@@ -1,0 +1,17 @@
+Package: srcquantcourse
+Title: Resources for the SRC Quantitative Methods PhD course
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Stefan",
+           family = "Daume",
+           role = c("aut", "cre"),
+           email = "stefan.daume@su.se",
+           comment = c(ORCID = "0000-0002-5879-0290"))
+Description: This package collects scripts, references and course notes for the 
+    2024 SRC Quantitative Methods PhD course.
+URL: https://github.com/sdaume/srcquantcourse, https://sdaume.github.io/srcquantcourse
+BugReports: https://github.com/sdaume/srcquantcourse/issues
+License: TBD
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
