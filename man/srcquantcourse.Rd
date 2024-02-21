@@ -3,8 +3,8 @@
 \docType{package}
 \name{srcquantcourse}
 \alias{srcquantcourse}
-\title{Resources for the SRC Quantitative Methods PhD Course}
+\title{Scripts and exercises for the SRC Quantitative Methods PhD Course}
 \description{
-This package collects scripts, references and course notes for the 2024 SRC
+This package collects scripts, data and exercises notes for the 2024 SRC
 Quantitative Methods PhD course.
 }
