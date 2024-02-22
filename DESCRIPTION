@@ -21,7 +21,10 @@ Imports:
     dplyr,
     lubridate,
     medrxivr,
-    stringr
+    stringr,
+    stm,
+    stminsights,
+    ggplot2
 Suggests: 
     knitr,
     rmarkdown
