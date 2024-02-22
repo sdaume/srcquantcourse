@@ -9,9 +9,11 @@ Authors@R:
            comment = c(ORCID = "0000-0002-5879-0290"))
 Description: This package collects scripts, data and exercises for the 
     2024 SRC Quantitative Methods PhD course.
-URL: https://github.com/sdaume/srcquantcourse, https://sdaume.github.io/srcquantcourse
+URL: https://github.com/sdaume/srcquantcourse,
+    https://sdaume.github.io/srcquantcourse,
+    https://sdaume.github.io/srcquantcourse/
 BugReports: https://github.com/sdaume/srcquantcourse/issues
-License: TBD
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
