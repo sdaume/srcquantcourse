@@ -77,12 +77,338 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sdaume/srcquantcourse" class="external-link">srcquantcourse</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>This is an example topic modelling analysis …</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">srcquantcourse</span><span class="fu">::</span><span class="va"><a href="../reference/covid_model_K20.html">covid_model_K20</a></span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<p><img src="covid-preprint-topics_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
+<p>Summary of estimateEffect …</p>
+<pre><code>&gt;# 
+&gt;# Call:
+&gt;# estimateEffect(formula = 1:20 ~ server * s(year), stmobj = covid_model_K20, 
+&gt;#     metadata = covid_stm_docs$meta)
+&gt;# 
+&gt;# 
+&gt;# Topic 1:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                          Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.0234840  0.0036976   6.351 2.17e-10 ***
+&gt;# servermedrxiv           0.1238855  0.0043269  28.631  &lt; 2e-16 ***
+&gt;# s(year)1               -0.0019748  0.0147821  -0.134    0.894    
+&gt;# s(year)2               -0.0007934  0.0153332  -0.052    0.959    
+&gt;# s(year)3                0.0083176  0.0067089   1.240    0.215    
+&gt;# servermedrxiv:s(year)1 -0.0694013  0.0173616  -3.997 6.42e-05 ***
+&gt;# servermedrxiv:s(year)2 -0.0964616  0.0189618  -5.087 3.66e-07 ***
+&gt;# servermedrxiv:s(year)3 -0.0705040  0.0084853  -8.309  &lt; 2e-16 ***
+&gt;# ---
+&gt;# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+&gt;# 
+&gt;# 
+&gt;# Topic 2:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.098649   0.002861  34.479  &lt; 2e-16 ***
+&gt;# servermedrxiv          -0.085918   0.003132 -27.430  &lt; 2e-16 ***
+&gt;# s(year)1               -0.020008   0.011445  -1.748   0.0805 .  
+&gt;# s(year)2               -0.011180   0.013436  -0.832   0.4053    
+&gt;# s(year)3               -0.028587   0.004518  -6.327 2.53e-10 ***
+&gt;# servermedrxiv:s(year)1  0.021792   0.012688   1.717   0.0859 .  
+&gt;# servermedrxiv:s(year)2  0.007990   0.014424   0.554   0.5796    
+&gt;# servermedrxiv:s(year)3  0.030380   0.005252   5.784 7.36e-09 ***
+&gt;# ---
+&gt;# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+&gt;# 
+&gt;# 
+&gt;# Topic 3:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.011080   0.002816   3.935 8.36e-05 ***
+&gt;# servermedrxiv           0.053938   0.003330  16.195  &lt; 2e-16 ***
+&gt;# s(year)1               -0.002588   0.011358  -0.228    0.820    
+&gt;# s(year)2               -0.002036   0.011858  -0.172    0.864    
+&gt;# s(year)3                0.001207   0.004812   0.251    0.802    
+&gt;# servermedrxiv:s(year)1  0.014922   0.013775   1.083    0.279    
+&gt;# servermedrxiv:s(year)2  0.014404   0.014908   0.966    0.334    
+&gt;# servermedrxiv:s(year)3  0.029813   0.006519   4.573 4.83e-06 ***
+&gt;# ---
+&gt;# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+&gt;# 
+&gt;# 
+&gt;# Topic 4:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.008877   0.003276   2.710  0.00673 ** 
+&gt;# servermedrxiv           0.057690   0.003886  14.845  &lt; 2e-16 ***
+&gt;# s(year)1                0.004845   0.013457   0.360  0.71879    
+&gt;# s(year)2               -0.005385   0.014061  -0.383  0.70175    
+&gt;# s(year)3                0.004487   0.005802   0.773  0.43929    
+&gt;# servermedrxiv:s(year)1  0.020264   0.016410   1.235  0.21690    
+&gt;# servermedrxiv:s(year)2 -0.003873   0.018062  -0.214  0.83020    
+&gt;# servermedrxiv:s(year)3  0.020385   0.007750   2.630  0.00854 ** 
+&gt;# ---
+&gt;# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+&gt;# 
+&gt;# 
+&gt;# Topic 5:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                          Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             4.921e-03  2.332e-03   2.110   0.0348 *  
+&gt;# servermedrxiv           5.428e-02  2.789e-03  19.462   &lt;2e-16 ***
+&gt;# s(year)1               -6.025e-04  9.323e-03  -0.065   0.9485    
+&gt;# s(year)2               -4.191e-05  9.807e-03  -0.004   0.9966    
+&gt;# s(year)3                1.115e-03  4.134e-03   0.270   0.7873    
+&gt;# servermedrxiv:s(year)1  2.590e-02  1.150e-02   2.251   0.0244 *  
+&gt;# servermedrxiv:s(year)2 -1.605e-03  1.210e-02  -0.133   0.8945    
+&gt;# servermedrxiv:s(year)3 -8.561e-03  5.333e-03  -1.605   0.1084    
+&gt;# ---
+&gt;# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+&gt;# 
+&gt;# 
+&gt;# Topic 6:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.148618   0.003841  38.694  &lt; 2e-16 ***
+&gt;# servermedrxiv          -0.115794   0.004180 -27.700  &lt; 2e-16 ***
+&gt;# s(year)1               -0.021084   0.013432  -1.570   0.1165    
+&gt;# s(year)2               -0.049307   0.012196  -4.043 5.29e-05 ***
+&gt;# s(year)3               -0.043724   0.006075  -7.197 6.29e-13 ***
+&gt;# servermedrxiv:s(year)1  0.005880   0.015028   0.391   0.6956    
+&gt;# servermedrxiv:s(year)2  0.035516   0.013875   2.560   0.0105 *  
+&gt;# servermedrxiv:s(year)3  0.031022   0.006943   4.468 7.92e-06 ***
+&gt;# ---
+&gt;# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+&gt;# 
+&gt;# 
+&gt;# Topic 7:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.010734   0.002956   3.632 0.000282 ***
+&gt;# servermedrxiv           0.086008   0.003495  24.612  &lt; 2e-16 ***
+&gt;# s(year)1               -0.004071   0.011621  -0.350 0.726107    
+&gt;# s(year)2               -0.008016   0.012253  -0.654 0.513004    
+&gt;# s(year)3               -0.003360   0.005137  -0.654 0.513115    
+&gt;# servermedrxiv:s(year)1 -0.049185   0.014484  -3.396 0.000685 ***
+&gt;# servermedrxiv:s(year)2 -0.019452   0.015706  -1.238 0.215558    
+&gt;# servermedrxiv:s(year)3 -0.038463   0.006458  -5.955 2.62e-09 ***
+&gt;# ---
+&gt;# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+&gt;# 
+&gt;# 
+&gt;# Topic 8:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.027240   0.003059   8.905  &lt; 2e-16 ***
+&gt;# servermedrxiv           0.108723   0.003578  30.383  &lt; 2e-16 ***
+&gt;# s(year)1               -0.012872   0.012498  -1.030  0.30304    
+&gt;# s(year)2               -0.018392   0.012676  -1.451  0.14683    
+&gt;# s(year)3               -0.017092   0.005251  -3.255  0.00114 ** 
+&gt;# servermedrxiv:s(year)1 -0.088494   0.015009  -5.896 3.77e-09 ***
+&gt;# servermedrxiv:s(year)2 -0.046521   0.015773  -2.949  0.00319 ** 
+&gt;# servermedrxiv:s(year)3 -0.060216   0.006527  -9.226  &lt; 2e-16 ***
+&gt;# ---
+&gt;# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+&gt;# 
+&gt;# 
+&gt;# Topic 9:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.170540   0.004558  37.419  &lt; 2e-16 ***
+&gt;# servermedrxiv          -0.163988   0.004764 -34.426  &lt; 2e-16 ***
+&gt;# s(year)1                0.018014   0.019171   0.940 0.347396    
+&gt;# s(year)2               -0.034937   0.020032  -1.744 0.081165 .  
+&gt;# s(year)3               -0.027945   0.006611  -4.227 2.38e-05 ***
+&gt;# servermedrxiv:s(year)1 -0.010850   0.020246  -0.536 0.592017    
+&gt;# servermedrxiv:s(year)2  0.033205   0.021805   1.523 0.127814    
+&gt;# servermedrxiv:s(year)3  0.027849   0.007204   3.865 0.000111 ***
+&gt;# ---
+&gt;# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+&gt;# 
+&gt;# 
+&gt;# Topic 10:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                          Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.0446781  0.0033477  13.346  &lt; 2e-16 ***
+&gt;# servermedrxiv           0.0118219  0.0036304   3.256  0.00113 ** 
+&gt;# s(year)1                0.0043613  0.0144722   0.301  0.76314    
+&gt;# s(year)2                0.0002108  0.0130601   0.016  0.98712    
+&gt;# s(year)3                0.0262434  0.0058334   4.499 6.86e-06 ***
+&gt;# servermedrxiv:s(year)1 -0.0179263  0.0161464  -1.110  0.26691    
+&gt;# servermedrxiv:s(year)2 -0.0303774  0.0152640  -1.990  0.04659 *  
+&gt;# servermedrxiv:s(year)3 -0.0410048  0.0069899  -5.866 4.50e-09 ***
+&gt;# ---
+&gt;# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+&gt;# 
+&gt;# 
+&gt;# Topic 11:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                        Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)            0.005030   0.002336   2.154  0.03129 *  
+&gt;# servermedrxiv          0.008217   0.002660   3.089  0.00201 ** 
+&gt;# s(year)1               0.010106   0.009935   1.017  0.30907    
+&gt;# s(year)2               0.010037   0.010136   0.990  0.32209    
+&gt;# s(year)3               0.006442   0.004250   1.516  0.12956    
+&gt;# servermedrxiv:s(year)1 0.057053   0.011721   4.868 1.13e-06 ***
+&gt;# servermedrxiv:s(year)2 0.073706   0.012512   5.891 3.89e-09 ***
+&gt;# servermedrxiv:s(year)3 0.047007   0.005907   7.958 1.81e-15 ***
+&gt;# ---
+&gt;# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+&gt;# 
+&gt;# 
+&gt;# Topic 12:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.021995   0.002811   7.824 5.27e-15 ***
+&gt;# servermedrxiv           0.041927   0.003377  12.414  &lt; 2e-16 ***
+&gt;# s(year)1               -0.008578   0.011279  -0.761    0.447    
+&gt;# s(year)2               -0.005866   0.012093  -0.485    0.628    
+&gt;# s(year)3               -0.002612   0.004815  -0.542    0.588    
+&gt;# servermedrxiv:s(year)1 -0.006530   0.013817  -0.473    0.636    
+&gt;# servermedrxiv:s(year)2  0.009493   0.015592   0.609    0.543    
+&gt;# servermedrxiv:s(year)3  0.034895   0.006381   5.469 4.58e-08 ***
+&gt;# ---
+&gt;# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+&gt;# 
+&gt;# 
+&gt;# Topic 13:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.104404   0.003156  33.079  &lt; 2e-16 ***
+&gt;# servermedrxiv          -0.086379   0.003435 -25.146  &lt; 2e-16 ***
+&gt;# s(year)1               -0.031576   0.015250  -2.071   0.0384 *  
+&gt;# s(year)2               -0.028089   0.015010  -1.871   0.0613 .  
+&gt;# s(year)3               -0.023296   0.005611  -4.152 3.31e-05 ***
+&gt;# servermedrxiv:s(year)1  0.077775   0.017760   4.379 1.20e-05 ***
+&gt;# servermedrxiv:s(year)2  0.028429   0.016847   1.687   0.0915 .  
+&gt;# servermedrxiv:s(year)3  0.041096   0.006628   6.200 5.72e-10 ***
+&gt;# ---
+&gt;# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+&gt;# 
+&gt;# 
+&gt;# Topic 14:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.124621   0.003429  36.346   &lt;2e-16 ***
+&gt;# servermedrxiv          -0.112772   0.003629 -31.077   &lt;2e-16 ***
+&gt;# s(year)1                0.004135   0.015170   0.273    0.785    
+&gt;# s(year)2               -0.007502   0.015721  -0.477    0.633    
+&gt;# s(year)3                0.007610   0.006358   1.197    0.231    
+&gt;# servermedrxiv:s(year)1 -0.003017   0.016046  -0.188    0.851    
+&gt;# servermedrxiv:s(year)2  0.005266   0.016670   0.316    0.752    
+&gt;# servermedrxiv:s(year)3 -0.005159   0.007143  -0.722    0.470    
+&gt;# ---
+&gt;# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+&gt;# 
+&gt;# 
+&gt;# Topic 15:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.053492   0.003516  15.215  &lt; 2e-16 ***
+&gt;# servermedrxiv          -0.027404   0.003973  -6.898 5.37e-12 ***
+&gt;# s(year)1                0.044583   0.014705   3.032  0.00243 ** 
+&gt;# s(year)2                0.024986   0.015401   1.622  0.10475    
+&gt;# s(year)3                0.017681   0.006482   2.728  0.00638 ** 
+&gt;# servermedrxiv:s(year)1  0.003729   0.017321   0.215  0.82955    
+&gt;# servermedrxiv:s(year)2  0.033390   0.017735   1.883  0.05974 .  
+&gt;# servermedrxiv:s(year)3 -0.003323   0.007630  -0.435  0.66322    
+&gt;# ---
+&gt;# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+&gt;# 
+&gt;# 
+&gt;# Topic 16:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                          Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.0531964  0.0034648  15.353  &lt; 2e-16 ***
+&gt;# servermedrxiv           0.0175724  0.0040746   4.313 1.62e-05 ***
+&gt;# s(year)1               -0.0495536  0.0129097  -3.838 0.000124 ***
+&gt;# s(year)2               -0.0294281  0.0132213  -2.226 0.026035 *  
+&gt;# s(year)3               -0.0279315  0.0057297  -4.875 1.09e-06 ***
+&gt;# servermedrxiv:s(year)1  0.0608468  0.0150331   4.048 5.19e-05 ***
+&gt;# servermedrxiv:s(year)2  0.0012997  0.0160258   0.081 0.935364    
+&gt;# servermedrxiv:s(year)3 -0.0006952  0.0072304  -0.096 0.923401    
+&gt;# ---
+&gt;# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+&gt;# 
+&gt;# 
+&gt;# Topic 17:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.012548   0.002386   5.258 1.46e-07 ***
+&gt;# servermedrxiv          -0.010901   0.002673  -4.078 4.56e-05 ***
+&gt;# s(year)1                0.062377   0.011980   5.207 1.94e-07 ***
+&gt;# s(year)2                0.167385   0.016038  10.437  &lt; 2e-16 ***
+&gt;# s(year)3                0.074733   0.005290  14.127  &lt; 2e-16 ***
+&gt;# servermedrxiv:s(year)1 -0.043342   0.013359  -3.244  0.00118 ** 
+&gt;# servermedrxiv:s(year)2 -0.080440   0.017919  -4.489 7.18e-06 ***
+&gt;# servermedrxiv:s(year)3 -0.037865   0.006101  -6.207 5.48e-10 ***
+&gt;# ---
+&gt;# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+&gt;# 
+&gt;# 
+&gt;# Topic 18:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.055687   0.003029  18.383  &lt; 2e-16 ***
+&gt;# servermedrxiv          -0.019897   0.003439  -5.786 7.30e-09 ***
+&gt;# s(year)1                0.005483   0.012016   0.456  0.64819    
+&gt;# s(year)2                0.004182   0.012758   0.328  0.74304    
+&gt;# s(year)3                0.029352   0.005748   5.106 3.31e-07 ***
+&gt;# servermedrxiv:s(year)1 -0.004350   0.014582  -0.298  0.76548    
+&gt;# servermedrxiv:s(year)2 -0.004792   0.015360  -0.312  0.75505    
+&gt;# servermedrxiv:s(year)3 -0.020598   0.006857  -3.004  0.00267 ** 
+&gt;# ---
+&gt;# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+&gt;# 
+&gt;# 
+&gt;# Topic 19:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                          Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.0135859  0.0026151   5.195 2.06e-07 ***
+&gt;# servermedrxiv           0.0273113  0.0030602   8.925  &lt; 2e-16 ***
+&gt;# s(year)1                0.0005247  0.0100074   0.052   0.9582    
+&gt;# s(year)2               -0.0065088  0.0105370  -0.618   0.5368    
+&gt;# s(year)3               -0.0031284  0.0044164  -0.708   0.4787    
+&gt;# servermedrxiv:s(year)1 -0.0031364  0.0122428  -0.256   0.7978    
+&gt;# servermedrxiv:s(year)2  0.0284433  0.0132349   2.149   0.0316 *  
+&gt;# servermedrxiv:s(year)3  0.0027998  0.0057320   0.488   0.6252    
+&gt;# ---
+&gt;# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+&gt;# 
+&gt;# 
+&gt;# Topic 20:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                          Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.0067543  0.0019560   3.453 0.000555 ***
+&gt;# servermedrxiv           0.0313988  0.0022137  14.184  &lt; 2e-16 ***
+&gt;# s(year)1               -0.0015648  0.0076322  -0.205 0.837553    
+&gt;# s(year)2               -0.0001117  0.0081316  -0.014 0.989035    
+&gt;# s(year)3                0.0004623  0.0034250   0.135 0.892619    
+&gt;# servermedrxiv:s(year)1  0.0088029  0.0095710   0.920 0.357713    
+&gt;# servermedrxiv:s(year)2  0.0129244  0.0106256   1.216 0.223861    
+&gt;# servermedrxiv:s(year)3  0.0213327  0.0046342   4.603 4.17e-06 ***
+&gt;# ---
+&gt;# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
   </main>
 </div>
