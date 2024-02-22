@@ -9,15 +9,31 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
   collapse = TRUE,
-  comment = "#>"
+  cache = FALSE,
+  comment = ">#"
 )
 ```
 
 ```{r setup}
 library(srcquantcourse)
+library(stm)
 ```
 
 # Introduction
 
 This is an example topic modelling analysis ...
+
+```{r echo=TRUE}
+plot(srcquantcourse::covid_model_K20, n = 5)
+```
+
+Summary of estimateEffect ...
+
+```{r}
+summary(srcquantcourse::covid_effect_K20)
+```
+
