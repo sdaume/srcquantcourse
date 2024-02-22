@@ -22,3 +22,7 @@ Imports:
     lubridate,
     medrxivr,
     stringr
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

@@ -1,0 +1,23 @@
+---
+title: "Example 1: Topic modelling Covid preprints"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Example 1: Topic modelling Covid preprints}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(srcquantcourse)
+```
+
+# Introduction
+
+This is an example topic modelling analysis ...
