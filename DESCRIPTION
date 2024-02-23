@@ -22,6 +22,8 @@ Imports:
     lubridate,
     medrxivr,
     stringr,
+    quanteda,
+    quanteda.textstats,
     stm,
     stminsights,
     ggplot2
