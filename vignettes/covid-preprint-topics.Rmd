@@ -1,6 +1,8 @@
 ---
 title: "Example 1: Topic modelling Covid preprints"
 output: rmarkdown::html_vignette
+bibliography: srcquantcourse.bib
+link-citations: yes
 vignette: >
   %\VignetteIndexEntry{Example 1: Topic modelling Covid preprints}
   %\VignetteEngine{knitr::rmarkdown}
@@ -20,20 +22,306 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(srcquantcourse)
+library(dplyr)
+library(stringr)
+library(quanteda)
+library(quanteda.textstats)
 library(stm)
+library(stminsights)
+library(ggplot2)
+
+
 ```
 
 # Introduction
 
-This is an example topic modelling analysis ...
+This is an example topic modelling analysis using the *Structural Topic Model (STM)* [@RobertsStewart_et_2019_JSTATS_91] for an analysis that focuses on a subset of [bioRxiv](https://www.biorxiv.org/) and [medRxiv](https://www.medrxiv.org/) preprints covering research related to *Covid-19*. The medRxiv website actually provides access to a dedicated collection of preprints on both medRxix and bioRxiv covering [COVID-19 SARS-CoV-2]((https://connect.medrxiv.org/relate/content/181)). We will work with the whole preprint collection and create a subset using keyword matching. 
+
+This document assumes some familiarity with *Structural Topic Modeling (STM)*. Please consult the `stm` package vignette [@RobertsStewart_et_2019_JSTATS_91] for background. 
+
+
+# Getting the document data 
+
+The [bioRxiv](https://www.biorxiv.org/) and [medRxiv](https://www.medrxiv.org/) servers [provide API access](https://api.biorxiv.org/) to retrieve preprint meta-data. One option to access the API is to use the  `[medrxivr](https://docs.ropensci.org/medrxivr/)` package. The code snippet below would for example collect all *bioRxiv* preprint meta-data for the year 2015. 
+
+```{r eval=FALSE, echo=TRUE}
+library(medrxivr)
+
+biorxiv_raw <- mx_api_content(server = "biorxiv",
+                              from_date = "2015-12-01",
+                              to_date = "2015-12-31")
+```
+
+This package has been setup to support exploring different thematic preprint subsets and assumes usage of all preprints from both servers published from 2013 to 2023. This data can not be shared in this package as the [usage and API terms](https://www.medrxiv.org/tdm) of **bioRxiv/medRxiv do not permit redistribution and rehosting of the complete data**; therefore this package provides scripts to collect and clean the data in order to replicate this analysis (check  `/data-raw` in the package repository).
+
+The documented examples assume that you have obtained the data yourself and created a local copy for replication of the analyses. Below is the code that would allow you to do this. **NOTE** that at the time of writing this returned a dataset with *365526* records. Retrieving this data would take several hours. When replicating an analysis like this **use the bioRxiv/medRxiv API responsibly!**. Consider collecting smaller datasets (the example shown below would for example only require preprints from 2020 to 2023) or use the bulk snapshot as detailed [here](https://www.medrxiv.org/tdm).
+
+```{r eval=FALSE}
+library(dplyr)
+library(medrxivr)
+
+# get publications from medRxiv and bioRxiv
+pubs_biorxiv_raw <- medrxivr::mx_api_content(server = "biorxiv",
+                                             #from_date = "2019-01-01",
+                                             to_date = "2023-12-31")
+
+pubs_medrxiv_raw <- medrxivr::mx_api_content(server = "medrxiv",
+                                             #from_date = "2019-01-01",
+                                             to_date = "2023-12-31")
+
+pubs_biorxiv_raw <- pubs_biorxiv_raw %>%
+  mutate(server = "biorxiv")
+
+pubs_medrxiv_raw <- pubs_medrxiv_raw %>%
+  mutate(server = "medrxiv")
+
+preprints_raw <- dplyr::bind_rows(pubs_biorxiv_raw, pubs_medrxiv_raw)
+
+save(preprints_raw, file = "./data-raw/preprints_raw.Rdata")
+```
+
+In addition to the 15 meta-data variables returned via the API the code above adds `server` as a variable to indicate the origin of the preprint. This is an important part of the examples below. 
+
+
+# Cleaning, filtering and annotating the data
+
+As a first step the raw preprint data has to be cleaned. Specifically, we want to retain only one unique record per preprint, multiple `version`s for each unique `doi` may exist. Below we retain only the latest version per doi and also ensure that there are no duplicate `doi`s. This is crucial as we need a unique identifier for each document that we want to include in the topic modelling. 
+
+
+```{r eval=FALSE, echo=TRUE}
+library(dplyr)
+
+preprints_cleaned <- preprints_raw %>%
+  group_by(doi) %>%
+  filter(version == max(version)) %>%
+  ungroup() %>%
+  distinct(doi, .keep_all = TRUE)
+```
+
+
+Next we annotate the data with additional variables, specifically we want to reduce the publication `date` to the publication `year`, and add an additional variable `is_published`, which is inferred from the `published` variable which provides the doi of the journal where the preprint has been published after peer review.
+We also limit the data to preprints from 2020 to 2023 (for an analysis of Covid topics preprints prior to 2020 are not relevant), and only retain variables that we may want to explore as *document covariates* that potentially influence the prevalence of topics.
+
+
+```{r eval=FALSE, echo=TRUE}
+preprints <- preprints_cleaned %>%
+  mutate(published = stringr::str_trim(published)) %>%
+  mutate(published = na_if(published, "NA")) %>%
+  mutate(is_published = as.numeric(!is.na(published))) %>%
+  mutate(is_published = case_when(is_published == 1 ~ "published",
+                                  is_published == 0 ~ "not published",
+                                  TRUE ~ "undefined")) %>%
+  mutate(year = lubridate::year(date)) %>%
+  filter(year >= 2020 & year <= 2023) %>% 
+  select(doi, server, title, abstract, date, year, version, is_published)
+```
+
+
+Finally, we define keywords and reduce our preprint set to preprints that contain one of those keywords in either the title or abstract, resulting in a subset of 29692 publications.
+
+```{r eval=FALSE, echo=TRUE}
+library(stringr)
+
+keywords <- c("sars-cov", "covid")
+
+search_pattern <- stringr::regex(paste(keywords, collapse = "|"), 
+                                 ignore_case = TRUE)
+
+covid_preprints <- preprints %>%
+  filter(stringr::str_detect(title, pattern = search_pattern) |
+           stringr::str_detect(abstract, pattern = search_pattern))
+```
+
+
+# Preparing and preprocessing the documents for text analysis
+
+In order to analyze the preprints with the [`stm`](https://github.com/bstewart/stm) package we need to create a representation of the documents and document meta-data that `stm` can utilize. `stm` offers built-in methods to support this (see specifically the `textProcessor()` and `prepDocuments()` methods [@RobertsStewart_et_2019_JSTATS_91]). Here we use however the [`quanteda`](http://quanteda.io/index.html) package [@BenoitWatanabe_et_2018_JOSS_3] which provides a broad range of methods for text pre-processing and analysis, creating formats also supported by `stm`.
+
+## Create a corpus
+
+First, we create a **corpus** object from the dataframe of preprints. The corpus is essentially a library of documents that will be used for the next steps. It specifies which variable should be used to uniquely identify documents and which variable holds the textual content (here the preprint *abstracts*) that should be processed.
+
+Echoing the corpus will provide some basic information. All other variables in the original dataframe will be interpreted and included as document metadata (*'docvars'*), which could later be included in the STM topic modelling process. 
+
+```{r eval=FALSE, echo=TRUE}
+library(quanteda)
+
+pubs_corpus <- covid_preprints %>%
+  quanteda::corpus(docid_field = "doi", text_field = "abstract")
+
+# pubs_corpus
+# Corpus consisting of 29,692 documents and 6 docvars.
+```
+
+
+## Tokenize and preprocess
+
+For further analysis the corpus documents have to be **tokenized**, i.e. the texts have to be broken into units for further processing. The most common approach is to interpret each word (typically designated by whitespaces or punctuation) as a token. This is applied here as well. `quanteda` offers several alternative approaches. Instead of individual words sequences of words (*n-grams*) could for example be used.
+
+The tokenization method also provides several options for preprocessing and filtering the tokens. Here for example we will in the process of tokenization remove punctuation, numbers, special symbols and URLs. Furthermore, we split words containing hyphens, a word like *social-ecological* will thus be split into two individual tokens (*social* and *ecological*). 
+
+The text preprocessing choices could strongly influence the results of a text analysis [@DennySpirling_2018_PA_26] and should be explained, carefully evaluated and ideally be based on theory.
+
+
+```{r eval=FALSE, echo=TRUE}
+pubs_tokens <- pubs_corpus %>%
+  quanteda::tokens(remove_punct = TRUE,
+                   remove_symbols = TRUE,
+                   remove_numbers = TRUE,
+                   remove_url = TRUE,
+                   remove_separators = TRUE,
+                   split_hyphens = TRUE) 
+
+```
+
+
+## Create a Document-feature matrix
+
+The **tokens** object is then used to create *document-feature matrix*. For further statistical analysis this reduces the tokens to a matrix of documents (rows) and unique **terms** (columns) that counts the number of occurrences for each term in each document. `quanteda` captures this as *features* which supports more general options than **terms** (see the `quanteda` documentation for details).
+
+
+```{r eval=FALSE, echo=TRUE}
+pubs_dfm <- pubs_tokens %>%
+  quanteda::dfm()
+```
+
+
+## Filter terms and documents
+
+This is followed by more and optional processing and filtering steps. A common task  --- to reduce the size of the data or assist in the interpretation --- is the removal of so-called **stopwords** (e.g. *"the", "and", "or"* etc).
+
+A step omitted here is reducing words (terms) to their word stem. The stemming algorithm (several are available) reduces words to a word stem. The terms "universal", "university" and "universe" would for example be reduced to the same word stem of "univers"; this example indicates that this approach may require careful consideration.
+
+Stemming has the advantage that it could potentially reduce the size of the matrix substantially. 
+
+```{r eval=FALSE, echo=TRUE}
+pubs_dfm <- pubs_dfm %>%
+  quanteda::dfm_remove(pattern = quanteda::stopwords("english")) #%>%
+  #quanteda::dfm_wordstem()
+```
+```
+# echo the result
+> pubs_dfm
+
+Document-feature matrix of: 29,692 documents, 82,472 features (99.87% sparse) and 6 docvars.
+                features
+docs             nitric oxide synthesised three isoforms synthases viz nnos neurons enos
+  10.1101/038398      6     6           1     1        1         1   1    1       2    1
+  10.1101/058511      0     0           0     0        0         0   0    0       0    0
+  10.1101/292979      0     0           0     2        0         0   0    0       0    0
+  10.1101/402370      0     0           0     0        0         0   0    0       0    0
+  10.1101/420737      0     0           0     0        0         0   0    0       0    0
+  10.1101/596700      0     0           0     0        0         0   0    0       0    0
+[ reached max_ndoc ... 29,686 more documents, reached max_nfeat ... 82,462 more features ]
+```
+
+Further options may be considered to reduce noise and/or the size of the matrix. The following code removes for example terms (or features) that consist only of one character, terms that do not appear in at least two different documents, and furthermore would remove documents that do not contain at least 5 tokens. In our example this drops one document and reduces the number of retained features by more than half. 
+
+```{r eval=FALSE, echo=TRUE}
+pubs_dfm <- pubs_dfm %>%
+  quanteda::dfm_remove(min_nchar = 2) %>%
+  quanteda::dfm_trim(min_docfreq = 2, docfreq_type = "count") %>%
+  quanteda::dfm_subset(quanteda::ntoken(.) > 4)
+```
+```
+# echo the result
+> pubs_dfm
+
+Document-feature matrix of: 29,691 documents, 37,093 features (99.72% sparse) and 6 docvars.
+                features
+docs             nitric oxide synthesised three isoforms synthases viz neurons enos endothelial
+  10.1101/038398      6     6           1     1        1         1   1       2    1           2
+  10.1101/058511      0     0           0     0        0         0   0       0    0           0
+  10.1101/292979      0     0           0     2        0         0   0       0    0           0
+  10.1101/402370      0     0           0     0        0         0   0       0    0           0
+  10.1101/420737      0     0           0     0        0         0   0       0    0           0
+  10.1101/596700      0     0           0     0        0         0   0       0    0           0
+[ reached max_ndoc ... 29,685 more documents, reached max_nfeat ... 37,083 more features ]
+```
+
+# Topic modeling
+
+## Fitting the STM topic model
+
+The key input is the number of topics (`K`) that the model should be fit to, which we here set to 20 (see the separate document for a discussion on suitable choices for the number of topics).
+
+Before fitting the topic model we convert the document-feature matrix into the native STM format. In order to fit a topic model with the `stm()` function we need the set of `documents`, the `vocabulary` of which these documents are composed and a dataframe specifying the values of all document meta-data variables (`data`) which can be used in the process as "covariates" that might influence the prevalence of topics in a document. 
+
+Here in the example below we ask stm to consider the origin of the document (`server`) and the publication `year` when fitting the topic model. The argument `prevalence = ~ server * s(year)` expresses that we assume that the prevalence of topics in a document is influenced by these two variables, and that they also interact, i.e. we work with the hypothesis that different temporal trends could be expected for documents published on either of the two preprint servers^[NOTE we use a spline function for the `year` variable. Consult the STM documentation for details on this.].
+
+The consideration of covariates is optional. If omitted the model reduces to a *Correlated Topic Model* [@BleiLafferty2007_AAS_1; @RobertsStewart_et_2019_JSTATS_91].
+
+We also supply a `seed`, which allows to replicate the results of the topic modeling. 
+
+
+```{r eval=FALSE, echo=TRUE}
+library(stm)
+
+covid_stm_docs <- quanteda::convert(pubs_dfm, to = "stm")
+
+covid_model_K20 <- stm(documents = covid_stm_docs$documents,
+                       vocab = covid_stm_docs$vocab,
+                       data = covid_stm_docs$meta,
+                       prevalence = ~ server * s(year),
+                       K = 20,
+                       verbose = TRUE,
+                       seed = 9868467)
+```
+
+
+## Estimating the effect of document covariates
+
+Once the model has converged we can estimate effect of document covariates on the topic prevalence. The `estimateEffect()` function allows to run regressions based on the formula specified as the first argument. It is here identical to the formula used when fitting the topic model, and regressions are run for all 20 topics. The same metadata as used previously needs to be supplied for this function in addition to the topic model object.  
+
+```{r eval=FALSE, echo=TRUE}
+covid_effect_K20 <- estimateEffect(1:20 ~ server * s(year),
+                                   stmobj = covid_model_K20,
+                                   metadata = covid_stm_docs$meta)
+```
+
+This concludes fitting the model. The following sections step through a sample exploration of this topic model.
+
+
+# Analysing and interpreting the topic model
+
+## Basic topic model information
+
+* plot and summary function
+
 
 ```{r echo=TRUE}
 plot(srcquantcourse::covid_model_K20, n = 5)
 ```
 
-Summary of estimateEffect ...
 
-```{r}
-summary(srcquantcourse::covid_effect_K20)
-```
+## Labelling topics
+
+* word clouds
+
+## Covariate effects
+
+### Publication year
+
+* overview of all topics
+* comparison of topics 8 and 17
+
+### Preprint server 
+
+* difference comparison of multiple (or all) topics
+
+
+### Combination of preprint server and publication year
+
+* topics 1 and TBD
+
+
+## Exploring the topic structure
+
+* primary, secondary etc topics
+* topic correlations
+* topic clusters
+
+
+# References
+
 
