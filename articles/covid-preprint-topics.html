@@ -77,6 +77,13 @@
 
     
     
+<style type="text/css">
+.scroll-100 {
+  max-height: 100px;
+  overflow-y: auto;
+  background-color: inherit;
+}
+</style>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
@@ -124,6 +131,28 @@ an analysis like this <strong>use the bioRxiv/medRxiv API
 responsibly!</strong>. Consider collecting smaller datasets (the example
 shown below would for example only require preprints from 2020 to 2023)
 or use the bulk snapshot as detailed <a href="https://www.medrxiv.org/tdm" class="external-link">here</a>.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/medrxivr" class="external-link">medrxivr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># get publications from medRxiv and bioRxiv</span></span>
+<span><span class="va">pubs_biorxiv_raw</span> <span class="op">&lt;-</span> <span class="fu">medrxivr</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/medrxivr/reference/mx_api_content.html" class="external-link">mx_api_content</a></span><span class="op">(</span>server <span class="op">=</span> <span class="st">"biorxiv"</span>,</span>
+<span>                                             <span class="co">#from_date = "2019-01-01",</span></span>
+<span>                                             to_date <span class="op">=</span> <span class="st">"2023-12-31"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">pubs_medrxiv_raw</span> <span class="op">&lt;-</span> <span class="fu">medrxivr</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/medrxivr/reference/mx_api_content.html" class="external-link">mx_api_content</a></span><span class="op">(</span>server <span class="op">=</span> <span class="st">"medrxiv"</span>,</span>
+<span>                                             <span class="co">#from_date = "2019-01-01",</span></span>
+<span>                                             to_date <span class="op">=</span> <span class="st">"2023-12-31"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">pubs_biorxiv_raw</span> <span class="op">&lt;-</span> <span class="va">pubs_biorxiv_raw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>server <span class="op">=</span> <span class="st">"biorxiv"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">pubs_medrxiv_raw</span> <span class="op">&lt;-</span> <span class="va">pubs_medrxiv_raw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>server <span class="op">=</span> <span class="st">"medrxiv"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">preprints_raw</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">pubs_biorxiv_raw</span>, <span class="va">pubs_medrxiv_raw</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/save.html" class="external-link">save</a></span><span class="op">(</span><span class="va">preprints_raw</span>, file <span class="op">=</span> <span class="st">"./data-raw/preprints_raw.Rdata"</span><span class="op">)</span></span></code></pre></div>
 <p>In addition to the 15 meta-data variables returned via the API the
 code above adds <code>server</code> as a variable to indicate the origin
 of the preprint. This is an important part of the examples below.</p>
@@ -138,7 +167,7 @@ exist. Below we retain only the latest version per doi and also ensure
 that there are no duplicate <code>doi</code>s. This is crucial as we
 need a unique identifier for each document that we want to include in
 the topic modelling.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">preprints_cleaned</span> <span class="op">&lt;-</span> <span class="va">preprints_raw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -156,7 +185,7 @@ the data to preprints from 2020 to 2023 (for an analysis of Covid topics
 preprints prior to 2020 are not relevant), and only retain variables
 that we may want to explore as <em>document covariates</em> that
 potentially influence the prevalence of topics.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">preprints</span> <span class="op">&lt;-</span> <span class="va">preprints_cleaned</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>published <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html" class="external-link">str_trim</a></span><span class="op">(</span><span class="va">published</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>published <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/na_if.html" class="external-link">na_if</a></span><span class="op">(</span><span class="va">published</span>, <span class="st">"NA"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -170,7 +199,7 @@ potentially influence the prevalence of topics.</p>
 <p>Finally, we define keywords and reduce our preprint set to preprints
 that contain one of those keywords in either the title or abstract,
 resulting in a subset of 29692 publications.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">keywords</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sars-cov"</span>, <span class="st">"covid"</span><span class="op">)</span></span>
@@ -208,7 +237,7 @@ processed.</p>
 variables in the original dataframe will be interpreted and included as
 document metadata (<em>‘docvars’</em>), which could later be included in
 the STM topic modelling process.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://quanteda.io" class="external-link">quanteda</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">pubs_corpus</span> <span class="op">&lt;-</span> <span class="va">covid_preprints</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -237,7 +266,7 @@ URLs. Furthermore, we split words containing hyphens, a word like
 of a text analysis <span class="citation">(<a href="#ref-DennySpirling_2018_PA_26" role="doc-biblioref">Denny and
 Spirling 2018</a>)</span> and should be explained, carefully evaluated
 and ideally be based on theory.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pubs_tokens</span> <span class="op">&lt;-</span> <span class="va">pubs_corpus</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">quanteda</span><span class="fu">::</span><span class="fu"><a href="https://quanteda.io/reference/tokens.html" class="external-link">tokens</a></span><span class="op">(</span>remove_punct <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                   remove_symbols <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -257,7 +286,7 @@ for each term in each document. <code>quanteda</code> captures this as
 <em>features</em> which supports more general options than
 <strong>terms</strong> (see the <code>quanteda</code> documentation for
 details).</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pubs_dfm</span> <span class="op">&lt;-</span> <span class="va">pubs_tokens</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">quanteda</span><span class="fu">::</span><span class="fu"><a href="https://quanteda.io/reference/dfm.html" class="external-link">dfm</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -275,7 +304,7 @@ reduced to the same word stem of “univers”; this example indicates that
 this approach may require careful consideration.</p>
 <p>Stemming has the advantage that it could potentially reduce the size
 of the matrix substantially.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pubs_dfm</span> <span class="op">&lt;-</span> <span class="va">pubs_dfm</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">quanteda</span><span class="fu">::</span><span class="fu"><a href="https://quanteda.io/reference/dfm_select.html" class="external-link">dfm_remove</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="fu">quanteda</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/stopwords/man/stopwords.html" class="external-link">stopwords</a></span><span class="op">(</span><span class="st">"english"</span><span class="op">)</span><span class="op">)</span> <span class="co">#%&gt;%</span></span>
 <span>  <span class="co">#quanteda::dfm_wordstem()</span></span></code></pre></div>
@@ -298,7 +327,7 @@ that consist only of one character, terms that do not appear in at least
 two different documents, and furthermore would remove documents that do
 not contain at least 5 tokens. In our example this drops one document
 and reduces the number of retained features by more than half.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pubs_dfm</span> <span class="op">&lt;-</span> <span class="va">pubs_dfm</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">quanteda</span><span class="fu">::</span><span class="fu"><a href="https://quanteda.io/reference/dfm_select.html" class="external-link">dfm_remove</a></span><span class="op">(</span>min_nchar <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">quanteda</span><span class="fu">::</span><span class="fu"><a href="https://quanteda.io/reference/dfm_trim.html" class="external-link">dfm_trim</a></span><span class="op">(</span>min_docfreq <span class="op">=</span> <span class="fl">2</span>, docfreq_type <span class="op">=</span> <span class="st">"count"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -348,7 +377,7 @@ reduces to a <em>Correlated Topic Model</em> <span class="citation">(<a href="#r
 Lafferty 2007</a>; <a href="#ref-RobertsStewart_et_2019_JSTATS_91" role="doc-biblioref">Roberts, Stewart, and Tingley 2019</a>)</span>.</p>
 <p>We also supply a <code>seed</code>, which allows to replicate the
 results of the topic modeling.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.structuraltopicmodel.com/" class="external-link">stm</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">covid_stm_docs</span> <span class="op">&lt;-</span> <span class="fu">quanteda</span><span class="fu">::</span><span class="fu"><a href="https://quanteda.io/reference/convert.html" class="external-link">convert</a></span><span class="op">(</span><span class="va">pubs_dfm</span>, to <span class="op">=</span> <span class="st">"stm"</span><span class="op">)</span></span>
@@ -364,14 +393,14 @@ results of the topic modeling.</p>
 <div class="section level3">
 <h3 id="estimating-the-effect-of-document-covariates">Estimating the effect of document covariates<a class="anchor" aria-label="anchor" href="#estimating-the-effect-of-document-covariates"></a>
 </h3>
-<p>Once the model has converged we can estimate effect of document
+<p>Once the model has converged we can estimate the effect of document
 covariates on the topic prevalence. The <code><a href="https://rdrr.io/pkg/stm/man/estimateEffect.html" class="external-link">estimateEffect()</a></code>
 function allows to run regressions based on the formula specified as the
 first argument. It is here identical to the formula used when fitting
 the topic model, and regressions are run for all 20 topics. The same
 metadata as used previously needs to be supplied for this function in
 addition to the topic model object.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">covid_effect_K20</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stm/man/estimateEffect.html" class="external-link">estimateEffect</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span> <span class="op">~</span> <span class="va">server</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/pkg/stm/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span>,</span>
 <span>                                   stmobj <span class="op">=</span> <span class="va">covid_model_K20</span>,</span>
 <span>                                   metadata <span class="op">=</span> <span class="va">covid_stm_docs</span><span class="op">$</span><span class="va">meta</span><span class="op">)</span></span></code></pre></div>
@@ -386,22 +415,135 @@ a sample exploration of this topic model.</p>
 <h3 id="basic-topic-model-information">Basic topic model information<a class="anchor" aria-label="anchor" href="#basic-topic-model-information"></a>
 </h3>
 <ul>
-<li>plot and summary function</li>
+<li>stm plot function (high res)</li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">srcquantcourse</span><span class="fu">::</span><span class="va"><a href="../reference/covid_model_K20.html">covid_model_K20</a></span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
-<p><img src="covid-preprint-topics_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">covid_model_K20</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<p><img src="covid-preprint-topics_files/figure-html/unnamed-chunk-15-1.png" width="1093.75"></p>
+<ul>
+<li>alternatively we can extract the topic proportions from the beta
+matrix</li>
+</ul>
 </div>
 <div class="section level3">
-<h3 id="labelling-topics">Labelling topics<a class="anchor" aria-label="anchor" href="#labelling-topics"></a>
+<h3 id="understanding-and-labeling-topics">Understanding and labeling topics<a class="anchor" aria-label="anchor" href="#understanding-and-labeling-topics"></a>
 </h3>
 <ul>
-<li>word clouds</li>
+<li>stm summary function</li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(covid_model_K20)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span><span class="co"># A topic model with 20 topics, 29691 documents and a 37093 word dictionary.</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 1 Top Words:</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: model, can, covid, transmission, epidemic, data, disease </span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: npis, mathematical, compartmental, scenarios, seir, reproduction, sir </span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 1we, abms, ao_scplowbstractc_scplowas, apt, artefact, asilv, asymptotically </span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: distancing, social, epidemic, reproduction, npis, model, r0 </span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 2 Top Words:</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: cov, sars, drug, antiviral, activity, drugs, covid </span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: src, figdir, o_linksmallfig, c_fig, m_fig, o_fig, gif </span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: k777, gif, pmmov, wwtps, 13k, 17k, 18k </span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: mpro, antiviral, drug, inhibitors, protease, drugs, compounds </span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 3 Top Words:</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: covid, risk, age, mortality, ci, associated, years </span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: hispanic, ethnicity, pregnant, racial, black, smoking, preterm </span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 65s, asmr, assault, backgroundethnic, backgroundracial, backgroundsocio, brunt </span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: ci, age, women, mortality, ethnicity, aor, hispanic </span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 4 Top Words:</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: covid, health, pandemic, mental, social, study, survey </span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: loneliness, emotional, attitude, depression, insecurity, mental, anxiety </span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: insecurity, accelerometers, amhara, angry, anovas, asd, asleep </span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: mental, anxiety, depression, respondents, social, psychological, students </span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 5 Top Words:</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: sars, cov, infection, testing, transmission, cases, children </span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: ifr, seroprevalence, schools, school, contacts, household, attack </span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: inmates, 19y, 35y, 39y, 9a, abidjan, addscovid </span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: school, seroprevalence, children, schools, household, transmission, testing </span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 6 Top Words:</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: cov, sars, virus, viral, coronavirus, respiratory, infection </span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: bats, cats, deer, animals, covs, wildlife, hcov </span></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: cats, 5x106, aav6, aegyptiacus, aethiops, affinis, agm </span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: cov, sars, mice, rna, viruses, coronaviruses, animals </span></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 7 Top Words:</span></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: patients, covid, hospital, disease, clinical, severe, admission </span></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: acei, admission, arbs, admitted, icu, aki, aceis </span></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 1.1x109, 2020r1g1a1a01006229, 2l, 4.0x109, 40y, ahmad, ahrq </span></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: patients, admission, icu, hospital, admitted, ci, hospitalized </span></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 8 Top Words:</span></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: covid, cases, countries, number, deaths, data, pandemic </span></span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: cfr, italy, cities, country, countries, fatality, china </span></span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 1000m, 1th, 55th, abysmally, abyss, adhanom, adminstat </span></span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: countries, cases, lockdown, deaths, country, cfr, daily </span></span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 9 Top Words:</span></span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: protein, binding, spike, sars, cov, ace2, rbd </span></span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: conformational, cryo, conformation, glycans, conformations, nanobodies, residues </span></span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 13c, 6lzg, 6m0j, 6vw1, 6vxx, aabpu, abdab </span></span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: binding, rbd, protein, spike, ace2, proteins, epitopes </span></span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 10 Top Words:</span></span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: data, can, learning, covid, using, model, based </span></span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: aerosol, n95, aerosols, respirators, decontamination, airborne, machine </span></span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: elastomeric, forehead, papr, radiomics, exhaled, singing, 0.3m </span></span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: learning, masks, aerosol, machine, respirators, n95, mask </span></span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 11 Top Words:</span></span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: vaccine, vaccination, covid, middle, vaccines, dot, dose </span></span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: hesitancy, dot, vaccinate, middle, hesitant, rollout, ve </span></span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: #949850, acceptant, adjrr, aesis, amparo, analysesthe, andersen </span></span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: vaccination, vaccine, dot, booster, dose, vaccinated, middle </span></span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 12 Top Words:</span></span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: studies, care, covid, health, research, data, pandemic </span></span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: reviews, telemedicine, preprints, scoping, articles, blacksquare, publications </span></span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: preprints, 1.2m, aas, abbreviating, accustomed, activists, advisor </span></span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: review, care, services, articles, reviews, pubmed, service </span></span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 13 Top Words:</span></span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: sars, cov, genome, mutations, sequencing, viral, variants </span></span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: phylogenetic, gisaid, clades, wgs, genomes, genomic, haplotype </span></span>
+<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: clades, snvs, 1.1.7s, 11083g, 14408c, 17del, 20a </span></span>
+<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: mutations, genome, wastewater, genomes, sequences, sequencing, genomic </span></span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 14 Top Words:</span></span>
+<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: cells, cell, sars, cov, expression, infection, ace2 </span></span>
+<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: autophagy, mirnas, mirna, at2, ifns, ciliated, scrna </span></span>
+<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 25hc, angiotensinogen, antagonizes, apcs, arf6, asgr1, at2s </span></span>
+<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: cells, expression, ace2, cell, genes, epithelial, tmprss2 </span></span>
+<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 15 Top Words:</span></span>
+<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: antibody, sars, cov, antibodies, igg, responses, vaccine </span></span>
+<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: iga, bau, igg, humoral, immunogenicity, as03, reactogenicity </span></span>
+<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 1x1011, 28d, 30ug, ad26cov2, addas03, adhu5, atellica </span></span>
+<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: igg, antibody, antibodies, neutralizing, rbd, vaccine, spike </span></span>
+<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 16 Top Words:</span></span>
+<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: sars, cov, pcr, samples, rt, test, testing </span></span>
+<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: ag, rdt, rdts, lod, rt, panbio, kits </span></span>
+<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: poct, cobas, panbio, #yomecorono, 1.6x104, 10min, 15min </span></span>
+<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: rt, pcr, assay, samples, saliva, detection, assays </span></span>
+<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 17 Top Words:</span></span>
+<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: variants, omicron, variant, delta, ba, cov, sars </span></span>
+<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: omicron, ba, xbb, subvariants, delta, bq, voc </span></span>
+<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 1.5s, 129s2, 1f11, 2.86s, 3b8, 417n, 75d30121c11061 </span></span>
+<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: omicron, ba, variants, variant, delta, mutations, voc </span></span>
+<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 18 Top Words:</span></span>
+<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: covid, patients, disease, severe, immune, inflammatory, associated </span></span>
+<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: autoantibodies, ipf, balf, neutrophils, il, fibrosis, autoantibody </span></span>
+<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 18f, 24hr, a2ar, aab, actinobacteria, activin, adiponectin </span></span>
+<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: inflammatory, il, patients, cytokine, inflammation, cytokines, endothelial </span></span>
+<span id="cb16-93"><a href="#cb16-93" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 19 Top Words:</span></span>
+<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: patients, treatment, covid, group, days, day, trial </span></span>
+<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: placebo, randomized, hcq, soc, azithromycin, arm, tocilizumab </span></span>
+<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 200mg, 400mg, 500mg, 600mg, 800mg, aureobasidium, ayush </span></span>
+<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: placebo, hcq, trial, patients, randomized, tocilizumab, hydroxychloroquine </span></span>
+<span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 20 Top Words:</span></span>
+<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: covid, symptoms, long, workers, infection, participants, study </span></span>
+<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: hcws, taste, smell, hcw, fatigue, workers, headache </span></span>
+<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: chemesthetic, dirty, eyewear, firefighters, ohs, principality, psychophysical </span></span>
+<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: symptoms, hcws, workers, participants, symptom, hcw, fatigue</span></span></code></pre></div>
+<ul>
+<li>we can extract these word probabilities (explain Prob and frex) and
+create word clouds for an interpretation</li>
 </ul>
 </div>
 <div class="section level3">
 <h3 id="covariate-effects">Covariate effects<a class="anchor" aria-label="anchor" href="#covariate-effects"></a>
 </h3>
+<ul>
+<li>illustrate with both STM plot methods and stminsight package</li>
+</ul>
 <div class="section level4">
 <h4 id="publication-year">Publication year<a class="anchor" aria-label="anchor" href="#publication-year"></a>
 </h4>
