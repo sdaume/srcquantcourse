@@ -33,6 +33,15 @@ library(ggplot2)
 
 ```
 
+
+```{css, echo=FALSE}
+.scroll-100 {
+  max-height: 100px;
+  overflow-y: auto;
+  background-color: inherit;
+}
+```
+
 # Introduction
 
 This is an example topic modelling analysis using the *Structural Topic Model (STM)* [@RobertsStewart_et_2019_JSTATS_91] for an analysis that focuses on a subset of [bioRxiv](https://www.biorxiv.org/) and [medRxiv](https://www.medrxiv.org/) preprints covering research related to *Covid-19*. The medRxiv website actually provides access to a dedicated collection of preprints on both medRxix and bioRxiv covering [COVID-19 SARS-CoV-2]((https://connect.medrxiv.org/relate/content/181)). We will work with the whole preprint collection and create a subset using keyword matching. 
@@ -56,7 +65,7 @@ This package has been setup to support exploring different thematic preprint sub
 
 The documented examples assume that you have obtained the data yourself and created a local copy for replication of the analyses. Below is the code that would allow you to do this. **NOTE** that at the time of writing this returned a dataset with *365526* records. Retrieving this data would take several hours. When replicating an analysis like this **use the bioRxiv/medRxiv API responsibly!**. Consider collecting smaller datasets (the example shown below would for example only require preprints from 2020 to 2023) or use the bulk snapshot as detailed [here](https://www.medrxiv.org/tdm).
 
-```{r eval=FALSE}
+```{r eval=FALSE, echo=TRUE}
 library(dplyr)
 library(medrxivr)
 
@@ -271,7 +280,7 @@ covid_model_K20 <- stm(documents = covid_stm_docs$documents,
 
 ## Estimating the effect of document covariates
 
-Once the model has converged we can estimate effect of document covariates on the topic prevalence. The `estimateEffect()` function allows to run regressions based on the formula specified as the first argument. It is here identical to the formula used when fitting the topic model, and regressions are run for all 20 topics. The same metadata as used previously needs to be supplied for this function in addition to the topic model object.  
+Once the model has converged we can estimate the effect of document covariates on the topic prevalence. The `estimateEffect()` function allows to run regressions based on the formula specified as the first argument. It is here identical to the formula used when fitting the topic model, and regressions are run for all 20 topics. The same metadata as used previously needs to be supplied for this function in addition to the topic model object.  
 
 ```{r eval=FALSE, echo=TRUE}
 covid_effect_K20 <- estimateEffect(1:20 ~ server * s(year),
@@ -286,19 +295,29 @@ This concludes fitting the model. The following sections step through a sample e
 
 ## Basic topic model information
 
-* plot and summary function
+* stm plot function (high res)
 
-
-```{r echo=TRUE}
-plot(srcquantcourse::covid_model_K20, n = 5)
+```{r echo=TRUE, dpi = 150}
+plot(covid_model_K20, n = 5)
 ```
 
+* alternatively we can extract the topic proportions from the beta matrix
 
-## Labelling topics
 
-* word clouds
+## Understanding and labeling topics
+
+* stm summary function
+
+```{r echo=TRUE, class.output="scroll-100"}
+summary(covid_model_K20)
+```
+
+* we can extract these word probabilities (explain Prob and frex) and create word clouds for an interpretation
+
 
 ## Covariate effects
+
+* illustrate with both STM plot methods and stminsight package
 
 ### Publication year
 
@@ -320,6 +339,12 @@ plot(srcquantcourse::covid_model_K20, n = 5)
 * primary, secondary etc topics
 * topic correlations
 * topic clusters
+
+
+
+
+
+
 
 
 # References
