@@ -44,7 +44,7 @@ library(ggplot2)
 
 # Introduction
 
-This is an example topic modelling analysis using the *Structural Topic Model (STM)* [@RobertsStewart_et_2019_JSTATS_91] for an analysis that focuses on a subset of [bioRxiv](https://www.biorxiv.org/) and [medRxiv](https://www.medrxiv.org/) preprints covering research related to *Covid-19*. The medRxiv website actually provides access to a dedicated collection of preprints on both medRxix and bioRxiv covering [COVID-19 SARS-CoV-2]((https://connect.medrxiv.org/relate/content/181)). We will work with the whole preprint collection and create a subset using keyword matching. 
+This is an example topic modelling analysis using the *Structural Topic Model (STM)* [@RobertsStewart_et_2019_JSTATS_91] to explore a subset of [bioRxiv](https://www.biorxiv.org/) and [medRxiv](https://www.medrxiv.org/) preprints covering research related to *Covid-19*. The medRxiv website actually provides access to a dedicated collection of preprints on both medRxix and bioRxiv covering [COVID-19 SARS-CoV-2]((https://connect.medrxiv.org/relate/content/181)). Here we will however work with the whole preprint collection and create a subset using keyword matching. 
 
 This document assumes some familiarity with *Structural Topic Modeling (STM)*. Please consult the `stm` package vignette [@RobertsStewart_et_2019_JSTATS_91] for background. 
 
@@ -61,9 +61,9 @@ biorxiv_raw <- mx_api_content(server = "biorxiv",
                               to_date = "2015-12-31")
 ```
 
-This package has been setup to support exploring different thematic preprint subsets and assumes usage of all preprints from both servers published from 2013 to 2023. This data can not be shared in this package as the [usage and API terms](https://www.medrxiv.org/tdm) of **bioRxiv/medRxiv do not permit redistribution and rehosting of the complete data**; therefore this package provides scripts to collect and clean the data in order to replicate this analysis (check  `/data-raw` in the package repository).
+This package has been setup to support exploring different thematic preprint subsets and assumes usage of all preprints from both servers published from 2013 to 2023. This data can not be shared in this package as the [usage and API terms](https://www.medrxiv.org/tdm) of **bioRxiv/medRxiv do not permit redistribution and rehosting of the complete data**; therefore this package provides scripts to collect and clean the data in order to replicate this analysis (check `/data-raw` in the package repository).
 
-The documented examples assume that you have obtained the data yourself and created a local copy for replication of the analyses. Below is the code that would allow you to do this. **NOTE** that at the time of writing this returned a dataset with *365526* records. Retrieving this data would take several hours. When replicating an analysis like this **use the bioRxiv/medRxiv API responsibly!**. Consider collecting smaller datasets (the example shown below would for example only require preprints from 2020 to 2023) or use the bulk snapshot as detailed [here](https://www.medrxiv.org/tdm).
+The documented examples assume that you have obtained the data yourself and created a local copy for replication of the analyses. Below is the code that would allow you to do this. **NOTE** that at the time of writing this returned a dataset with *365526* records. Retrieving this data would take several hours. When replicating an analysis like this **use the bioRxiv/medRxiv API responsibly**. Consider collecting smaller datasets (the example shown below would for example only require preprints from 2020 to 2023). Alternatively, use the bulk snapshot as detailed [here](https://www.medrxiv.org/tdm).
 
 ```{r eval=FALSE, echo=TRUE}
 library(dplyr)
@@ -89,7 +89,7 @@ preprints_raw <- dplyr::bind_rows(pubs_biorxiv_raw, pubs_medrxiv_raw)
 save(preprints_raw, file = "./data-raw/preprints_raw.Rdata")
 ```
 
-In addition to the 15 meta-data variables returned via the API the code above adds `server` as a variable to indicate the origin of the preprint. This is an important part of the examples below. 
+In addition to the 15 meta-data variables returned via the API the code above adds `server` as a variable to indicate the origin of the preprint. This is an important variable for the examples shown below. 
 
 
 # Cleaning, filtering and annotating the data
@@ -108,8 +108,8 @@ preprints_cleaned <- preprints_raw %>%
 ```
 
 
-Next we annotate the data with additional variables, specifically we want to reduce the publication `date` to the publication `year`, and add an additional variable `is_published`, which is inferred from the `published` variable which provides the doi of the journal where the preprint has been published after peer review.
-We also limit the data to preprints from 2020 to 2023 (for an analysis of Covid topics preprints prior to 2020 are not relevant), and only retain variables that we may want to explore as *document covariates* that potentially influence the prevalence of topics.
+Next we annotate the data with additional variables, specifically we want to reduce the publication `date` to the publication `year`, and add an additional variable `is_published`, which is inferred from the `published` variable. The latter provides the *DOI* of the journal where the preprint has been published after peer review.
+We also limit the data to preprints from 2020 to 2023 (for an analysis of Covid topics preprints prior to 2020 are not relevant), and only retain variables that we may want to explore as *document covariates*, i.e. document propereties that potentially influence the prevalence of topics.
 
 
 ```{r eval=FALSE, echo=TRUE}
@@ -144,7 +144,8 @@ covid_preprints <- preprints %>%
 
 # Preparing and preprocessing the documents for text analysis
 
-In order to analyze the preprints with the [`stm`](https://github.com/bstewart/stm) package we need to create a representation of the documents and document meta-data that `stm` can utilize. `stm` offers built-in methods to support this (see specifically the `textProcessor()` and `prepDocuments()` methods [@RobertsStewart_et_2019_JSTATS_91]). Here we use however the [`quanteda`](http://quanteda.io/index.html) package [@BenoitWatanabe_et_2018_JOSS_3] which provides a broad range of methods for text pre-processing and analysis, creating formats also supported by `stm`.
+In order to analyze the preprints with the [`stm`](https://github.com/bstewart/stm) package we need to create a representation of the documents and document meta-data that `stm` can utilize. `stm` offers built-in methods to support this (see specifically the `textProcessor()` and `prepDocuments()` methods [@RobertsStewart_et_2019_JSTATS_91]). Here we use instead the [`quanteda`](http://quanteda.io/index.html) package [@BenoitWatanabe_et_2018_JOSS_3] which provides a broad range of methods for text pre-processing and analysis, creating formats also supported by `stm`.
+
 
 ## Create a corpus
 
@@ -165,11 +166,11 @@ pubs_corpus <- covid_preprints %>%
 
 ## Tokenize and preprocess
 
-For further analysis the corpus documents have to be **tokenized**, i.e. the texts have to be broken into units for further processing. The most common approach is to interpret each word (typically designated by whitespaces or punctuation) as a token. This is applied here as well. `quanteda` offers several alternative approaches. Instead of individual words sequences of words (*n-grams*) could for example be used.
+For further analysis the corpus documents have to be **tokenized**, i.e. further processing the texts have to be broken into semantic units that are relevant for our analysis. The most common approach is to interpret each *word* (typically designated by whitespaces or punctuation) as a token. This is applied here as well. `quanteda` offers several alternative approaches. Instead of individual words sequences of words (*n-grams*) could for example be used.
 
-The tokenization method also provides several options for preprocessing and filtering the tokens. Here for example we will in the process of tokenization remove punctuation, numbers, special symbols and URLs. Furthermore, we split words containing hyphens, a word like *social-ecological* will thus be split into two individual tokens (*social* and *ecological*). 
+The tokenization method also provides several options for preprocessing and filtering the tokens. Here for example while tokenizing we will simultaneously remove punctuation, numbers, special symbols and URLs. Furthermore, we split words containing hyphens, a word like *social-ecological* will thus be split into two individual tokens (*social* and *ecological*). 
 
-The text preprocessing choices could strongly influence the results of a text analysis [@DennySpirling_2018_PA_26] and should be explained, carefully evaluated and ideally be based on theory.
+The text preprocessing choices could strongly influence the results of a text analysis [@DennySpirling_2018_PA_26] and should be thouroughly explained, carefully evaluated and ideally be based on theory.
 
 
 ```{r eval=FALSE, echo=TRUE}
@@ -186,7 +187,7 @@ pubs_tokens <- pubs_corpus %>%
 
 ## Create a Document-feature matrix
 
-The **tokens** object is then used to create *document-feature matrix*. For further statistical analysis this reduces the tokens to a matrix of documents (rows) and unique **terms** (columns) that counts the number of occurrences for each term in each document. `quanteda` captures this as *features* which supports more general options than **terms** (see the `quanteda` documentation for details).
+The **tokens** object is then used to create a *document-feature matrix*. For further statistical analysis this reduces the tokens to a matrix of documents (rows) and unique **terms** (columns) that counts the number of occurrences for each term in each document. `quanteda` captures this as *features* which supports more general options than **terms** (see the `quanteda` documentation for details).
 
 
 ```{r eval=FALSE, echo=TRUE}
@@ -197,9 +198,9 @@ pubs_dfm <- pubs_tokens %>%
 
 ## Filter terms and documents
 
-This is followed by more and optional processing and filtering steps. A common task  --- to reduce the size of the data or assist in the interpretation --- is the removal of so-called **stopwords** (e.g. *"the", "and", "or"* etc).
+This is followed by other (optional) processing and filtering steps. A common option for example  --- to reduce the size of the data or assist in the interpretation --- is the removal of so-called **stopwords** (e.g. *"the", "and", "or"* etc).
 
-A step omitted here is reducing words (terms) to their word stem. The stemming algorithm (several are available) reduces words to a word stem. The terms "universal", "university" and "universe" would for example be reduced to the same word stem of "univers"; this example indicates that this approach may require careful consideration.
+A step omitted here is reducing words (terms) to their word stem. The stemming algorithm (several are available) reduces words to its word stem. The terms "universal", "university" and "universe" would for example be reduced to the same word stem of "univers"; this example indicates that this approach may require careful consideration.
 
 Stemming has the advantage that it could potentially reduce the size of the matrix substantially. 
 
@@ -256,7 +257,7 @@ The key input is the number of topics (`K`) that the model should be fit to, whi
 
 Before fitting the topic model we convert the document-feature matrix into the native STM format. In order to fit a topic model with the `stm()` function we need the set of `documents`, the `vocabulary` of which these documents are composed and a dataframe specifying the values of all document meta-data variables (`data`) which can be used in the process as "covariates" that might influence the prevalence of topics in a document. 
 
-Here in the example below we ask stm to consider the origin of the document (`server`) and the publication `year` when fitting the topic model. The argument `prevalence = ~ server * s(year)` expresses that we assume that the prevalence of topics in a document is influenced by these two variables, and that they also interact, i.e. we work with the hypothesis that different temporal trends could be expected for documents published on either of the two preprint servers^[NOTE we use a spline function for the `year` variable. Consult the STM documentation for details on this.].
+Here, in the example below, we ask `stm` to consider the origin of the document (`server`) and the publication `year` when fitting the topic model. The argument `prevalence = ~ server * s(year)` expresses that we assume that the prevalence of topics in a document is influenced by these two variables, and that they also interact, i.e. we work with the hypothesis that different temporal trends could be expected for documents published on either of the two preprint servers^[NOTE we use the recommended spline function for the `year` variable. Consult the STM documentation for details on this.].
 
 The consideration of covariates is optional. If omitted the model reduces to a *Correlated Topic Model* [@BleiLafferty2007_AAS_1; @RobertsStewart_et_2019_JSTATS_91].
 
@@ -295,43 +296,214 @@ This concludes fitting the model. The following sections step through a sample e
 
 ## Basic topic model information
 
-* stm plot function (high res)
+The topic model is defined by two matrices that capture probability distributions of topics over documents (*gamma* matrix) and words (or terms) over topics (*beta* matrix). We can start exploring these with some of the built-in functions of `stm`. 
 
-```{r echo=TRUE, dpi = 150}
+The `plot()` function plots a chart showing topic proportions for all topics in the model. A topic is identified by a unique ID (1-20) and in the plot below the five words (or terms) that have the highest probability of being associated with the given topic. This gives an early indication of the distinct latent topics in the analysed subset of preprints. 
+
+```{r echo=TRUE, dpi = 200, fig.height=7, fig.width=10}
+
 plot(covid_model_K20, n = 5)
+
 ```
 
-* alternatively we can extract the topic proportions from the beta matrix
+The `summary()` function provides a more detailed view of the topics and can help to begin interpreting and labeling the 20 topics. Specifically, the output shows four different sets of words associated with a topic. *'Highest Prob'* lists the words that have the highest probability of being associated with a topic. A comparison of different topics highlights that a term such as *covid* has a high probability for several topics. The list of *'FREX'* words summarizes words that are frequent and exclusive in a topic, i.e. characterize a topic in comparison to other topics (consult `stm::labelTopics()` for details as well as *Lift* and *Score* word sets). 
+
+```{r echo=TRUE}
+
+summary(covid_model_K20)
+
+```
+
+## Topic-document and term-topic distributions
+
+As mentioned, the topic model is defined by the *gamma* (distribution of topics over words) and *beta* (distribution of terms over topics) matrices. With the help of the `tidytext` package we can extract those into dataframes for a more detailed analysis. Each row in the resulting dataframes lists the probability (`gamma`) of a given `topic` occurring in a given `document`^[NOTE that for each document a non-zero probability for all topics is assigned.].
+
+```{r}
+library(tidytext)
+
+# retrieve the 'gamma' matrix
+gamma <- tidytext::tidy(covid_model_K20, matrix = "gamma")
+
+glimpse(gamma)
+```
+
+Similarly, the *beta* matrix (extracted into a dataframe) lists for each row the probability (`beta`) of a given `term` occurring in a given `topic`.
+
+```{r}
+library(tidytext)
+
+# retrieve the 'beta' matrix
+beta <- tidytext::tidy(covid_model_K20, matrix = "beta")
+
+glimpse(beta)
+```
+Starting with the *beta* matrix we can create word clouds to explore useful semantic labels for each topic. 
+
 
 
 ## Understanding and labeling topics
 
-* stm summary function
+As mentioned previously `stm` can use the word probabilities to also compute *FREX* (frequent and exclusive) words per topic. Those can be retrieved with the `stm::labelTopics()` function, which returns ordered lists of the different word sets characterizing a topic. We can combine the information about *high probability* and *FREX* words to create word clouds for each topic, which might help to assign a summary label for each topic.   
 
-```{r echo=TRUE, class.output="scroll-100"}
-summary(covid_model_K20)
+```{r echo=TRUE, warning=FALSE, fig.width=9, fig.height=11, fig.cap="**Word clouds showing the 50 most probable terms per topic.** Words are scaled by normalized probability per topic, terms that are also among the top 20 *FREX* terms are highlighted in orange. For readability, the terms 'sars', 'cov' and 'covid' have been removed as they occur with high probability in most topics."}
+library(tidyr)
+library(tibble)
+
+# get the top FREX words
+frex_top20 <- as.data.frame(labelTopics(covid_model_K20, n = 20)$frex) %>%
+  rownames_to_column(var = "topic") %>%
+  pivot_longer(starts_with("V"), values_to = "term") %>%
+  mutate(is_frex = 1) %>%
+  select(-name)
+
+topic_words <- tidytext::tidy(covid_model_K20, matrix = "beta") %>%
+  #filter(!(term %in% c("sars", "cov", "covid"))) %>% 
+  mutate(topic = as.character(topic)) %>%
+  group_by(topic) %>%
+  arrange(-beta) %>%
+  slice_head(n = 50) %>%
+  mutate(beta_norm = (beta - min(beta)) / (max(beta) - min(beta))) %>%
+  ungroup() %>%
+  left_join(frex_top20, by = c("topic", "term")) %>%
+  mutate(is_frex = ifelse(is.na(is_frex), "0", "1")) %>%
+  filter(!(term %in% c("sars", "cov", "covid"))) %>%
+  mutate(topic = paste("Topic", topic))
+
+ggplot(topic_words, aes(label = term, size = beta_norm, color = is_frex)) +
+  ggwordcloud::geom_text_wordcloud_area(shape = "square",
+                                        rm_outside = TRUE) +
+  scale_radius(range = c(2, 13)) +
+  scale_color_manual(values = c("0" = "black", "1" = "#D55E00")) + 
+  facet_wrap(~topic, ncol = 4)
 ```
-
-* we can extract these word probabilities (explain Prob and frex) and create word clouds for an interpretation
+From the review of this combination of *FREX* and *high probability* terms distinct topics are emerging, such as: "epidemic models" (Topic 1), "vaccines" (Topic 11), "testing" (Topic 16), "virus variants" (Topic 17), "treatments" (Topic 2), "mortality risks" (Topic 3), "mental health" (Topic 4), "country-wise case reports" (Topic 8), "virus molecular structure" (Topic 9).
 
 
 ## Covariate effects
 
-* illustrate with both STM plot methods and stminsight package
+A key feature of STM is the incorporation of document covariates into the topic model. In our example we considered the publication year and the preprint server as covariates that might influence the prevalence of a topic in a document. We also applied a regression for these covariates to the fit model, which were extracted with `stm::estimateEffect()`. 
+
+As a first exploration we can print the regression tables for all or selected topics. 
+
+```{r echo=TRUE}
+
+summary(covid_effect_K20)
+
+```
+
+The following sections illustrate the exploration of covariate effects with several examples.
+
 
 ### Publication year
 
-* overview of all topics
-* comparison of topics 8 and 17
+`stm` offers several built-in methods to explore the covariate effects visually. 
+
+```{r echo=TRUE, fig.height=7, fig.width=7}
+plot(covid_effect_K20,
+     covariate = "year",
+     method = "continuous",
+     model = covid_model_K20,
+     topics = c(1, 16, 11),
+     xaxt = "n",
+     main = 'Effect of publication year on prevalence of Topic 1 ("epidemic \nmodels"), Topic 16 ("testing") and Topic 11 ("vaccines")',
+     labeltype = "prob",
+     xlab = "Publication year")
+axis(1, at = c("2020","2021","2022","2023"), labels = c(2020, 2021, 2022, 2023))
+```
+The visualization of the effect of preprint *publication year* on *expected topic proportions* confirm some trends that appear to match intuitively with different phases of the Covid-19 pandemic. Modelling the spread of infections (Topic 1) had a high relevance initially, but declined later, the same applies to (PCR-)testing (Topic 16), while vaccines (Topic 11) received limited coverage in earlier preprints, but became more important in later years.  
+
+Alternatively, the `stminsights` package could be used to extract effects and create customized charts.
+
+```{r echo=TRUE, warning=FALSE, fig.width=9, fig.height=11}
+library(stminsights)
+
+year_effect <- get_effects(estimates = covid_effect_K20, 
+                           variable = "year",
+                           type = "continuous")
+
+year_effect %>%
+  mutate(topic = as.character(topic)) %>%
+  mutate(topic = paste("Topic", topic)) %>%
+    ggplot(aes(x = value, y = proportion)) +
+      geom_line() +
+      geom_ribbon(aes(ymin = lower, ymax = upper), 
+                  alpha = 0.2, linetype = 0)  +
+      xlab("Publication year") +
+      ylab("Topic prevalence") +
+      facet_wrap(~topic, ncol = 4) +
+      theme_minimal()
+```
+
+biorxiv
 
 ### Preprint server 
 
 * difference comparison of multiple (or all) topics
 
+```{r echo=FALSE, fig.height=14}
+plot(covid_effect_K20, 
+     covariate = "server",
+     #topics = c(9, 10, 16, 1),
+     model = covid_model_K20, 
+     method = "difference",
+     cov.value1 = "biorxiv", cov.value2 = "medrxiv",
+     xlab = "medrxiv ... biorxiv",
+     xlim = c(-0.18, 0.18),
+     main = "Effect of preprint server"#,
+     #labeltype = "prob"
+     )
+```
+
+* comparison of single topic
+
+```{r echo=TRUE}
+plot(covid_effect_K20, 
+     covariate = "server",
+     topics = c(17),
+     model = covid_model_K20, 
+      method = "pointestimate",
+     #cov.value1 = "biorxiv", cov.value2 = "medrxiv",
+     xlab = "Topic prevalence",
+     #xlim = c(-0.18, 0.18),
+     main = "Effect of preprint server"#,
+     #labeltype = "prob"
+     )
+
+```
+
 
 ### Combination of preprint server and publication year
 
 * topics 1 and TBD
+
+```{r echo=TRUE, warning=FALSE, fig.width=9, fig.height=11}
+biorxiv_effect <- get_effects(covid_effect_K20,
+                              variable = "year", type = "continuous", 
+                              moderator = "server", modval = "biorxiv")
+
+medrxiv_effect <- get_effects(covid_effect_K20,
+                              variable = "year", type = "continuous", 
+                              moderator = "server", modval = "medrxiv")
+
+server_effects <- bind_rows(biorxiv_effect, medrxiv_effect)
+
+server_effects %>%
+  mutate(topic = as.character(topic)) %>%
+  mutate(topic = paste("Topic", topic)) %>%
+    ggplot(aes(x = value, y = proportion, color = moderator,
+               group = moderator, fill = moderator)) +
+      geom_line() +
+      geom_ribbon(aes(ymin = lower, ymax = upper, 
+                      fill = moderator), alpha = 0.2, linetype = 0) +
+      xlab("Publication year") +
+      ylab("Topic prevalence") +
+      facet_wrap(~topic, ncol = 4) +
+      theme_minimal() +
+      theme(legend.position = "bottom") 
+```
+
+
+
 
 
 ## Exploring the topic structure

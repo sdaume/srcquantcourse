@@ -26,7 +26,11 @@ Imports:
     quanteda.textstats,
     stm,
     stminsights,
-    ggplot2
+    ggplot2,
+    tidytext,
+    tidyr,
+    tibble,
+    ggwordcloud
 Suggests: 
     knitr,
     rmarkdown
