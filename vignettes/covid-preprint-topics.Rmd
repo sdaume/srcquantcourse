@@ -380,6 +380,7 @@ topic_words <- tidytext::tidy(covid_model_K20, matrix = "beta") %>%
 
 ggplot(topic_words, aes(label = term, size = beta_norm, color = is_frex)) +
   ggwordcloud::geom_text_wordcloud_area(shape = "square",
+                                        family = "Arial",
                                         rm_outside = TRUE) +
   scale_radius(range = c(4, 15)) +
   scale_color_manual(values = c("0" = "black", "1" = "#D55E00")) + 
