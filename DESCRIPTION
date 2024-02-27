@@ -28,6 +28,7 @@ Imports:
     stminsights,
     ggplot2,
     tidytext,
+    reshape2,
     tidyr,
     tibble,
     ggwordcloud
