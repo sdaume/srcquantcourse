@@ -45,14 +45,17 @@ library(ggplot2)
 
 # Introduction
 
-This is an example topic modelling analysis using the *Structural Topic Model (STM)* [@RobertsStewart_et_2019_JSTATS_91] to explore a subset of [bioRxiv](https://www.biorxiv.org/) and [medRxiv](https://www.medrxiv.org/) preprints covering research related to *Covid-19*. The medRxiv website actually provides access to a dedicated collection of preprints on both medRxix and bioRxiv covering [COVID-19 SARS-CoV-2]((https://connect.medrxiv.org/relate/content/181)). Here we will however work with the whole preprint collection and create a subset using keyword matching. 
+This is an example topic modelling analysis using the *Structural Topic Model (STM)* [@RobertsStewart_et_2019_JSTATS_91] to explore a subset of [bioRxiv](https://www.biorxiv.org/) and [medRxiv](https://www.medrxiv.org/) preprints covering research related to *Covid-19*. 
+The medRxiv website actually provides access to a dedicated collection of preprints on both medRxix and bioRxiv covering [COVID-19 SARS-CoV-2]((https://connect.medrxiv.org/relate/content/181)). Here we will however work with the whole preprint collection and create a subset using keyword matching. 
+
+Note that this analysis is intended to illustrate the method of *topic modeling*. A complete analysis of the sample preprints would be more detailed and would like feature a larger number of topics.
 
 This document assumes some familiarity with *Structural Topic Modeling (STM)*. Please consult the `stm` package vignette [@RobertsStewart_et_2019_JSTATS_91] for background. 
 
 
 # Getting the document data 
 
-The [bioRxiv](https://www.biorxiv.org/) and [medRxiv](https://www.medrxiv.org/) servers [provide API access](https://api.biorxiv.org/) to retrieve preprint meta-data. One option to access the API is to use the  `[medrxivr](https://docs.ropensci.org/medrxivr/)` package. The code snippet below would for example collect all *bioRxiv* preprint meta-data for the year 2015. 
+The [bioRxiv](https://www.biorxiv.org/) and [medRxiv](https://www.medrxiv.org/) servers [provide API access](https://api.biorxiv.org/) to retrieve preprint meta-data. One option to access the API is to use the [`medrxivr`](https://docs.ropensci.org/medrxivr/) package. The code snippet below would for example collect all *bioRxiv* preprint meta-data for the year 2015. 
 
 ```{r eval=FALSE, echo=TRUE}
 library(medrxivr)
@@ -64,7 +67,9 @@ biorxiv_raw <- mx_api_content(server = "biorxiv",
 
 This package has been setup to support exploring different thematic preprint subsets and assumes usage of all preprints from both servers published from 2013 to 2023. This data can not be shared in this package as the [usage and API terms](https://www.medrxiv.org/tdm) of **bioRxiv/medRxiv do not permit redistribution and rehosting of the complete data**; therefore this package provides scripts to collect and clean the data in order to replicate this analysis (check `/data-raw` in the package repository).
 
-The documented examples assume that you have obtained the data yourself and created a local copy for replication of the analyses. Below is the code that would allow you to do this. **NOTE** that at the time of writing this returned a dataset with *365526* records. Retrieving this data would take several hours. When replicating an analysis like this **use the bioRxiv/medRxiv API responsibly**. Consider collecting smaller datasets (the example shown below would for example only require preprints from 2020 to 2023). Alternatively, use the bulk snapshot as detailed [here](https://www.medrxiv.org/tdm).
+The documented examples assume that you have obtained the data yourself and created a local copy for replication of the analyses. Below is the code that would allow you to do this. **NOTE** that at the time of writing this returned a dataset with *365526* records. Retrieving this data would take several hours. 
+
+When replicating an analysis like this **use the bioRxiv/medRxiv API responsibly**. Consider collecting smaller datasets (the example shown below would for example only require preprints from 2020 to 2023). Alternatively, use the bulk snapshot as detailed [here](https://www.medrxiv.org/tdm).
 
 ```{r eval=FALSE, echo=TRUE}
 library(dplyr)
@@ -95,7 +100,7 @@ In addition to the 15 meta-data variables returned via the API the code above ad
 
 # Cleaning, filtering and annotating the data
 
-As a first step the raw preprint data has to be cleaned. Specifically, we want to retain only one unique record per preprint, multiple `version`s for each unique `doi` may exist. Below we retain only the latest version per doi and also ensure that there are no duplicate `doi`s. This is crucial as we need a unique identifier for each document that we want to include in the topic modelling. 
+As a first step the raw preprint data has to be cleaned. Specifically, we want to retain only one unique record per preprint, multiple `version`s for each unique `doi` may exist. Below we retain only the latest version per *DOI* and also ensure that there are no duplicate `doi`s. This is crucial as we need a unique identifier for each document that we want to include in the topic modelling. 
 
 
 ```{r eval=FALSE, echo=TRUE}
@@ -110,7 +115,8 @@ preprints_cleaned <- preprints_raw %>%
 
 
 Next we annotate the data with additional variables, specifically we want to reduce the publication `date` to the publication `year`, and add an additional variable `is_published`, which is inferred from the `published` variable. The latter provides the *DOI* of the journal where the preprint has been published after peer review.
-We also limit the data to preprints from 2020 to 2023 (for an analysis of Covid topics preprints prior to 2020 are not relevant), and only retain variables that we may want to explore as *document covariates*, i.e. document propereties that potentially influence the prevalence of topics.
+
+We also limit the data to preprints from 2020 to 2023 (for an analysis of Covid topics preprints prior to 2020 are not relevant), and only retain variables that we may want to explore as *document covariates*, i.e. document properties that potentially influence the prevalence of topics.
 
 
 ```{r eval=FALSE, echo=TRUE}
@@ -127,7 +133,7 @@ preprints <- preprints_cleaned %>%
 ```
 
 
-Finally, we define keywords and reduce our preprint set to preprints that contain one of those keywords in either the title or abstract, resulting in a subset of 29692 publications.
+Finally, we define keywords and reduce our preprint set to preprints that contain one of those keywords in either the title or abstract, resulting in a subset of *29692* publications.
 
 ```{r eval=FALSE, echo=TRUE}
 library(stringr)
@@ -167,11 +173,11 @@ pubs_corpus <- covid_preprints %>%
 
 ## Tokenize and preprocess
 
-For further analysis the corpus documents have to be **tokenized**, i.e. further processing the texts have to be broken into semantic units that are relevant for our analysis. The most common approach is to interpret each *word* (typically designated by whitespaces or punctuation) as a token. This is applied here as well. `quanteda` offers several alternative approaches. Instead of individual words sequences of words (*n-grams*) could for example be used.
+For further analysis the corpus documents have to be **tokenized**, i.e. further processing the texts have to be broken into semantic units that are relevant for our analysis. The most common approach is to interpret each *word* (typically designated by whitespaces or punctuation) as a token. This is applied here as well. `quanteda` offers several alternative approaches. Instead of individual words, sequences of words (*n-grams*) could for example be used.
 
-The tokenization method also provides several options for preprocessing and filtering the tokens. Here for example while tokenizing we will simultaneously remove punctuation, numbers, special symbols and URLs. Furthermore, we split words containing hyphens, a word like *social-ecological* will thus be split into two individual tokens (*social* and *ecological*). 
+The tokenization method also provides several options for preprocessing and filtering the tokens. Here for example, while tokenizing, we will simultaneously remove punctuation, numbers, special symbols and URLs. Furthermore, we split words containing hyphens, a word like *social-ecological* will thus be split into two individual tokens (*social* and *ecological*). 
 
-The text preprocessing choices could strongly influence the results of a text analysis [@DennySpirling_2018_PA_26] and should be thouroughly explained, carefully evaluated and ideally be based on theory.
+The text preprocessing choices could strongly influence the results of a text analysis and should be thoroughly explained, carefully evaluated and ideally be based on theory (see [@DennySpirling_2018_PA_26]).
 
 
 ```{r eval=FALSE, echo=TRUE}
@@ -254,11 +260,11 @@ docs             nitric oxide synthesised three isoforms synthases viz neurons e
 
 ## Fitting the STM topic model
 
-The key input is the number of topics (`K`) that the model should be fit to, which we here set to 20 (see the separate document for a discussion on suitable choices for the number of topics).
+The key input to any topic modelling algorithm is the number of topics (`K`) that the model should be fit to, which we here set to 20 (see the separate document for a discussion on suitable choices for the number of topics).
 
 Before fitting the topic model we convert the document-feature matrix into the native STM format. In order to fit a topic model with the `stm()` function we need the set of `documents`, the `vocabulary` of which these documents are composed and a dataframe specifying the values of all document meta-data variables (`data`) which can be used in the process as "covariates" that might influence the prevalence of topics in a document. 
 
-Here, in the example below, we ask `stm` to consider the origin of the document (`server`) and the publication `year` when fitting the topic model. The argument `prevalence = ~ server * s(year)` expresses that we assume that the prevalence of topics in a document is influenced by these two variables, and that they also interact, i.e. we work with the hypothesis that different temporal trends could be expected for documents published on either of the two preprint servers^[NOTE we use the recommended spline function for the `year` variable. Consult the STM documentation for details on this.].
+In the example below, we ask `stm` to incorporate the origin of the document (`server`) and the publication `year` when fitting the topic model. The argument `prevalence = ~ server * s(year)` expresses that we assume that the prevalence of topics in a document is influenced by these two variables, and that they also interact, i.e. we work with the hypothesis that different temporal trends could be expected for documents published on either of the two preprint servers^[NOTE we use the recommended spline function for the `year` variable. Consult the STM documentation for details on this.].
 
 The consideration of covariates is optional. If omitted the model reduces to a *Correlated Topic Model* [@BleiLafferty2007_AAS_1; @RobertsStewart_et_2019_JSTATS_91].
 
@@ -317,7 +323,9 @@ summary(covid_model_K20)
 
 ## Topic-document and term-topic distributions
 
-As mentioned, the topic model is defined by the *gamma* (distribution of topics over words) and *beta* (distribution of terms over topics) matrices. With the help of the `tidytext` package we can extract those into dataframes for a more detailed analysis. Each row in the resulting dataframes lists the probability (`gamma`) of a given `topic` occurring in a given `document`^[NOTE that for each document a non-zero probability for all topics is assigned.].
+As mentioned, the topic model is defined by the *gamma* (distribution of topics over words) and *beta* (distribution of terms over topics) matrices. With the help of the `tidytext` package we can extract those into dataframes for a more detailed analysis. 
+
+Each row in the following dataframe lists the probability (`gamma`) of a given `topic` occurring in a given `document`^[NOTE that for each document a non-zero probability for all topics is assigned.].
 
 ```{r}
 library(tidytext)
@@ -379,6 +387,13 @@ ggplot(topic_words, aes(label = term, size = beta_norm, color = is_frex)) +
 ```
 From the review of this combination of *FREX* and *high probability* terms distinct topics are emerging, such as: "epidemic models" (Topic 1), "vaccines" (Topic 11), "testing" (Topic 16), "virus variants" (Topic 17), "treatments" (Topic 2), "mortality risks" (Topic 3), "mental health" (Topic 4), "country-wise case reports" (Topic 8), "virus molecular structure" (Topic 9).
 
+Deriving semantic labels will also benefit from a review of sample documents that are representative for certain topics, i.e. where the topic model assigns a high topic proportion of a given topic to the document. Furthermore, the consistency of assigned semantic labels should be checked prior to further analysis (see for example the [`oolong` package](https://github.com/gesistsa/oolong) for a systematic approach).
+
+```{r eval=FALSE}
+# might be useful to add an example for stm::findThoughts() here
+```
+
+
 
 ## Covariate effects
 
@@ -397,9 +412,10 @@ The following sections illustrate the exploration of covariate effects with seve
 
 ### Publication year
 
-`stm` offers several built-in methods to explore the covariate effects visually. 
+`stm` offers several built-in methods to explore the covariate effects visually. The visualization of the effect of preprint *publication year* on *expected topic proportions* confirm some trends that appear to match intuitively with different phases of the Covid-19 pandemic. Modelling the spread of infections (Topic 1) had a high relevance initially, but declined later, the same applies to (PCR-)testing (Topic 16), while vaccines (Topic 11) received limited coverage in earlier preprints, but became more important in later years as they were developed and distributed.  
 
-```{r echo=TRUE, fig.height=7, fig.width=7}
+
+```{r echo=TRUE, fig.height=7, fig.width=10}
 plot(covid_effect_K20,
      covariate = "year",
      method = "continuous",
@@ -411,9 +427,8 @@ plot(covid_effect_K20,
      xlab = "Publication year")
 axis(1, at = c("2020","2021","2022","2023"), labels = c(2020, 2021, 2022, 2023))
 ```
-The visualization of the effect of preprint *publication year* on *expected topic proportions* confirm some trends that appear to match intuitively with different phases of the Covid-19 pandemic. Modelling the spread of infections (Topic 1) had a high relevance initially, but declined later, the same applies to (PCR-)testing (Topic 16), while vaccines (Topic 11) received limited coverage in earlier preprints, but became more important in later years.  
 
-Alternatively, the `stminsights` package could be used to extract the same regression information from `stm` effects object and create customized charts.
+Alternatively, the `stminsights` package could be used to extract the same regression information from the `stm` effects object and create customized charts.
 
 ```{r echo=TRUE, warning=FALSE, fig.width=9, fig.height=11}
 library(stminsights)
@@ -439,7 +454,9 @@ year_effect %>%
 
 ### Preprint server 
 
-The model also incorporated the preprint server (*bioRxiv* and *medRxiv*) as a covariate. We hypothesized that the prevalence of certain topics will be influenced by this covariate, i.e. that we are more likely to see certain topics on either *bioRxiv* and *medRxiv*. STM interpretes this as a *treatment* (see [@RobertsStewart_et_2014_AJPS_58] for background and examples) and we can extract the effect of this treatment from the regression object returned by `estimateEffect()`. The `stm::plot()` offers different methods to explore those effects. The figure below lists the effect of *'treatment medrxiv'* for all topics in the model. The treatment can have a positive or negative effect. Here we can for example see that Topic 4 ("mental health") can be expected with higher prevalence in *medRxiv* preprints, whereas Topic 9 ("virus molecular structure") will have a much lower prevalence in *medRxiv* preprints, i.e. should be expected with higher prevalence in *bioRxiv* preprints.
+The model also incorporated the preprint server (*bioRxiv* and *medRxiv*) as a covariate. We hypothesized that the prevalence of certain topics will be influenced by this covariate, i.e. that we are more likely to see certain topics on either *bioRxiv* and *medRxiv*. STM interprets this as a *treatment* (see [@RobertsStewart_et_2014_AJPS_58] for background and examples) and we can extract the effect of this treatment from the regression object returned by `estimateEffect()`. 
+
+The `stm::plot()` offers different methods to explore those effects. The figure below lists the effect of *'treatment medrxiv'* for all topics in the model. The treatment can have a positive or negative effect. Here we can for example see that Topic 4 ("mental health") can be expected with higher prevalence in *medRxiv* preprints, whereas Topic 9 ("virus molecular structure") will have a much lower prevalence in *medRxiv* preprints, i.e. should be expected with higher prevalence in *bioRxiv* preprints.
 
 
 ```{r echo=FALSE, fig.dpi=150, fig.height=14, fig.width=16}
@@ -455,7 +472,7 @@ plot(covid_effect_K20,
      main = "Effect of preprint server ('treatment medrxiv')")
 ```
 
-We can also compare the topical prevalence effect of covariate values for a single topic. The figure below confirms the previous observation for Topic 9 ("virus molecular structure") which has a prevalence close to zero in *medRxiv* preprints but a prevalence of approximately 0.17 for *bioRxiv* preprints, i.e. it appears almost exclusively in the latter.
+We can also compare the topical prevalence effect of covariate values for a single topic. The figure below confirms the previous observation for Topic 9 ("virus molecular structure") which has a prevalence close to zero in *medRxiv* preprints but a prevalence of approximately 0.17 for *bioRxiv* preprints, i.e. it seems to appear almost exclusively in the latter.
 
 
 ```{r echo=TRUE}
@@ -550,7 +567,7 @@ covid_topic_correlations <- topicCorr(covid_model_K20)
 plot(covid_topic_correlations)
 ```
 
-The correlation matrix can be used for further analysis (e.g. networks and clusters) or alternative visualizations. Both are outside the scope of this example and the course module.  For illustration, the following figure creates an alternative network visualization, with nodes coloured according to a community analysis of the topical network, which here reveals four distinct topical clusters.  
+The correlation matrix can be used for further analysis (e.g. networks and clusters) or alternative visualizations. Both are outside the scope of this example and the course module.  For illustration, the following figure creates an alternative network visualization, with nodes colored according to a community analysis of the topical network, which here reveals four distinct topical clusters.  
 
 ```{r eval=FALSE}
 library(networkD3)

@@ -33,14 +33,14 @@ modify the scripts.
 The package is shared under an [MIT License](LICENSE.md).
 
 The package relies on several other R packages that are listed in the
-package [DESCRIPTION](DESCRIPTION)\` and accompanying scripts. The work
-of these packages’ authors is hereby gratefully acknowledged.
+package [DESCRIPTION](DESCRIPTION) and accompanying scripts. The work of
+these packages’ authors is hereby gratefully acknowledged.
 
 To illustrate the methods covered in this package preprint meta-data
 from [bioRxiv](https://www.biorxiv.org/) and
 [medRxiv](https://www.medrxiv.org/) has been used. Those preprint
 servers provide [API access](http://api.biorxiv.org/) to preprints which
-is also explicitly [intended to support text
+is explicitly [intended to support text
 mining](https://www.biorxiv.org/tdm); this is hereby gratefully
 acknowledged. The actual preprints cannot be shared in this package, but
 scripts utilizing the

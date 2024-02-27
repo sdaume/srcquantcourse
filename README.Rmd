@@ -36,9 +36,9 @@ Alternatively, clone this repo (https://github.com/sdaume/srcquantcourse) in ord
 ## License, credits and acknowledgements
 The package is shared under an [MIT License](LICENSE.md). 
 
-The package relies on several other R packages that are listed in the package [DESCRIPTION](DESCRIPTION)` and accompanying scripts. The work of these packages' authors is hereby gratefully acknowledged.
+The package relies on several other R packages that are listed in the package [DESCRIPTION](DESCRIPTION) and accompanying scripts. The work of these packages' authors is hereby gratefully acknowledged.
 
-To illustrate the methods covered in this package preprint meta-data from [bioRxiv](https://www.biorxiv.org/) and [medRxiv](https://www.medrxiv.org/) has been used. Those preprint servers provide [API access](http://api.biorxiv.org/) to preprints which is also explicitly [intended to support text mining](https://www.biorxiv.org/tdm); this is hereby gratefully acknowledged. The actual preprints cannot be shared in this package, but scripts utilizing the [`medrxivr`](https://github.com/ropensci/medrxivr/) package are provided to obtain the preprint data and replicate the results.
+To illustrate the methods covered in this package preprint meta-data from [bioRxiv](https://www.biorxiv.org/) and [medRxiv](https://www.medrxiv.org/) has been used. Those preprint servers provide [API access](http://api.biorxiv.org/) to preprints which is explicitly [intended to support text mining](https://www.biorxiv.org/tdm); this is hereby gratefully acknowledged. The actual preprints cannot be shared in this package, but scripts utilizing the [`medrxivr`](https://github.com/ropensci/medrxivr/) package are provided to obtain the preprint data and replicate the results.
 
 This package has been developed to support education and research at the [Stockholm Resilience Centre](https://www.stockholmresilience.org); the research has benefited from funding by the [Swedish Research Council for Sustainable Development (Formas)](https://formas.se/).
 
