@@ -23,6 +23,7 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(srcquantcourse)
 library(dplyr)
+library(tidyr)
 library(stringr)
 library(quanteda)
 library(quanteda.textstats)
@@ -412,7 +413,7 @@ axis(1, at = c("2020","2021","2022","2023"), labels = c(2020, 2021, 2022, 2023))
 ```
 The visualization of the effect of preprint *publication year* on *expected topic proportions* confirm some trends that appear to match intuitively with different phases of the Covid-19 pandemic. Modelling the spread of infections (Topic 1) had a high relevance initially, but declined later, the same applies to (PCR-)testing (Topic 16), while vaccines (Topic 11) received limited coverage in earlier preprints, but became more important in later years.  
 
-Alternatively, the `stminsights` package could be used to extract effects and create customized charts.
+Alternatively, the `stminsights` package could be used to extract the same regression information from `stm` effects object and create customized charts.
 
 ```{r echo=TRUE, warning=FALSE, fig.width=9, fig.height=11}
 library(stminsights)
@@ -434,47 +435,78 @@ year_effect %>%
       theme_minimal()
 ```
 
-biorxiv
+
 
 ### Preprint server 
 
-* difference comparison of multiple (or all) topics
+The model also incorporated the preprint server (*bioRxiv* and *medRxiv*) as a covariate. We hypothesized that the prevalence of certain topics will be influenced by this covariate, i.e. that we are more likely to see certain topics on either *bioRxiv* and *medRxiv*. STM interpretes this as a *treatment* (see [@RobertsStewart_et_2014_AJPS_58] for background and examples) and we can extract the effect of this treatment from the regression object returned by `estimateEffect()`. The `stm::plot()` offers different methods to explore those effects. The figure below lists the effect of *'treatment medrxiv'* for all topics in the model. The treatment can have a positive or negative effect. Here we can for example see that Topic 4 ("mental health") can be expected with higher prevalence in *medRxiv* preprints, whereas Topic 9 ("virus molecular structure") will have a much lower prevalence in *medRxiv* preprints, i.e. should be expected with higher prevalence in *bioRxiv* preprints.
 
-```{r echo=FALSE, fig.height=14}
+
+```{r echo=FALSE, fig.dpi=150, fig.height=14, fig.width=16}
 plot(covid_effect_K20, 
      covariate = "server",
      #topics = c(9, 10, 16, 1),
      model = covid_model_K20, 
      method = "difference",
-     cov.value1 = "biorxiv", cov.value2 = "medrxiv",
-     xlab = "medrxiv ... biorxiv",
-     xlim = c(-0.18, 0.18),
-     main = "Effect of preprint server"#,
-     #labeltype = "prob"
-     )
+     cov.value1 = "medrxiv", cov.value2 = "biorxiv",
+     xlab = "higher biorxiv prevalence ... higher medrxiv prevalence",
+     xlim = c(-0.19, 0.1),
+     #labeltype = "prob",
+     main = "Effect of preprint server ('treatment medrxiv')")
 ```
 
-* comparison of single topic
+We can also compare the topical prevalence effect of covariate values for a single topic. The figure below confirms the previous observation for Topic 9 ("virus molecular structure") which has a prevalence close to zero in *medRxiv* preprints but a prevalence of approximately 0.17 for *bioRxiv* preprints, i.e. it appears almost exclusively in the latter.
+
 
 ```{r echo=TRUE}
 plot(covid_effect_K20, 
      covariate = "server",
-     topics = c(17),
+     topics = c(9),
      model = covid_model_K20, 
       method = "pointestimate",
-     #cov.value1 = "biorxiv", cov.value2 = "medrxiv",
-     xlab = "Topic prevalence",
-     #xlim = c(-0.18, 0.18),
-     main = "Effect of preprint server"#,
-     #labeltype = "prob"
-     )
+     xlab = "Topical prevalence",
+     xlim = c(-0.04, 0.2),
+     #labeltype = "prob",
+     main = "Effect of preprint server covariate for Topic 9")
 
 ```
 
 
 ### Combination of preprint server and publication year
 
-* topics 1 and TBD
+Finally, we can also explore the combined effect of covariates; we assumed an interacting effect of the two covariates `server` and `year`. The plot below visualizes this for Topic 17 ("virus variants") and illustrates that the topical prevalence increased throughout the pandemic in all preprints but that the topic apparently received more coverage in *bioRxiv* preprints.
+
+```{r echo=FALSE, fig.width=10, fig.height=7, dpi=150}
+plot(covid_effect_K20,
+     topics = c(17),
+     covariate = "year",
+     model = covid_model_K20,
+     ci.level = 0.95,
+     method = "continuous",
+     moderator = "server",
+     moderator.value = "medrxiv",
+     linecol = "#619CFF", lwd = 4,
+     xlab = "Publication year",
+     ylim = c(0, .15),
+     main = 'Effect of preprint server on Topic 17 ("virus variants")',
+     xaxt = "n",
+     printlegend = F)
+plot(covid_effect_K20,
+     topics = c(17),
+     covariate = "year",
+     model = covid_model_K20,
+     method = "continuous",
+     moderator = "server",
+     moderator.value = "biorxiv",
+     linecol = "#F8766D", lwd = 2,
+     add = T,
+     printlegend = F)
+legend(2020, .15, c("medRxiv", "bioRxiv"), lwd = 2, col = c("#619CFF", "#F8766D"))
+axis(1, at = c("2020","2021","2022","2023"), labels = c(2020, 2021, 2022, 2023))
+```
+
+Again, `stminsights` can be used to retrieve this information and create customized visualizations for the combined covariate effect.
+
 
 ```{r echo=TRUE, warning=FALSE, fig.width=9, fig.height=11}
 biorxiv_effect <- get_effects(covid_effect_K20,
@@ -508,12 +540,86 @@ server_effects %>%
 
 ## Exploring the topic structure
 
-* primary, secondary etc topics
-* topic correlations
-* topic clusters
+### Topic correlations
+
+Finally, considering that STM is extending [@RobertsStewart_et_2019_JSTATS_91] a correlated topic model [@BleiLafferty2007_AAS_1] we may also explore if topics are frequently cooccuring. A a topic correlation matrix is retrieved with `stm::topicCorr()` which can then be plotted. The resulting figure below indicates at least two clusters of topics.  
+
+```{r echo=TRUE}
+covid_topic_correlations <- topicCorr(covid_model_K20)
+
+plot(covid_topic_correlations)
+```
+
+The correlation matrix can be used for further analysis (e.g. networks and clusters) or alternative visualizations. Both are outside the scope of this example and the course module.  For illustration, the following figure creates an alternative network visualization, with nodes coloured according to a community analysis of the topical network, which here reveals four distinct topical clusters.  
+
+```{r eval=FALSE}
+library(networkD3)
+
+corrCutoff <- 0.01
+topicModel <- covid_model_K20
+nLabelWords <- 2
+
+topic_correlation_matrix <- topicCorr(topicModel, cutoff = corrCutoff)
+
+topic_igraph <- topic_correlation_matrix$poscor %>%
+  igraph::graph.adjacency(mode = "undirected", weighted = TRUE, diag = FALSE)
+
+topic_clusters <- igraph::cluster_louvain(topic_igraph)
+
+d3_network <- topic_igraph %>%
+  networkD3::igraph_to_networkD3(group = igraph::membership(topic_clusters))
+
+topic_edges <- d3_network$links %>%
+  mutate(value = value/min(value)) 
+
+topic_labels <- as.data.frame(labelTopics(covid_model_K20, n = 4)$prob) %>%
+  tibble::rownames_to_column(var = "topic_id") %>%
+  tidyr::unite(col = "topic_label", starts_with("V"), sep = ", ")
+
+node_centralities <- igraph::centr_betw(topic_igraph)$res
+node_sizes <- data.frame(topic_id = seq_along(along.with = node_centralities),
+                         size = node_centralities) %>%
+  mutate(size = size/max(size))
+
+# the name in the "nodes" DF is a factor, but the ordering has to be preserved
+# when modifying the DF, otherwise the links are incorrectly interpreted
+topic_nodes <- d3_network$nodes %>% 
+  mutate(topic_id = as.numeric(row.names(.))) %>%
+  merge(topic_labels, by = "topic_id") %>%
+  merge(node_sizes, by = "topic_id") %>%
+  rowwise() %>%
+  mutate(name = paste(name, ": ", paste(topic_label, collapse = ", "), sep = "")) %>%
+  arrange(topic_id)
+  
+topic_net <- networkD3::forceNetwork(Links = topic_edges, Nodes = topic_nodes,
+                          Source = "source", Target = "target",
+                          Value = "value", NodeID = "name",
+                          Group = "group", Nodesize = "size",
+                          radiusCalculation = JS("d.nodesize*20+4"),
+                          #linkWidth = JS("function(d) { return d.value*5+1; }"),
+                          charge = -250, 
+                          #width = 1000, 
+                          height = 500, 
+                          opacity = 0.9, opacityNoHover = 1, 
+                          fontFamily = "'Share Tech', 'Source Sans Pro'",
+                          fontSize = 16, linkColour = "#c1c1c1",
+                          colourScale = "d3.scaleOrdinal(d3.schemeCategory10)",
+                          zoom = TRUE, bounded = TRUE)
+topic_net
+#saveNetwork(topic_net, "topic_correlation.html", selfcontained = TRUE)
+```
+
+```{r echo=FALSE}
+htmltools::includeHTML("topic_correlation.html")
+```
 
 
-
+```{r eval=FALSE}
+# potentially useful
+#* topic signatures (table with primary, secondary etc topics) 
+#* topic correlations (as heatmap) 
+#* topic clusters (as network graph)
+```
 
 
 
