@@ -22,3 +22,18 @@
 #' @format An STM regression object
 #'
 "covid_effect_K20"
+
+
+#' Evaluation results for topic models with different K
+#'
+#' This is a convenience dataset to include the results of evaluating topic
+#' models with different topic numbers (*K*) for thematic subsets of the
+#' bioRxiv and medRxiv preprints. Scripts to run the actual evaluations are
+#' included in the package repo.
+#'
+#' The dataset specifies the preprint subset, used K, type of evaluation metric
+#' and the value of that metric.
+#'
+#' @format A dataframe with four variables
+#'
+"topicmodel_evaluations"
