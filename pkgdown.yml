@@ -3,7 +3,8 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   covid-preprint-topics: covid-preprint-topics.html
-last_built: 2024-02-29T11:26Z
+  exercise1-biodiv: exercise1-biodiv.html
+last_built: 2024-02-29T18:36Z
 urls:
   reference: https://sdaume.github.io/srcquantcourse/reference
   article: https://sdaume.github.io/srcquantcourse/articles
