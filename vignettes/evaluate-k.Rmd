@@ -1,6 +1,8 @@
 ---
 title: "Choosing the number of topics (K)"
 output: rmarkdown::html_vignette
+bibliography: srcquantcourse.bib
+link-citations: yes
 vignette: >
   %\VignetteIndexEntry{Choosing the number of topics (K)}
   %\VignetteEngine{knitr::rmarkdown}
@@ -21,6 +23,7 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(srcquantcourse)
+library(dplyr)
 library(ggplot2)
 library(tidyr)
 ```
@@ -30,7 +33,8 @@ library(tidyr)
 # Covid preprints
 
 ```{r, fig.height=7, fig.width=10, dpi=300}
-topicmodel_evaluations %>%
+
+srcquantcourse::topicmodel_evaluations %>%
   filter(subset_label %in% c("Covid preprints")) %>%
   filter(!(model_metric %in% c("Converged", "Iterations"))) %>%
   #filter(K <= 70) %>%
