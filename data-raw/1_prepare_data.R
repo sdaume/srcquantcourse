@@ -37,6 +37,6 @@ pubs_biorxiv_raw <- pubs_biorxiv_raw %>%
 pubs_medrxiv_raw <- pubs_medrxiv_raw %>%
   mutate(server = "medrxiv")
 
-preprints_raw <- rbind(pubs_biorxiv_raw, pubs_medrxiv_raw)
+preprints_raw <- dplyr::bind_rows(pubs_biorxiv_raw, pubs_medrxiv_raw)
 
 save(preprints_raw, file = "./data-raw/preprints_raw.Rdata")
