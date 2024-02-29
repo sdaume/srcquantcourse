@@ -1,10 +1,10 @@
 ---
-title: "Example 1: Topic modelling Covid preprints"
+title: "Example: Topic modelling Covid preprints"
 output: rmarkdown::html_vignette
 bibliography: srcquantcourse.bib
 link-citations: yes
 vignette: >
-  %\VignetteIndexEntry{Example 1: Topic modelling Covid preprints}
+  %\VignetteIndexEntry{Example: Topic modelling Covid preprints}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -30,18 +30,8 @@ library(quanteda.textstats)
 library(stm)
 library(stminsights)
 library(ggplot2)
-
-
 ```
 
-
-```{css, echo=FALSE}
-.scroll-100 {
-  max-height: 100px;
-  overflow-y: auto;
-  background-color: inherit;
-}
-```
 
 # Introduction
 
@@ -460,7 +450,7 @@ The model also incorporated the preprint server (*bioRxiv* and *medRxiv*) as a c
 The `stm::plot()` offers different methods to explore those effects. The figure below lists the effect of *'treatment medrxiv'* for all topics in the model. The treatment can have a positive or negative effect. Here we can for example see that Topic 4 ("mental health") can be expected with higher prevalence in *medRxiv* preprints, whereas Topic 9 ("virus molecular structure") will have a much lower prevalence in *medRxiv* preprints, i.e. should be expected with higher prevalence in *bioRxiv* preprints.
 
 
-```{r echo=FALSE, fig.dpi=150, fig.height=14, fig.width=16}
+```{r echo=TRUE, fig.dpi=150, fig.height=14, fig.width=16}
 plot(covid_effect_K20, 
      covariate = "server",
      #topics = c(9, 10, 16, 1),
