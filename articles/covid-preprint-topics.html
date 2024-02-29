@@ -89,12 +89,11 @@
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>This is an example topic modelling analysis using the <em>Structural
-Topic Model (STM)</em> <span class="citation">(<a href="#ref-RobertsStewart_et_2019_JSTATS_91" role="doc-biblioref">Roberts, Stewart, and Tingley 2019</a>)</span> to
-explore a subset of <a href="https://www.biorxiv.org/" class="external-link">bioRxiv</a> and
-<a href="https://www.medrxiv.org/" class="external-link">medRxiv</a> preprints covering
-research related to <em>Covid-19</em>. The medRxiv website actually
-provides access to a dedicated collection of preprints on both medRxix
-and bioRxiv covering <a href="(https://connect.medrxiv.org/relate/content/181)" class="external-link">COVID-19
+Topic Model (STM)</em> <span class="citation">(<a href="#ref-RobertsStewart_et_2019_JSTATS_91">Roberts, Stewart, and
+Tingley 2019</a>)</span> to explore a subset of <a href="https://www.biorxiv.org/" class="external-link">bioRxiv</a> and <a href="https://www.medrxiv.org/" class="external-link">medRxiv</a> preprints covering research
+related to <em>Covid-19</em>. The medRxiv website actually provides
+access to a dedicated collection of preprints on both medRxix and
+bioRxiv covering <a href="(https://connect.medrxiv.org/relate/content/181)" class="external-link">COVID-19
 SARS-CoV-2</a>. Here we will however work with the whole preprint
 collection and create a subset using keyword matching.</p>
 <p>Note that this analysis is intended to illustrate the method of
@@ -103,8 +102,8 @@ would be more detailed and would like feature a larger number of
 topics.</p>
 <p>This document assumes some familiarity with <em>Structural Topic
 Modeling (STM)</em>. Please consult the <code>stm</code> package
-vignette <span class="citation">(<a href="#ref-RobertsStewart_et_2019_JSTATS_91" role="doc-biblioref">Roberts, Stewart, and Tingley 2019</a>)</span> for
-background.</p>
+vignette <span class="citation">(<a href="#ref-RobertsStewart_et_2019_JSTATS_91">Roberts, Stewart, and
+Tingley 2019</a>)</span> for background.</p>
 </div>
 <div class="section level2">
 <h2 id="getting-the-document-data">Getting the document data<a class="anchor" aria-label="anchor" href="#getting-the-document-data"></a>
@@ -227,11 +226,11 @@ need to create a representation of the documents and document meta-data
 that <code>stm</code> can utilize. <code>stm</code> offers built-in
 methods to support this (see specifically the
 <code><a href="https://rdrr.io/pkg/stm/man/textProcessor.html" class="external-link">textProcessor()</a></code> and <code><a href="https://rdrr.io/pkg/stm/man/prepDocuments.html" class="external-link">prepDocuments()</a></code> methods
-<span class="citation">(<a href="#ref-RobertsStewart_et_2019_JSTATS_91" role="doc-biblioref">Roberts, Stewart, and Tingley 2019</a>)</span>).
-Here we use instead the <a href="http://quanteda.io/index.html" class="external-link"><code>quanteda</code></a> package
-<span class="citation">(<a href="#ref-BenoitWatanabe_et_2018_JOSS_3" role="doc-biblioref">Benoit et al. 2018</a>)</span> which provides a
-broad range of methods for text pre-processing and analysis, creating
-formats also supported by <code>stm</code>.</p>
+<span class="citation">(<a href="#ref-RobertsStewart_et_2019_JSTATS_91">Roberts, Stewart, and
+Tingley 2019</a>)</span>). Here we use instead the <a href="http://quanteda.io/index.html" class="external-link"><code>quanteda</code></a> package
+<span class="citation">(<a href="#ref-BenoitWatanabe_et_2018_JOSS_3">Benoit et al. 2018</a>)</span>
+which provides a broad range of methods for text pre-processing and
+analysis, creating formats also supported by <code>stm</code>.</p>
 <div class="section level3">
 <h3 id="create-a-corpus">Create a corpus<a class="anchor" aria-label="anchor" href="#create-a-corpus"></a>
 </h3>
@@ -273,8 +272,8 @@ like <em>social-ecological</em> will thus be split into two individual
 tokens (<em>social</em> and <em>ecological</em>).</p>
 <p>The text preprocessing choices could strongly influence the results
 of a text analysis and should be thoroughly explained, carefully
-evaluated and ideally be based on theory (see <span class="citation">(<a href="#ref-DennySpirling_2018_PA_26" role="doc-biblioref">Denny and
-Spirling 2018</a>)</span>).</p>
+evaluated and ideally be based on theory (see <span class="citation">(<a href="#ref-DennySpirling_2018_PA_26">Denny and Spirling
+2018</a>)</span>).</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pubs_tokens</span> <span class="op">&lt;-</span> <span class="va">pubs_corpus</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">quanteda</span><span class="fu">::</span><span class="fu"><a href="https://quanteda.io/reference/tokens.html" class="external-link">tokens</a></span><span class="op">(</span>remove_punct <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -384,8 +383,8 @@ on either of the two preprint servers<a class="footnote-ref" tabindex="0" data-b
 &lt;code&gt;year&lt;/code&gt; variable. Consult the STM documentation for details on
 this.&lt;/p&gt;"><sup>1</sup></a>.</p>
 <p>The consideration of covariates is optional. If omitted the model
-reduces to a <em>Correlated Topic Model</em> <span class="citation">(<a href="#ref-BleiLafferty2007_AAS_1" role="doc-biblioref">Blei and
-Lafferty 2007</a>; <a href="#ref-RobertsStewart_et_2019_JSTATS_91" role="doc-biblioref">Roberts, Stewart, and Tingley 2019</a>)</span>.</p>
+reduces to a <em>Correlated Topic Model</em> <span class="citation">(<a href="#ref-BleiLafferty2007_AAS_1">Blei and Lafferty 2007</a>; <a href="#ref-RobertsStewart_et_2019_JSTATS_91">Roberts, Stewart, and
+Tingley 2019</a>)</span>.</p>
 <p>We also supply a <code>seed</code>, which allows to replicate the
 results of the topic modeling.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
@@ -450,109 +449,109 @@ comparison of different topics highlights that a term such as
 in a topic, i.e. characterize a topic in comparison to other topics
 (consult <code><a href="https://rdrr.io/pkg/stm/man/labelTopics.html" class="external-link">stm::labelTopics()</a></code> for details as well as
 <em>Lift</em> and <em>Score</em> word sets).</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(covid_model_K20)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span><span class="co"># A topic model with 20 topics, 29691 documents and a 37093 word dictionary.</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 1 Top Words:</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: model, can, covid, transmission, epidemic, data, disease </span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: npis, mathematical, compartmental, scenarios, seir, reproduction, sir </span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 1we, abms, ao_scplowbstractc_scplowas, apt, artefact, asilv, asymptotically </span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: distancing, social, epidemic, reproduction, npis, model, r0 </span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 2 Top Words:</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: cov, sars, drug, antiviral, activity, drugs, covid </span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: src, figdir, o_linksmallfig, c_fig, m_fig, o_fig, gif </span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: k777, gif, pmmov, wwtps, 13k, 17k, 18k </span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: mpro, antiviral, drug, inhibitors, protease, drugs, compounds </span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 3 Top Words:</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: covid, risk, age, mortality, ci, associated, years </span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: hispanic, ethnicity, pregnant, racial, black, smoking, preterm </span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 65s, asmr, assault, backgroundethnic, backgroundracial, backgroundsocio, brunt </span></span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: ci, age, women, mortality, ethnicity, aor, hispanic </span></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 4 Top Words:</span></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: covid, health, pandemic, mental, social, study, survey </span></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: loneliness, emotional, attitude, depression, insecurity, mental, anxiety </span></span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: insecurity, accelerometers, amhara, angry, anovas, asd, asleep </span></span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: mental, anxiety, depression, respondents, social, psychological, students </span></span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 5 Top Words:</span></span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: sars, cov, infection, testing, transmission, cases, children </span></span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: ifr, seroprevalence, schools, school, contacts, household, attack </span></span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: inmates, 19y, 35y, 39y, 9a, abidjan, addscovid </span></span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: school, seroprevalence, children, schools, household, transmission, testing </span></span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 6 Top Words:</span></span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: cov, sars, virus, viral, coronavirus, respiratory, infection </span></span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: bats, cats, deer, animals, covs, wildlife, hcov </span></span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: cats, 5x106, aav6, aegyptiacus, aethiops, affinis, agm </span></span>
-<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: cov, sars, mice, rna, viruses, coronaviruses, animals </span></span>
-<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 7 Top Words:</span></span>
-<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: patients, covid, hospital, disease, clinical, severe, admission </span></span>
-<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: acei, admission, arbs, admitted, icu, aki, aceis </span></span>
-<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 1.1x109, 2020r1g1a1a01006229, 2l, 4.0x109, 40y, ahmad, ahrq </span></span>
-<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: patients, admission, icu, hospital, admitted, ci, hospitalized </span></span>
-<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 8 Top Words:</span></span>
-<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: covid, cases, countries, number, deaths, data, pandemic </span></span>
-<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: cfr, italy, cities, country, countries, fatality, china </span></span>
-<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 1000m, 1th, 55th, abysmally, abyss, adhanom, adminstat </span></span>
-<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: countries, cases, lockdown, deaths, country, cfr, daily </span></span>
-<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 9 Top Words:</span></span>
-<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: protein, binding, spike, sars, cov, ace2, rbd </span></span>
-<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: conformational, cryo, conformation, glycans, conformations, nanobodies, residues </span></span>
-<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 13c, 6lzg, 6m0j, 6vw1, 6vxx, aabpu, abdab </span></span>
-<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: binding, rbd, protein, spike, ace2, proteins, epitopes </span></span>
-<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 10 Top Words:</span></span>
-<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: data, can, learning, covid, using, model, based </span></span>
-<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: aerosol, n95, aerosols, respirators, decontamination, airborne, machine </span></span>
-<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: elastomeric, forehead, papr, radiomics, exhaled, singing, 0.3m </span></span>
-<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: learning, masks, aerosol, machine, respirators, n95, mask </span></span>
-<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 11 Top Words:</span></span>
-<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: vaccine, vaccination, covid, middle, vaccines, dot, dose </span></span>
-<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: hesitancy, dot, vaccinate, middle, hesitant, rollout, ve </span></span>
-<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: #949850, acceptant, adjrr, aesis, amparo, analysesthe, andersen </span></span>
-<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: vaccination, vaccine, dot, booster, dose, vaccinated, middle </span></span>
-<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 12 Top Words:</span></span>
-<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: studies, care, covid, health, research, data, pandemic </span></span>
-<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: reviews, telemedicine, preprints, scoping, articles, blacksquare, publications </span></span>
-<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: preprints, 1.2m, aas, abbreviating, accustomed, activists, advisor </span></span>
-<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: review, care, services, articles, reviews, pubmed, service </span></span>
-<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 13 Top Words:</span></span>
-<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: sars, cov, genome, mutations, sequencing, viral, variants </span></span>
-<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: phylogenetic, gisaid, clades, wgs, genomes, genomic, haplotype </span></span>
-<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: clades, snvs, 1.1.7s, 11083g, 14408c, 17del, 20a </span></span>
-<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: mutations, genome, wastewater, genomes, sequences, sequencing, genomic </span></span>
-<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 14 Top Words:</span></span>
-<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: cells, cell, sars, cov, expression, infection, ace2 </span></span>
-<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: autophagy, mirnas, mirna, at2, ifns, ciliated, scrna </span></span>
-<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 25hc, angiotensinogen, antagonizes, apcs, arf6, asgr1, at2s </span></span>
-<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: cells, expression, ace2, cell, genes, epithelial, tmprss2 </span></span>
-<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 15 Top Words:</span></span>
-<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: antibody, sars, cov, antibodies, igg, responses, vaccine </span></span>
-<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: iga, bau, igg, humoral, immunogenicity, as03, reactogenicity </span></span>
-<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 1x1011, 28d, 30ug, ad26cov2, addas03, adhu5, atellica </span></span>
-<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: igg, antibody, antibodies, neutralizing, rbd, vaccine, spike </span></span>
-<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 16 Top Words:</span></span>
-<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: sars, cov, pcr, samples, rt, test, testing </span></span>
-<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: ag, rdt, rdts, lod, rt, panbio, kits </span></span>
-<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: poct, cobas, panbio, #yomecorono, 1.6x104, 10min, 15min </span></span>
-<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: rt, pcr, assay, samples, saliva, detection, assays </span></span>
-<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 17 Top Words:</span></span>
-<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: variants, omicron, variant, delta, ba, cov, sars </span></span>
-<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: omicron, ba, xbb, subvariants, delta, bq, voc </span></span>
-<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 1.5s, 129s2, 1f11, 2.86s, 3b8, 417n, 75d30121c11061 </span></span>
-<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: omicron, ba, variants, variant, delta, mutations, voc </span></span>
-<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 18 Top Words:</span></span>
-<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: covid, patients, disease, severe, immune, inflammatory, associated </span></span>
-<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: autoantibodies, ipf, balf, neutrophils, il, fibrosis, autoantibody </span></span>
-<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 18f, 24hr, a2ar, aab, actinobacteria, activin, adiponectin </span></span>
-<span id="cb16-93"><a href="#cb16-93" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: inflammatory, il, patients, cytokine, inflammation, cytokines, endothelial </span></span>
-<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 19 Top Words:</span></span>
-<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: patients, treatment, covid, group, days, day, trial </span></span>
-<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: placebo, randomized, hcq, soc, azithromycin, arm, tocilizumab </span></span>
-<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 200mg, 400mg, 500mg, 600mg, 800mg, aureobasidium, ayush </span></span>
-<span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: placebo, hcq, trial, patients, randomized, tocilizumab, hydroxychloroquine </span></span>
-<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 20 Top Words:</span></span>
-<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: covid, symptoms, long, workers, infection, participants, study </span></span>
-<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: hcws, taste, smell, hcw, fatigue, workers, headache </span></span>
-<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: chemesthetic, dirty, eyewear, firefighters, ohs, principality, psychophysical </span></span>
-<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: symptoms, hcws, workers, participants, symptom, hcw, fatigue</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="fu">summary</span>(covid_model_K20)</span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="sc">&gt;</span><span class="co"># A topic model with 20 topics, 29691 documents and a 37093 word dictionary.</span></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 1 Top Words:</span></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: model, can, covid, transmission, epidemic, data, disease </span></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: npis, mathematical, compartmental, scenarios, seir, reproduction, sir </span></span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 1we, abms, ao_scplowbstractc_scplowas, apt, artefact, asilv, asymptotically </span></span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: distancing, social, epidemic, reproduction, npis, model, r0 </span></span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 2 Top Words:</span></span>
+<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: cov, sars, drug, antiviral, activity, drugs, covid </span></span>
+<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: src, figdir, o_linksmallfig, c_fig, m_fig, o_fig, gif </span></span>
+<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: k777, gif, pmmov, wwtps, 13k, 17k, 18k </span></span>
+<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: mpro, antiviral, drug, inhibitors, protease, drugs, compounds </span></span>
+<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 3 Top Words:</span></span>
+<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: covid, risk, age, mortality, ci, associated, years </span></span>
+<span id="cb16-16"><a href="#cb16-16" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: hispanic, ethnicity, pregnant, racial, black, smoking, preterm </span></span>
+<span id="cb16-17"><a href="#cb16-17" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 65s, asmr, assault, backgroundethnic, backgroundracial, backgroundsocio, brunt </span></span>
+<span id="cb16-18"><a href="#cb16-18" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: ci, age, women, mortality, ethnicity, aor, hispanic </span></span>
+<span id="cb16-19"><a href="#cb16-19" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 4 Top Words:</span></span>
+<span id="cb16-20"><a href="#cb16-20" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: covid, health, pandemic, mental, social, study, survey </span></span>
+<span id="cb16-21"><a href="#cb16-21" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: loneliness, emotional, attitude, depression, insecurity, mental, anxiety </span></span>
+<span id="cb16-22"><a href="#cb16-22" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: insecurity, accelerometers, amhara, angry, anovas, asd, asleep </span></span>
+<span id="cb16-23"><a href="#cb16-23" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: mental, anxiety, depression, respondents, social, psychological, students </span></span>
+<span id="cb16-24"><a href="#cb16-24" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 5 Top Words:</span></span>
+<span id="cb16-25"><a href="#cb16-25" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: sars, cov, infection, testing, transmission, cases, children </span></span>
+<span id="cb16-26"><a href="#cb16-26" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: ifr, seroprevalence, schools, school, contacts, household, attack </span></span>
+<span id="cb16-27"><a href="#cb16-27" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: inmates, 19y, 35y, 39y, 9a, abidjan, addscovid </span></span>
+<span id="cb16-28"><a href="#cb16-28" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: school, seroprevalence, children, schools, household, transmission, testing </span></span>
+<span id="cb16-29"><a href="#cb16-29" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 6 Top Words:</span></span>
+<span id="cb16-30"><a href="#cb16-30" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: cov, sars, virus, viral, coronavirus, respiratory, infection </span></span>
+<span id="cb16-31"><a href="#cb16-31" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: bats, cats, deer, animals, covs, wildlife, hcov </span></span>
+<span id="cb16-32"><a href="#cb16-32" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: cats, 5x106, aav6, aegyptiacus, aethiops, affinis, agm </span></span>
+<span id="cb16-33"><a href="#cb16-33" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: cov, sars, mice, rna, viruses, coronaviruses, animals </span></span>
+<span id="cb16-34"><a href="#cb16-34" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 7 Top Words:</span></span>
+<span id="cb16-35"><a href="#cb16-35" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: patients, covid, hospital, disease, clinical, severe, admission </span></span>
+<span id="cb16-36"><a href="#cb16-36" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: acei, admission, arbs, admitted, icu, aki, aceis </span></span>
+<span id="cb16-37"><a href="#cb16-37" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 1.1x109, 2020r1g1a1a01006229, 2l, 4.0x109, 40y, ahmad, ahrq </span></span>
+<span id="cb16-38"><a href="#cb16-38" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: patients, admission, icu, hospital, admitted, ci, hospitalized </span></span>
+<span id="cb16-39"><a href="#cb16-39" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 8 Top Words:</span></span>
+<span id="cb16-40"><a href="#cb16-40" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: covid, cases, countries, number, deaths, data, pandemic </span></span>
+<span id="cb16-41"><a href="#cb16-41" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: cfr, italy, cities, country, countries, fatality, china </span></span>
+<span id="cb16-42"><a href="#cb16-42" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 1000m, 1th, 55th, abysmally, abyss, adhanom, adminstat </span></span>
+<span id="cb16-43"><a href="#cb16-43" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: countries, cases, lockdown, deaths, country, cfr, daily </span></span>
+<span id="cb16-44"><a href="#cb16-44" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 9 Top Words:</span></span>
+<span id="cb16-45"><a href="#cb16-45" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: protein, binding, spike, sars, cov, ace2, rbd </span></span>
+<span id="cb16-46"><a href="#cb16-46" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: conformational, cryo, conformation, glycans, conformations, nanobodies, residues </span></span>
+<span id="cb16-47"><a href="#cb16-47" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 13c, 6lzg, 6m0j, 6vw1, 6vxx, aabpu, abdab </span></span>
+<span id="cb16-48"><a href="#cb16-48" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: binding, rbd, protein, spike, ace2, proteins, epitopes </span></span>
+<span id="cb16-49"><a href="#cb16-49" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 10 Top Words:</span></span>
+<span id="cb16-50"><a href="#cb16-50" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: data, can, learning, covid, using, model, based </span></span>
+<span id="cb16-51"><a href="#cb16-51" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: aerosol, n95, aerosols, respirators, decontamination, airborne, machine </span></span>
+<span id="cb16-52"><a href="#cb16-52" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: elastomeric, forehead, papr, radiomics, exhaled, singing, 0.3m </span></span>
+<span id="cb16-53"><a href="#cb16-53" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: learning, masks, aerosol, machine, respirators, n95, mask </span></span>
+<span id="cb16-54"><a href="#cb16-54" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 11 Top Words:</span></span>
+<span id="cb16-55"><a href="#cb16-55" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: vaccine, vaccination, covid, middle, vaccines, dot, dose </span></span>
+<span id="cb16-56"><a href="#cb16-56" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: hesitancy, dot, vaccinate, middle, hesitant, rollout, ve </span></span>
+<span id="cb16-57"><a href="#cb16-57" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: #949850, acceptant, adjrr, aesis, amparo, analysesthe, andersen </span></span>
+<span id="cb16-58"><a href="#cb16-58" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: vaccination, vaccine, dot, booster, dose, vaccinated, middle </span></span>
+<span id="cb16-59"><a href="#cb16-59" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 12 Top Words:</span></span>
+<span id="cb16-60"><a href="#cb16-60" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: studies, care, covid, health, research, data, pandemic </span></span>
+<span id="cb16-61"><a href="#cb16-61" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: reviews, telemedicine, preprints, scoping, articles, blacksquare, publications </span></span>
+<span id="cb16-62"><a href="#cb16-62" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: preprints, 1.2m, aas, abbreviating, accustomed, activists, advisor </span></span>
+<span id="cb16-63"><a href="#cb16-63" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: review, care, services, articles, reviews, pubmed, service </span></span>
+<span id="cb16-64"><a href="#cb16-64" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 13 Top Words:</span></span>
+<span id="cb16-65"><a href="#cb16-65" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: sars, cov, genome, mutations, sequencing, viral, variants </span></span>
+<span id="cb16-66"><a href="#cb16-66" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: phylogenetic, gisaid, clades, wgs, genomes, genomic, haplotype </span></span>
+<span id="cb16-67"><a href="#cb16-67" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: clades, snvs, 1.1.7s, 11083g, 14408c, 17del, 20a </span></span>
+<span id="cb16-68"><a href="#cb16-68" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: mutations, genome, wastewater, genomes, sequences, sequencing, genomic </span></span>
+<span id="cb16-69"><a href="#cb16-69" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 14 Top Words:</span></span>
+<span id="cb16-70"><a href="#cb16-70" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: cells, cell, sars, cov, expression, infection, ace2 </span></span>
+<span id="cb16-71"><a href="#cb16-71" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: autophagy, mirnas, mirna, at2, ifns, ciliated, scrna </span></span>
+<span id="cb16-72"><a href="#cb16-72" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 25hc, angiotensinogen, antagonizes, apcs, arf6, asgr1, at2s </span></span>
+<span id="cb16-73"><a href="#cb16-73" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: cells, expression, ace2, cell, genes, epithelial, tmprss2 </span></span>
+<span id="cb16-74"><a href="#cb16-74" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 15 Top Words:</span></span>
+<span id="cb16-75"><a href="#cb16-75" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: antibody, sars, cov, antibodies, igg, responses, vaccine </span></span>
+<span id="cb16-76"><a href="#cb16-76" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: iga, bau, igg, humoral, immunogenicity, as03, reactogenicity </span></span>
+<span id="cb16-77"><a href="#cb16-77" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 1x1011, 28d, 30ug, ad26cov2, addas03, adhu5, atellica </span></span>
+<span id="cb16-78"><a href="#cb16-78" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: igg, antibody, antibodies, neutralizing, rbd, vaccine, spike </span></span>
+<span id="cb16-79"><a href="#cb16-79" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 16 Top Words:</span></span>
+<span id="cb16-80"><a href="#cb16-80" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: sars, cov, pcr, samples, rt, test, testing </span></span>
+<span id="cb16-81"><a href="#cb16-81" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: ag, rdt, rdts, lod, rt, panbio, kits </span></span>
+<span id="cb16-82"><a href="#cb16-82" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: poct, cobas, panbio, #yomecorono, 1.6x104, 10min, 15min </span></span>
+<span id="cb16-83"><a href="#cb16-83" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: rt, pcr, assay, samples, saliva, detection, assays </span></span>
+<span id="cb16-84"><a href="#cb16-84" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 17 Top Words:</span></span>
+<span id="cb16-85"><a href="#cb16-85" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: variants, omicron, variant, delta, ba, cov, sars </span></span>
+<span id="cb16-86"><a href="#cb16-86" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: omicron, ba, xbb, subvariants, delta, bq, voc </span></span>
+<span id="cb16-87"><a href="#cb16-87" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 1.5s, 129s2, 1f11, 2.86s, 3b8, 417n, 75d30121c11061 </span></span>
+<span id="cb16-88"><a href="#cb16-88" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: omicron, ba, variants, variant, delta, mutations, voc </span></span>
+<span id="cb16-89"><a href="#cb16-89" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 18 Top Words:</span></span>
+<span id="cb16-90"><a href="#cb16-90" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: covid, patients, disease, severe, immune, inflammatory, associated </span></span>
+<span id="cb16-91"><a href="#cb16-91" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: autoantibodies, ipf, balf, neutrophils, il, fibrosis, autoantibody </span></span>
+<span id="cb16-92"><a href="#cb16-92" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 18f, 24hr, a2ar, aab, actinobacteria, activin, adiponectin </span></span>
+<span id="cb16-93"><a href="#cb16-93" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: inflammatory, il, patients, cytokine, inflammation, cytokines, endothelial </span></span>
+<span id="cb16-94"><a href="#cb16-94" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 19 Top Words:</span></span>
+<span id="cb16-95"><a href="#cb16-95" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: patients, treatment, covid, group, days, day, trial </span></span>
+<span id="cb16-96"><a href="#cb16-96" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: placebo, randomized, hcq, soc, azithromycin, arm, tocilizumab </span></span>
+<span id="cb16-97"><a href="#cb16-97" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: 200mg, 400mg, 500mg, 600mg, 800mg, aureobasidium, ayush </span></span>
+<span id="cb16-98"><a href="#cb16-98" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: placebo, hcq, trial, patients, randomized, tocilizumab, hydroxychloroquine </span></span>
+<span id="cb16-99"><a href="#cb16-99" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 20 Top Words:</span></span>
+<span id="cb16-100"><a href="#cb16-100" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Highest Prob: covid, symptoms, long, workers, infection, participants, study </span></span>
+<span id="cb16-101"><a href="#cb16-101" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       FREX: hcws, taste, smell, hcw, fatigue, workers, headache </span></span>
+<span id="cb16-102"><a href="#cb16-102" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Lift: chemesthetic, dirty, eyewear, firefighters, ohs, principality, psychophysical </span></span>
+<span id="cb16-103"><a href="#cb16-103" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#       Score: symptoms, hcws, workers, participants, symptom, hcw, fatigue</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="topic-document-and-term-topic-distributions">Topic-document and term-topic distributions<a class="anchor" aria-label="anchor" href="#topic-document-and-term-topic-distributions"></a>
@@ -657,332 +656,332 @@ to the fit model, which were extracted with
 <code><a href="https://rdrr.io/pkg/stm/man/estimateEffect.html" class="external-link">stm::estimateEffect()</a></code>.</p>
 <p>As a first exploration we can print the regression tables for all or
 selected topics.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(covid_effect_K20)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span><span class="co"># </span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Call:</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># estimateEffect(formula = 1:20 ~ server * s(year), stmobj = covid_model_K20, </span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#     metadata = covid_stm_docs$meta)</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 1:</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                          Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.0234363  0.0036625   6.399 1.59e-10 ***</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.1239792  0.0043304  28.630  &lt; 2e-16 ***</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.0017059  0.0145540  -0.117    0.907    </span></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.0007203  0.0152368  -0.047    0.962    </span></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.0084005  0.0067261   1.249    0.212    </span></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.0697969  0.0172318  -4.050 5.12e-05 ***</span></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.0966009  0.0190367  -5.074 3.91e-07 ***</span></span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.0706597  0.0085248  -8.289  &lt; 2e-16 ***</span></span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 2:</span></span>
-<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
-<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.098636   0.002869  34.378  &lt; 2e-16 ***</span></span>
-<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.085913   0.003146 -27.308  &lt; 2e-16 ***</span></span>
-<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.019921   0.011489  -1.734   0.0830 .  </span></span>
-<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.011274   0.013410  -0.841   0.4005    </span></span>
-<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.028568   0.004516  -6.326 2.55e-10 ***</span></span>
-<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.021663   0.012670   1.710   0.0873 .  </span></span>
-<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.008132   0.014449   0.563   0.5736    </span></span>
-<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.030361   0.005261   5.771 7.97e-09 ***</span></span>
-<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
-<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 3:</span></span>
-<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
-<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.011036   0.002807   3.931 8.49e-05 ***</span></span>
-<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.053988   0.003260  16.561  &lt; 2e-16 ***</span></span>
-<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.002361   0.011359  -0.208    0.835    </span></span>
-<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.002081   0.011891  -0.175    0.861    </span></span>
-<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.001198   0.004838   0.248    0.804    </span></span>
-<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.014756   0.013740   1.074    0.283    </span></span>
-<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.014400   0.015012   0.959    0.337    </span></span>
-<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.029816   0.006475   4.605 4.14e-06 ***</span></span>
-<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
-<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 4:</span></span>
-<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
-<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.008868   0.003293   2.693  0.00708 ** </span></span>
-<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.057719   0.003863  14.940  &lt; 2e-16 ***</span></span>
-<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.004827   0.013461   0.359  0.71992    </span></span>
-<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.005451   0.013978  -0.390  0.69656    </span></span>
-<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.004469   0.005863   0.762  0.44595    </span></span>
-<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.020293   0.016485   1.231  0.21835    </span></span>
-<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.003719   0.017904  -0.208  0.83545    </span></span>
-<span id="cb20-68"><a href="#cb20-68" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.020359   0.007780   2.617  0.00888 ** </span></span>
-<span id="cb20-69"><a href="#cb20-69" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
-<span id="cb20-70"><a href="#cb20-70" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb20-71"><a href="#cb20-71" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-72"><a href="#cb20-72" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-73"><a href="#cb20-73" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 5:</span></span>
-<span id="cb20-74"><a href="#cb20-74" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-75"><a href="#cb20-75" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
-<span id="cb20-76"><a href="#cb20-76" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                          Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-77"><a href="#cb20-77" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             4.891e-03  2.317e-03   2.111   0.0348 *  </span></span>
-<span id="cb20-78"><a href="#cb20-78" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           5.432e-02  2.762e-03  19.669   &lt;2e-16 ***</span></span>
-<span id="cb20-79"><a href="#cb20-79" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -5.905e-04  9.326e-03  -0.063   0.9495    </span></span>
-<span id="cb20-80"><a href="#cb20-80" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2                6.429e-05  9.890e-03   0.007   0.9948    </span></span>
-<span id="cb20-81"><a href="#cb20-81" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                1.164e-03  4.127e-03   0.282   0.7779    </span></span>
-<span id="cb20-82"><a href="#cb20-82" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  2.594e-02  1.137e-02   2.281   0.0225 *  </span></span>
-<span id="cb20-83"><a href="#cb20-83" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -1.791e-03  1.204e-02  -0.149   0.8818    </span></span>
-<span id="cb20-84"><a href="#cb20-84" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -8.607e-03  5.358e-03  -1.606   0.1082    </span></span>
-<span id="cb20-85"><a href="#cb20-85" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
-<span id="cb20-86"><a href="#cb20-86" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb20-87"><a href="#cb20-87" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-88"><a href="#cb20-88" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-89"><a href="#cb20-89" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 6:</span></span>
-<span id="cb20-90"><a href="#cb20-90" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-91"><a href="#cb20-91" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
-<span id="cb20-92"><a href="#cb20-92" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-93"><a href="#cb20-93" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.148633   0.003883  38.282  &lt; 2e-16 ***</span></span>
-<span id="cb20-94"><a href="#cb20-94" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.115812   0.004228 -27.394  &lt; 2e-16 ***</span></span>
-<span id="cb20-95"><a href="#cb20-95" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.020954   0.013463  -1.556   0.1196    </span></span>
-<span id="cb20-96"><a href="#cb20-96" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.049361   0.012216  -4.041 5.34e-05 ***</span></span>
-<span id="cb20-97"><a href="#cb20-97" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.043799   0.006112  -7.166 7.88e-13 ***</span></span>
-<span id="cb20-98"><a href="#cb20-98" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.005756   0.014971   0.384   0.7006    </span></span>
-<span id="cb20-99"><a href="#cb20-99" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.035599   0.013911   2.559   0.0105 *  </span></span>
-<span id="cb20-100"><a href="#cb20-100" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.031083   0.006993   4.445 8.84e-06 ***</span></span>
-<span id="cb20-101"><a href="#cb20-101" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
-<span id="cb20-102"><a href="#cb20-102" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb20-103"><a href="#cb20-103" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-104"><a href="#cb20-104" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-105"><a href="#cb20-105" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 7:</span></span>
-<span id="cb20-106"><a href="#cb20-106" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-107"><a href="#cb20-107" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
-<span id="cb20-108"><a href="#cb20-108" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-109"><a href="#cb20-109" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.010742   0.002965   3.622 0.000292 ***</span></span>
-<span id="cb20-110"><a href="#cb20-110" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.086008   0.003507  24.527  &lt; 2e-16 ***</span></span>
-<span id="cb20-111"><a href="#cb20-111" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.004062   0.011594  -0.350 0.726103    </span></span>
-<span id="cb20-112"><a href="#cb20-112" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.007945   0.012183  -0.652 0.514314    </span></span>
-<span id="cb20-113"><a href="#cb20-113" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.003398   0.005142  -0.661 0.508791    </span></span>
-<span id="cb20-114"><a href="#cb20-114" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.049222   0.014521  -3.390 0.000700 ***</span></span>
-<span id="cb20-115"><a href="#cb20-115" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.019616   0.015746  -1.246 0.212874    </span></span>
-<span id="cb20-116"><a href="#cb20-116" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.038387   0.006508  -5.898 3.71e-09 ***</span></span>
-<span id="cb20-117"><a href="#cb20-117" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
-<span id="cb20-118"><a href="#cb20-118" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb20-119"><a href="#cb20-119" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-120"><a href="#cb20-120" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-121"><a href="#cb20-121" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 8:</span></span>
-<span id="cb20-122"><a href="#cb20-122" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-123"><a href="#cb20-123" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
-<span id="cb20-124"><a href="#cb20-124" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-125"><a href="#cb20-125" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.027243   0.003035   8.976  &lt; 2e-16 ***</span></span>
-<span id="cb20-126"><a href="#cb20-126" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.108717   0.003551  30.614  &lt; 2e-16 ***</span></span>
-<span id="cb20-127"><a href="#cb20-127" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.012949   0.012357  -1.048  0.29468    </span></span>
-<span id="cb20-128"><a href="#cb20-128" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.018378   0.012577  -1.461  0.14396    </span></span>
-<span id="cb20-129"><a href="#cb20-129" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.017024   0.005258  -3.238  0.00121 ** </span></span>
-<span id="cb20-130"><a href="#cb20-130" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.088347   0.014777  -5.978 2.28e-09 ***</span></span>
-<span id="cb20-131"><a href="#cb20-131" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.046612   0.015626  -2.983  0.00286 ** </span></span>
-<span id="cb20-132"><a href="#cb20-132" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.060254   0.006533  -9.223  &lt; 2e-16 ***</span></span>
-<span id="cb20-133"><a href="#cb20-133" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
-<span id="cb20-134"><a href="#cb20-134" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb20-135"><a href="#cb20-135" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-136"><a href="#cb20-136" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-137"><a href="#cb20-137" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 9:</span></span>
-<span id="cb20-138"><a href="#cb20-138" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-139"><a href="#cb20-139" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
-<span id="cb20-140"><a href="#cb20-140" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-141"><a href="#cb20-141" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.170504   0.004536  37.590  &lt; 2e-16 ***</span></span>
-<span id="cb20-142"><a href="#cb20-142" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.163974   0.004739 -34.603  &lt; 2e-16 ***</span></span>
-<span id="cb20-143"><a href="#cb20-143" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.018019   0.019061   0.945   0.3445    </span></span>
-<span id="cb20-144"><a href="#cb20-144" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.034733   0.020022  -1.735   0.0828 .  </span></span>
-<span id="cb20-145"><a href="#cb20-145" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.028035   0.006607  -4.243 2.21e-05 ***</span></span>
-<span id="cb20-146"><a href="#cb20-146" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.010830   0.020231  -0.535   0.5924    </span></span>
-<span id="cb20-147"><a href="#cb20-147" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.033002   0.021830   1.512   0.1306    </span></span>
-<span id="cb20-148"><a href="#cb20-148" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.027979   0.007158   3.909 9.30e-05 ***</span></span>
-<span id="cb20-149"><a href="#cb20-149" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
-<span id="cb20-150"><a href="#cb20-150" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb20-151"><a href="#cb20-151" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-152"><a href="#cb20-152" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-153"><a href="#cb20-153" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 10:</span></span>
-<span id="cb20-154"><a href="#cb20-154" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-155"><a href="#cb20-155" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
-<span id="cb20-156"><a href="#cb20-156" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                          Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-157"><a href="#cb20-157" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.0447218  0.0033389  13.394  &lt; 2e-16 ***</span></span>
-<span id="cb20-158"><a href="#cb20-158" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.0117627  0.0036321   3.239   0.0012 ** </span></span>
-<span id="cb20-159"><a href="#cb20-159" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.0041776  0.0145648   0.287   0.7742    </span></span>
-<span id="cb20-160"><a href="#cb20-160" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2                0.0002253  0.0131811   0.017   0.9864    </span></span>
-<span id="cb20-161"><a href="#cb20-161" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.0261815  0.0057804   4.529 5.94e-06 ***</span></span>
-<span id="cb20-162"><a href="#cb20-162" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.0175679  0.0162241  -1.083   0.2789    </span></span>
-<span id="cb20-163"><a href="#cb20-163" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.0304732  0.0152111  -2.003   0.0451 *  </span></span>
-<span id="cb20-164"><a href="#cb20-164" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.0409759  0.0069154  -5.925 3.15e-09 ***</span></span>
-<span id="cb20-165"><a href="#cb20-165" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
-<span id="cb20-166"><a href="#cb20-166" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb20-167"><a href="#cb20-167" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-168"><a href="#cb20-168" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-169"><a href="#cb20-169" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 11:</span></span>
-<span id="cb20-170"><a href="#cb20-170" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-171"><a href="#cb20-171" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
-<span id="cb20-172"><a href="#cb20-172" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                        Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-173"><a href="#cb20-173" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)            0.005022   0.002310   2.174   0.0297 *  </span></span>
-<span id="cb20-174"><a href="#cb20-174" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          0.008250   0.002643   3.121   0.0018 ** </span></span>
-<span id="cb20-175"><a href="#cb20-175" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               0.010048   0.009762   1.029   0.3033    </span></span>
-<span id="cb20-176"><a href="#cb20-176" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               0.010109   0.010088   1.002   0.3163    </span></span>
-<span id="cb20-177"><a href="#cb20-177" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               0.006448   0.004193   1.538   0.1241    </span></span>
-<span id="cb20-178"><a href="#cb20-178" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 0.057131   0.011593   4.928 8.35e-07 ***</span></span>
-<span id="cb20-179"><a href="#cb20-179" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 0.073521   0.012530   5.868 4.47e-09 ***</span></span>
-<span id="cb20-180"><a href="#cb20-180" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 0.046979   0.005844   8.039 9.38e-16 ***</span></span>
-<span id="cb20-181"><a href="#cb20-181" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
-<span id="cb20-182"><a href="#cb20-182" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb20-183"><a href="#cb20-183" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-184"><a href="#cb20-184" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-185"><a href="#cb20-185" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 12:</span></span>
-<span id="cb20-186"><a href="#cb20-186" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-187"><a href="#cb20-187" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
-<span id="cb20-188"><a href="#cb20-188" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-189"><a href="#cb20-189" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.021995   0.002830   7.771 8.03e-15 ***</span></span>
-<span id="cb20-190"><a href="#cb20-190" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.041944   0.003386  12.388  &lt; 2e-16 ***</span></span>
-<span id="cb20-191"><a href="#cb20-191" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.008625   0.011223  -0.768    0.442    </span></span>
-<span id="cb20-192"><a href="#cb20-192" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.005833   0.012170  -0.479    0.632    </span></span>
-<span id="cb20-193"><a href="#cb20-193" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.002584   0.004811  -0.537    0.591    </span></span>
-<span id="cb20-194"><a href="#cb20-194" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.006612   0.013767  -0.480    0.631    </span></span>
-<span id="cb20-195"><a href="#cb20-195" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.009535   0.015751   0.605    0.545    </span></span>
-<span id="cb20-196"><a href="#cb20-196" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.034797   0.006379   5.455 4.94e-08 ***</span></span>
-<span id="cb20-197"><a href="#cb20-197" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
-<span id="cb20-198"><a href="#cb20-198" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb20-199"><a href="#cb20-199" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-200"><a href="#cb20-200" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-201"><a href="#cb20-201" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 13:</span></span>
-<span id="cb20-202"><a href="#cb20-202" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-203"><a href="#cb20-203" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
-<span id="cb20-204"><a href="#cb20-204" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-205"><a href="#cb20-205" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.104383   0.003139  33.250  &lt; 2e-16 ***</span></span>
-<span id="cb20-206"><a href="#cb20-206" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.086367   0.003434 -25.152  &lt; 2e-16 ***</span></span>
-<span id="cb20-207"><a href="#cb20-207" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.031519   0.015502  -2.033   0.0420 *  </span></span>
-<span id="cb20-208"><a href="#cb20-208" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.028127   0.015253  -1.844   0.0652 .  </span></span>
-<span id="cb20-209"><a href="#cb20-209" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.023321   0.005615  -4.153 3.29e-05 ***</span></span>
-<span id="cb20-210"><a href="#cb20-210" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.077749   0.017861   4.353 1.35e-05 ***</span></span>
-<span id="cb20-211"><a href="#cb20-211" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.028386   0.016921   1.678   0.0934 .  </span></span>
-<span id="cb20-212"><a href="#cb20-212" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.041111   0.006632   6.199 5.77e-10 ***</span></span>
-<span id="cb20-213"><a href="#cb20-213" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
-<span id="cb20-214"><a href="#cb20-214" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb20-215"><a href="#cb20-215" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-216"><a href="#cb20-216" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-217"><a href="#cb20-217" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 14:</span></span>
-<span id="cb20-218"><a href="#cb20-218" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-219"><a href="#cb20-219" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
-<span id="cb20-220"><a href="#cb20-220" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-221"><a href="#cb20-221" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.124600   0.003465  35.964   &lt;2e-16 ***</span></span>
-<span id="cb20-222"><a href="#cb20-222" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.112737   0.003647 -30.914   &lt;2e-16 ***</span></span>
-<span id="cb20-223"><a href="#cb20-223" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.004248   0.015187   0.280    0.780    </span></span>
-<span id="cb20-224"><a href="#cb20-224" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.007555   0.015776  -0.479    0.632    </span></span>
-<span id="cb20-225"><a href="#cb20-225" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.007565   0.006350   1.191    0.234    </span></span>
-<span id="cb20-226"><a href="#cb20-226" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.003088   0.016197  -0.191    0.849    </span></span>
-<span id="cb20-227"><a href="#cb20-227" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.005294   0.016888   0.314    0.754    </span></span>
-<span id="cb20-228"><a href="#cb20-228" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.005120   0.007126  -0.719    0.472    </span></span>
-<span id="cb20-229"><a href="#cb20-229" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
-<span id="cb20-230"><a href="#cb20-230" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb20-231"><a href="#cb20-231" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-232"><a href="#cb20-232" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-233"><a href="#cb20-233" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 15:</span></span>
-<span id="cb20-234"><a href="#cb20-234" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-235"><a href="#cb20-235" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
-<span id="cb20-236"><a href="#cb20-236" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-237"><a href="#cb20-237" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.053464   0.003482  15.353  &lt; 2e-16 ***</span></span>
-<span id="cb20-238"><a href="#cb20-238" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.027358   0.003951  -6.924 4.48e-12 ***</span></span>
-<span id="cb20-239"><a href="#cb20-239" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.044566   0.014703   3.031  0.00244 ** </span></span>
-<span id="cb20-240"><a href="#cb20-240" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2                0.024951   0.015386   1.622  0.10488    </span></span>
-<span id="cb20-241"><a href="#cb20-241" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.017743   0.006412   2.767  0.00566 ** </span></span>
-<span id="cb20-242"><a href="#cb20-242" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.003627   0.017316   0.209  0.83410    </span></span>
-<span id="cb20-243"><a href="#cb20-243" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.033570   0.017633   1.904  0.05695 .  </span></span>
-<span id="cb20-244"><a href="#cb20-244" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.003428   0.007536  -0.455  0.64918    </span></span>
-<span id="cb20-245"><a href="#cb20-245" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
-<span id="cb20-246"><a href="#cb20-246" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb20-247"><a href="#cb20-247" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-248"><a href="#cb20-248" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-249"><a href="#cb20-249" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 16:</span></span>
-<span id="cb20-250"><a href="#cb20-250" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-251"><a href="#cb20-251" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
-<span id="cb20-252"><a href="#cb20-252" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-253"><a href="#cb20-253" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.053171   0.003479  15.284  &lt; 2e-16 ***</span></span>
-<span id="cb20-254"><a href="#cb20-254" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.017598   0.004054   4.341 1.42e-05 ***</span></span>
-<span id="cb20-255"><a href="#cb20-255" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.049526   0.013064  -3.791  0.00015 ***</span></span>
-<span id="cb20-256"><a href="#cb20-256" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.029386   0.013346  -2.202  0.02768 *  </span></span>
-<span id="cb20-257"><a href="#cb20-257" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.027948   0.005776  -4.838 1.32e-06 ***</span></span>
-<span id="cb20-258"><a href="#cb20-258" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.060922   0.015067   4.043 5.28e-05 ***</span></span>
-<span id="cb20-259"><a href="#cb20-259" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.001197   0.016228   0.074  0.94120    </span></span>
-<span id="cb20-260"><a href="#cb20-260" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.000582   0.007265  -0.080  0.93614    </span></span>
-<span id="cb20-261"><a href="#cb20-261" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
-<span id="cb20-262"><a href="#cb20-262" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb20-263"><a href="#cb20-263" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-264"><a href="#cb20-264" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-265"><a href="#cb20-265" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 17:</span></span>
-<span id="cb20-266"><a href="#cb20-266" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-267"><a href="#cb20-267" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
-<span id="cb20-268"><a href="#cb20-268" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-269"><a href="#cb20-269" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.012530   0.002398   5.226 1.74e-07 ***</span></span>
-<span id="cb20-270"><a href="#cb20-270" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.010867   0.002697  -4.029 5.61e-05 ***</span></span>
-<span id="cb20-271"><a href="#cb20-271" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.062448   0.012042   5.186 2.17e-07 ***</span></span>
-<span id="cb20-272"><a href="#cb20-272" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2                0.167234   0.015972  10.470  &lt; 2e-16 ***</span></span>
-<span id="cb20-273"><a href="#cb20-273" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.074760   0.005338  14.006  &lt; 2e-16 ***</span></span>
-<span id="cb20-274"><a href="#cb20-274" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.043652   0.013469  -3.241  0.00119 ** </span></span>
-<span id="cb20-275"><a href="#cb20-275" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.080147   0.017945  -4.466 7.99e-06 ***</span></span>
-<span id="cb20-276"><a href="#cb20-276" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.037941   0.006105  -6.215 5.20e-10 ***</span></span>
-<span id="cb20-277"><a href="#cb20-277" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
-<span id="cb20-278"><a href="#cb20-278" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb20-279"><a href="#cb20-279" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-280"><a href="#cb20-280" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-281"><a href="#cb20-281" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 18:</span></span>
-<span id="cb20-282"><a href="#cb20-282" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-283"><a href="#cb20-283" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
-<span id="cb20-284"><a href="#cb20-284" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-285"><a href="#cb20-285" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.055660   0.003038  18.323  &lt; 2e-16 ***</span></span>
-<span id="cb20-286"><a href="#cb20-286" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.019888   0.003447  -5.769 8.06e-09 ***</span></span>
-<span id="cb20-287"><a href="#cb20-287" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.005662   0.011905   0.476  0.63436    </span></span>
-<span id="cb20-288"><a href="#cb20-288" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2                0.003991   0.012665   0.315  0.75271    </span></span>
-<span id="cb20-289"><a href="#cb20-289" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.029466   0.005751   5.124 3.02e-07 ***</span></span>
-<span id="cb20-290"><a href="#cb20-290" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.004612   0.014554  -0.317  0.75131    </span></span>
-<span id="cb20-291"><a href="#cb20-291" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.004422   0.015289  -0.289  0.77243    </span></span>
-<span id="cb20-292"><a href="#cb20-292" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.020691   0.006841  -3.025  0.00249 ** </span></span>
-<span id="cb20-293"><a href="#cb20-293" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
-<span id="cb20-294"><a href="#cb20-294" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb20-295"><a href="#cb20-295" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-296"><a href="#cb20-296" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-297"><a href="#cb20-297" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 19:</span></span>
-<span id="cb20-298"><a href="#cb20-298" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-299"><a href="#cb20-299" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
-<span id="cb20-300"><a href="#cb20-300" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                          Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-301"><a href="#cb20-301" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.0135394  0.0025712   5.266 1.41e-07 ***</span></span>
-<span id="cb20-302"><a href="#cb20-302" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.0273816  0.0029976   9.135  &lt; 2e-16 ***</span></span>
-<span id="cb20-303"><a href="#cb20-303" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.0004797  0.0099826   0.048   0.9617    </span></span>
-<span id="cb20-304"><a href="#cb20-304" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.0061516  0.0106143  -0.580   0.5622    </span></span>
-<span id="cb20-305"><a href="#cb20-305" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.0031083  0.0044076  -0.705   0.4807    </span></span>
-<span id="cb20-306"><a href="#cb20-306" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.0031514  0.0121519  -0.259   0.7954    </span></span>
-<span id="cb20-307"><a href="#cb20-307" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.0280632  0.0131848   2.128   0.0333 *  </span></span>
-<span id="cb20-308"><a href="#cb20-308" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.0027573  0.0057287   0.481   0.6303    </span></span>
-<span id="cb20-309"><a href="#cb20-309" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
-<span id="cb20-310"><a href="#cb20-310" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb20-311"><a href="#cb20-311" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-312"><a href="#cb20-312" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-313"><a href="#cb20-313" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 20:</span></span>
-<span id="cb20-314"><a href="#cb20-314" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
-<span id="cb20-315"><a href="#cb20-315" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
-<span id="cb20-316"><a href="#cb20-316" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                          Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-317"><a href="#cb20-317" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             6.732e-03  1.956e-03   3.442 0.000578 ***</span></span>
-<span id="cb20-318"><a href="#cb20-318" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           3.141e-02  2.222e-03  14.139  &lt; 2e-16 ***</span></span>
-<span id="cb20-319"><a href="#cb20-319" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -1.518e-03  7.625e-03  -0.199 0.842225    </span></span>
-<span id="cb20-320"><a href="#cb20-320" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -3.936e-05  8.132e-03  -0.005 0.996138    </span></span>
-<span id="cb20-321"><a href="#cb20-321" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                4.636e-04  3.424e-03   0.135 0.892288    </span></span>
-<span id="cb20-322"><a href="#cb20-322" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  8.770e-03  9.586e-03   0.915 0.360261    </span></span>
-<span id="cb20-323"><a href="#cb20-323" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  1.278e-02  1.070e-02   1.195 0.231989    </span></span>
-<span id="cb20-324"><a href="#cb20-324" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  2.137e-02  4.627e-03   4.617  3.9e-06 ***</span></span>
-<span id="cb20-325"><a href="#cb20-325" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
-<span id="cb20-326"><a href="#cb20-326" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="fu">summary</span>(covid_effect_K20)</span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="sc">&gt;</span><span class="co"># </span></span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Call:</span></span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># estimateEffect(formula = 1:20 ~ server * s(year), stmobj = covid_model_K20, </span></span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#     metadata = covid_stm_docs$meta)</span></span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 1:</span></span>
+<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
+<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                          Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.0234406  0.0037209   6.300 3.03e-10 ***</span></span>
+<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.1239404  0.0043837  28.273  &lt; 2e-16 ***</span></span>
+<span id="cb20-15"><a href="#cb20-15" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.0019906  0.0147251  -0.135    0.892    </span></span>
+<span id="cb20-16"><a href="#cb20-16" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.0005906  0.0153855  -0.038    0.969    </span></span>
+<span id="cb20-17"><a href="#cb20-17" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.0083690  0.0067608   1.238    0.216    </span></span>
+<span id="cb20-18"><a href="#cb20-18" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.0693392  0.0172420  -4.022 5.80e-05 ***</span></span>
+<span id="cb20-19"><a href="#cb20-19" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.0967995  0.0188392  -5.138 2.79e-07 ***</span></span>
+<span id="cb20-20"><a href="#cb20-20" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.0704873  0.0085319  -8.262  &lt; 2e-16 ***</span></span>
+<span id="cb20-21"><a href="#cb20-21" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
+<span id="cb20-22"><a href="#cb20-22" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb20-23"><a href="#cb20-23" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-24"><a href="#cb20-24" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-25"><a href="#cb20-25" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 2:</span></span>
+<span id="cb20-26"><a href="#cb20-26" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-27"><a href="#cb20-27" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
+<span id="cb20-28"><a href="#cb20-28" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb20-29"><a href="#cb20-29" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.098634   0.002859  34.504  &lt; 2e-16 ***</span></span>
+<span id="cb20-30"><a href="#cb20-30" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.085904   0.003134 -27.407  &lt; 2e-16 ***</span></span>
+<span id="cb20-31"><a href="#cb20-31" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.019849   0.011300  -1.757   0.0790 .  </span></span>
+<span id="cb20-32"><a href="#cb20-32" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.011260   0.013588  -0.829   0.4073    </span></span>
+<span id="cb20-33"><a href="#cb20-33" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.028616   0.004570  -6.262 3.86e-10 ***</span></span>
+<span id="cb20-34"><a href="#cb20-34" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.021576   0.012541   1.720   0.0854 .  </span></span>
+<span id="cb20-35"><a href="#cb20-35" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.008179   0.014631   0.559   0.5762    </span></span>
+<span id="cb20-36"><a href="#cb20-36" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.030380   0.005273   5.761 8.44e-09 ***</span></span>
+<span id="cb20-37"><a href="#cb20-37" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
+<span id="cb20-38"><a href="#cb20-38" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb20-39"><a href="#cb20-39" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-40"><a href="#cb20-40" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-41"><a href="#cb20-41" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 3:</span></span>
+<span id="cb20-42"><a href="#cb20-42" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-43"><a href="#cb20-43" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
+<span id="cb20-44"><a href="#cb20-44" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb20-45"><a href="#cb20-45" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.011070   0.002866   3.863 0.000112 ***</span></span>
+<span id="cb20-46"><a href="#cb20-46" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.053941   0.003367  16.023  &lt; 2e-16 ***</span></span>
+<span id="cb20-47"><a href="#cb20-47" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.002443   0.011358  -0.215 0.829719    </span></span>
+<span id="cb20-48"><a href="#cb20-48" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.002113   0.011874  -0.178 0.858734    </span></span>
+<span id="cb20-49"><a href="#cb20-49" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.001221   0.004865   0.251 0.801792    </span></span>
+<span id="cb20-50"><a href="#cb20-50" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.014872   0.013887   1.071 0.284215    </span></span>
+<span id="cb20-51"><a href="#cb20-51" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.014459   0.015068   0.960 0.337253    </span></span>
+<span id="cb20-52"><a href="#cb20-52" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.029819   0.006604   4.515 6.35e-06 ***</span></span>
+<span id="cb20-53"><a href="#cb20-53" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
+<span id="cb20-54"><a href="#cb20-54" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb20-55"><a href="#cb20-55" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-56"><a href="#cb20-56" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-57"><a href="#cb20-57" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 4:</span></span>
+<span id="cb20-58"><a href="#cb20-58" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-59"><a href="#cb20-59" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
+<span id="cb20-60"><a href="#cb20-60" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb20-61"><a href="#cb20-61" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.008843   0.003283   2.693  0.00708 ** </span></span>
+<span id="cb20-62"><a href="#cb20-62" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.057748   0.003831  15.072  &lt; 2e-16 ***</span></span>
+<span id="cb20-63"><a href="#cb20-63" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.004846   0.013347   0.363  0.71653    </span></span>
+<span id="cb20-64"><a href="#cb20-64" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.005247   0.014080  -0.373  0.70944    </span></span>
+<span id="cb20-65"><a href="#cb20-65" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.004538   0.005835   0.778  0.43673    </span></span>
+<span id="cb20-66"><a href="#cb20-66" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.020293   0.016309   1.244  0.21340    </span></span>
+<span id="cb20-67"><a href="#cb20-67" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.003962   0.018097  -0.219  0.82669    </span></span>
+<span id="cb20-68"><a href="#cb20-68" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.020239   0.007770   2.605  0.00919 ** </span></span>
+<span id="cb20-69"><a href="#cb20-69" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
+<span id="cb20-70"><a href="#cb20-70" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb20-71"><a href="#cb20-71" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-72"><a href="#cb20-72" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-73"><a href="#cb20-73" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 5:</span></span>
+<span id="cb20-74"><a href="#cb20-74" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-75"><a href="#cb20-75" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
+<span id="cb20-76"><a href="#cb20-76" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                          Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb20-77"><a href="#cb20-77" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             4.930e-03  2.344e-03   2.103   0.0355 *  </span></span>
+<span id="cb20-78"><a href="#cb20-78" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           5.429e-02  2.805e-03  19.353   &lt;2e-16 ***</span></span>
+<span id="cb20-79"><a href="#cb20-79" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -7.256e-04  9.490e-03  -0.076   0.9391    </span></span>
+<span id="cb20-80"><a href="#cb20-80" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2                9.636e-05  1.001e-02   0.010   0.9923    </span></span>
+<span id="cb20-81"><a href="#cb20-81" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                1.149e-03  4.136e-03   0.278   0.7811    </span></span>
+<span id="cb20-82"><a href="#cb20-82" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  2.601e-02  1.155e-02   2.252   0.0243 *  </span></span>
+<span id="cb20-83"><a href="#cb20-83" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -1.727e-03  1.216e-02  -0.142   0.8870    </span></span>
+<span id="cb20-84"><a href="#cb20-84" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -8.560e-03  5.379e-03  -1.591   0.1115    </span></span>
+<span id="cb20-85"><a href="#cb20-85" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
+<span id="cb20-86"><a href="#cb20-86" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb20-87"><a href="#cb20-87" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-88"><a href="#cb20-88" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-89"><a href="#cb20-89" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 6:</span></span>
+<span id="cb20-90"><a href="#cb20-90" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-91"><a href="#cb20-91" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
+<span id="cb20-92"><a href="#cb20-92" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb20-93"><a href="#cb20-93" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.148613   0.003822  38.879  &lt; 2e-16 ***</span></span>
+<span id="cb20-94"><a href="#cb20-94" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.115779   0.004202 -27.555  &lt; 2e-16 ***</span></span>
+<span id="cb20-95"><a href="#cb20-95" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.021108   0.013368  -1.579   0.1144    </span></span>
+<span id="cb20-96"><a href="#cb20-96" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.049179   0.012021  -4.091 4.31e-05 ***</span></span>
+<span id="cb20-97"><a href="#cb20-97" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.043752   0.006007  -7.284 3.32e-13 ***</span></span>
+<span id="cb20-98"><a href="#cb20-98" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.005827   0.014973   0.389   0.6971    </span></span>
+<span id="cb20-99"><a href="#cb20-99" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.035415   0.013764   2.573   0.0101 *  </span></span>
+<span id="cb20-100"><a href="#cb20-100" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.031012   0.006903   4.492 7.07e-06 ***</span></span>
+<span id="cb20-101"><a href="#cb20-101" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
+<span id="cb20-102"><a href="#cb20-102" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb20-103"><a href="#cb20-103" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-104"><a href="#cb20-104" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-105"><a href="#cb20-105" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 7:</span></span>
+<span id="cb20-106"><a href="#cb20-106" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-107"><a href="#cb20-107" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
+<span id="cb20-108"><a href="#cb20-108" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb20-109"><a href="#cb20-109" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.010762   0.002952   3.646 0.000267 ***</span></span>
+<span id="cb20-110"><a href="#cb20-110" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.085978   0.003516  24.455  &lt; 2e-16 ***</span></span>
+<span id="cb20-111"><a href="#cb20-111" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.004068   0.011679  -0.348 0.727589    </span></span>
+<span id="cb20-112"><a href="#cb20-112" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.007918   0.012233  -0.647 0.517430    </span></span>
+<span id="cb20-113"><a href="#cb20-113" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.003431   0.005119  -0.670 0.502765    </span></span>
+<span id="cb20-114"><a href="#cb20-114" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.049342   0.014428  -3.420 0.000627 ***</span></span>
+<span id="cb20-115"><a href="#cb20-115" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.019515   0.015750  -1.239 0.215339    </span></span>
+<span id="cb20-116"><a href="#cb20-116" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.038374   0.006476  -5.926 3.14e-09 ***</span></span>
+<span id="cb20-117"><a href="#cb20-117" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
+<span id="cb20-118"><a href="#cb20-118" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb20-119"><a href="#cb20-119" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-120"><a href="#cb20-120" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-121"><a href="#cb20-121" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 8:</span></span>
+<span id="cb20-122"><a href="#cb20-122" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-123"><a href="#cb20-123" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
+<span id="cb20-124"><a href="#cb20-124" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb20-125"><a href="#cb20-125" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.027236   0.003046   8.943  &lt; 2e-16 ***</span></span>
+<span id="cb20-126"><a href="#cb20-126" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.108719   0.003572  30.434  &lt; 2e-16 ***</span></span>
+<span id="cb20-127"><a href="#cb20-127" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.012887   0.012333  -1.045  0.29608    </span></span>
+<span id="cb20-128"><a href="#cb20-128" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.018288   0.012617  -1.450  0.14720    </span></span>
+<span id="cb20-129"><a href="#cb20-129" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.017050   0.005216  -3.269  0.00108 ** </span></span>
+<span id="cb20-130"><a href="#cb20-130" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.088436   0.014793  -5.978 2.28e-09 ***</span></span>
+<span id="cb20-131"><a href="#cb20-131" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.046722   0.015571  -3.001  0.00270 ** </span></span>
+<span id="cb20-132"><a href="#cb20-132" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.060216   0.006537  -9.212  &lt; 2e-16 ***</span></span>
+<span id="cb20-133"><a href="#cb20-133" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
+<span id="cb20-134"><a href="#cb20-134" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb20-135"><a href="#cb20-135" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-136"><a href="#cb20-136" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-137"><a href="#cb20-137" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 9:</span></span>
+<span id="cb20-138"><a href="#cb20-138" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-139"><a href="#cb20-139" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
+<span id="cb20-140"><a href="#cb20-140" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb20-141"><a href="#cb20-141" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.170499   0.004570  37.306  &lt; 2e-16 ***</span></span>
+<span id="cb20-142"><a href="#cb20-142" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.163957   0.004774 -34.343  &lt; 2e-16 ***</span></span>
+<span id="cb20-143"><a href="#cb20-143" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.018025   0.019183   0.940   0.3474    </span></span>
+<span id="cb20-144"><a href="#cb20-144" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.034774   0.020147  -1.726   0.0844 .  </span></span>
+<span id="cb20-145"><a href="#cb20-145" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.027994   0.006551  -4.273 1.93e-05 ***</span></span>
+<span id="cb20-146"><a href="#cb20-146" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.010893   0.020301  -0.537   0.5916    </span></span>
+<span id="cb20-147"><a href="#cb20-147" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.033114   0.022024   1.504   0.1327    </span></span>
+<span id="cb20-148"><a href="#cb20-148" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.027940   0.007114   3.927 8.61e-05 ***</span></span>
+<span id="cb20-149"><a href="#cb20-149" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
+<span id="cb20-150"><a href="#cb20-150" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb20-151"><a href="#cb20-151" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-152"><a href="#cb20-152" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-153"><a href="#cb20-153" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 10:</span></span>
+<span id="cb20-154"><a href="#cb20-154" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-155"><a href="#cb20-155" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
+<span id="cb20-156"><a href="#cb20-156" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                          Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb20-157"><a href="#cb20-157" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.0446702  0.0033561  13.310  &lt; 2e-16 ***</span></span>
+<span id="cb20-158"><a href="#cb20-158" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.0118411  0.0036642   3.232  0.00123 ** </span></span>
+<span id="cb20-159"><a href="#cb20-159" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.0042291  0.0147539   0.287  0.77439    </span></span>
+<span id="cb20-160"><a href="#cb20-160" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2                0.0003806  0.0133869   0.028  0.97732    </span></span>
+<span id="cb20-161"><a href="#cb20-161" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.0262052  0.0058724   4.462 8.13e-06 ***</span></span>
+<span id="cb20-162"><a href="#cb20-162" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.0177402  0.0164329  -1.080  0.28035    </span></span>
+<span id="cb20-163"><a href="#cb20-163" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.0307245  0.0153722  -1.999  0.04565 *  </span></span>
+<span id="cb20-164"><a href="#cb20-164" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.0409994  0.0070290  -5.833 5.51e-09 ***</span></span>
+<span id="cb20-165"><a href="#cb20-165" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
+<span id="cb20-166"><a href="#cb20-166" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb20-167"><a href="#cb20-167" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-168"><a href="#cb20-168" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-169"><a href="#cb20-169" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 11:</span></span>
+<span id="cb20-170"><a href="#cb20-170" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-171"><a href="#cb20-171" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
+<span id="cb20-172"><a href="#cb20-172" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                        Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb20-173"><a href="#cb20-173" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)            0.005066   0.002348   2.158  0.03095 *  </span></span>
+<span id="cb20-174"><a href="#cb20-174" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          0.008204   0.002697   3.042  0.00235 ** </span></span>
+<span id="cb20-175"><a href="#cb20-175" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               0.010036   0.009953   1.008  0.31331    </span></span>
+<span id="cb20-176"><a href="#cb20-176" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               0.010033   0.010166   0.987  0.32371    </span></span>
+<span id="cb20-177"><a href="#cb20-177" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               0.006391   0.004268   1.498  0.13424    </span></span>
+<span id="cb20-178"><a href="#cb20-178" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 0.057100   0.011762   4.854 1.21e-06 ***</span></span>
+<span id="cb20-179"><a href="#cb20-179" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 0.073675   0.012529   5.881 4.13e-09 ***</span></span>
+<span id="cb20-180"><a href="#cb20-180" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 0.047081   0.005951   7.911 2.63e-15 ***</span></span>
+<span id="cb20-181"><a href="#cb20-181" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
+<span id="cb20-182"><a href="#cb20-182" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb20-183"><a href="#cb20-183" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-184"><a href="#cb20-184" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-185"><a href="#cb20-185" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 12:</span></span>
+<span id="cb20-186"><a href="#cb20-186" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-187"><a href="#cb20-187" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
+<span id="cb20-188"><a href="#cb20-188" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb20-189"><a href="#cb20-189" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.022054   0.002851   7.735 1.07e-14 ***</span></span>
+<span id="cb20-190"><a href="#cb20-190" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.041880   0.003425  12.229  &lt; 2e-16 ***</span></span>
+<span id="cb20-191"><a href="#cb20-191" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.008591   0.011389  -0.754    0.451    </span></span>
+<span id="cb20-192"><a href="#cb20-192" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.005970   0.012318  -0.485    0.628    </span></span>
+<span id="cb20-193"><a href="#cb20-193" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.002648   0.004901  -0.540    0.589    </span></span>
+<span id="cb20-194"><a href="#cb20-194" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.006635   0.013931  -0.476    0.634    </span></span>
+<span id="cb20-195"><a href="#cb20-195" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.009730   0.015773   0.617    0.537    </span></span>
+<span id="cb20-196"><a href="#cb20-196" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.034869   0.006508   5.358 8.50e-08 ***</span></span>
+<span id="cb20-197"><a href="#cb20-197" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
+<span id="cb20-198"><a href="#cb20-198" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb20-199"><a href="#cb20-199" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-200"><a href="#cb20-200" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-201"><a href="#cb20-201" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 13:</span></span>
+<span id="cb20-202"><a href="#cb20-202" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-203"><a href="#cb20-203" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
+<span id="cb20-204"><a href="#cb20-204" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb20-205"><a href="#cb20-205" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.104406   0.003132  33.330  &lt; 2e-16 ***</span></span>
+<span id="cb20-206"><a href="#cb20-206" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.086379   0.003436 -25.141  &lt; 2e-16 ***</span></span>
+<span id="cb20-207"><a href="#cb20-207" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.031728   0.015407  -2.059   0.0395 *  </span></span>
+<span id="cb20-208"><a href="#cb20-208" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.027907   0.015125  -1.845   0.0650 .  </span></span>
+<span id="cb20-209"><a href="#cb20-209" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.023378   0.005607  -4.170 3.06e-05 ***</span></span>
+<span id="cb20-210"><a href="#cb20-210" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.077880   0.017912   4.348 1.38e-05 ***</span></span>
+<span id="cb20-211"><a href="#cb20-211" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.028308   0.016976   1.668   0.0954 .  </span></span>
+<span id="cb20-212"><a href="#cb20-212" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.041102   0.006616   6.212 5.30e-10 ***</span></span>
+<span id="cb20-213"><a href="#cb20-213" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
+<span id="cb20-214"><a href="#cb20-214" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb20-215"><a href="#cb20-215" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-216"><a href="#cb20-216" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-217"><a href="#cb20-217" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 14:</span></span>
+<span id="cb20-218"><a href="#cb20-218" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-219"><a href="#cb20-219" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
+<span id="cb20-220"><a href="#cb20-220" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb20-221"><a href="#cb20-221" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.124578   0.003424  36.381   &lt;2e-16 ***</span></span>
+<span id="cb20-222"><a href="#cb20-222" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.112723   0.003613 -31.196   &lt;2e-16 ***</span></span>
+<span id="cb20-223"><a href="#cb20-223" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.004303   0.015061   0.286    0.775    </span></span>
+<span id="cb20-224"><a href="#cb20-224" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.007563   0.015586  -0.485    0.627    </span></span>
+<span id="cb20-225"><a href="#cb20-225" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.007591   0.006363   1.193    0.233    </span></span>
+<span id="cb20-226"><a href="#cb20-226" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.003154   0.015906  -0.198    0.843    </span></span>
+<span id="cb20-227"><a href="#cb20-227" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.005287   0.016653   0.317    0.751    </span></span>
+<span id="cb20-228"><a href="#cb20-228" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.005140   0.007166  -0.717    0.473    </span></span>
+<span id="cb20-229"><a href="#cb20-229" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
+<span id="cb20-230"><a href="#cb20-230" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb20-231"><a href="#cb20-231" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-232"><a href="#cb20-232" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-233"><a href="#cb20-233" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 15:</span></span>
+<span id="cb20-234"><a href="#cb20-234" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-235"><a href="#cb20-235" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
+<span id="cb20-236"><a href="#cb20-236" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb20-237"><a href="#cb20-237" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.053512   0.003518  15.211  &lt; 2e-16 ***</span></span>
+<span id="cb20-238"><a href="#cb20-238" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.027439   0.003970  -6.912 4.87e-12 ***</span></span>
+<span id="cb20-239"><a href="#cb20-239" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.044612   0.014917   2.991  0.00279 ** </span></span>
+<span id="cb20-240"><a href="#cb20-240" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2                0.024732   0.015523   1.593  0.11111    </span></span>
+<span id="cb20-241"><a href="#cb20-241" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.017727   0.006485   2.733  0.00627 ** </span></span>
+<span id="cb20-242"><a href="#cb20-242" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.003585   0.017434   0.206  0.83710    </span></span>
+<span id="cb20-243"><a href="#cb20-243" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.033864   0.017679   1.915  0.05544 .  </span></span>
+<span id="cb20-244"><a href="#cb20-244" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.003397   0.007637  -0.445  0.65646    </span></span>
+<span id="cb20-245"><a href="#cb20-245" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
+<span id="cb20-246"><a href="#cb20-246" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb20-247"><a href="#cb20-247" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-248"><a href="#cb20-248" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-249"><a href="#cb20-249" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 16:</span></span>
+<span id="cb20-250"><a href="#cb20-250" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-251"><a href="#cb20-251" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
+<span id="cb20-252"><a href="#cb20-252" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                          Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb20-253"><a href="#cb20-253" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.0531929  0.0035082  15.162  &lt; 2e-16 ***</span></span>
+<span id="cb20-254"><a href="#cb20-254" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.0175983  0.0040741   4.320 1.57e-05 ***</span></span>
+<span id="cb20-255"><a href="#cb20-255" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.0495297  0.0130191  -3.804 0.000142 ***</span></span>
+<span id="cb20-256"><a href="#cb20-256" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.0294216  0.0132356  -2.223 0.026229 *  </span></span>
+<span id="cb20-257"><a href="#cb20-257" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.0279241  0.0057428  -4.862 1.17e-06 ***</span></span>
+<span id="cb20-258"><a href="#cb20-258" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.0608938  0.0150057   4.058 4.96e-05 ***</span></span>
+<span id="cb20-259"><a href="#cb20-259" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.0011419  0.0160244   0.071 0.943192    </span></span>
+<span id="cb20-260"><a href="#cb20-260" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.0007154  0.0072574  -0.099 0.921479    </span></span>
+<span id="cb20-261"><a href="#cb20-261" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
+<span id="cb20-262"><a href="#cb20-262" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb20-263"><a href="#cb20-263" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-264"><a href="#cb20-264" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-265"><a href="#cb20-265" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 17:</span></span>
+<span id="cb20-266"><a href="#cb20-266" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-267"><a href="#cb20-267" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
+<span id="cb20-268"><a href="#cb20-268" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb20-269"><a href="#cb20-269" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.012551   0.002389   5.253 1.51e-07 ***</span></span>
+<span id="cb20-270"><a href="#cb20-270" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.010899   0.002674  -4.077 4.58e-05 ***</span></span>
+<span id="cb20-271"><a href="#cb20-271" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.062633   0.011947   5.242 1.60e-07 ***</span></span>
+<span id="cb20-272"><a href="#cb20-272" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2                0.167129   0.015989  10.453  &lt; 2e-16 ***</span></span>
+<span id="cb20-273"><a href="#cb20-273" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.074735   0.005279  14.157  &lt; 2e-16 ***</span></span>
+<span id="cb20-274"><a href="#cb20-274" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.043736   0.013361  -3.273  0.00106 ** </span></span>
+<span id="cb20-275"><a href="#cb20-275" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.080082   0.017946  -4.462 8.14e-06 ***</span></span>
+<span id="cb20-276"><a href="#cb20-276" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.037893   0.006055  -6.259 3.94e-10 ***</span></span>
+<span id="cb20-277"><a href="#cb20-277" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
+<span id="cb20-278"><a href="#cb20-278" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb20-279"><a href="#cb20-279" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-280"><a href="#cb20-280" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-281"><a href="#cb20-281" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 18:</span></span>
+<span id="cb20-282"><a href="#cb20-282" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-283"><a href="#cb20-283" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
+<span id="cb20-284"><a href="#cb20-284" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb20-285"><a href="#cb20-285" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.055685   0.003080  18.077  &lt; 2e-16 ***</span></span>
+<span id="cb20-286"><a href="#cb20-286" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.019907   0.003497  -5.692 1.27e-08 ***</span></span>
+<span id="cb20-287"><a href="#cb20-287" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.005562   0.012074   0.461  0.64505    </span></span>
+<span id="cb20-288"><a href="#cb20-288" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2                0.004178   0.012739   0.328  0.74297    </span></span>
+<span id="cb20-289"><a href="#cb20-289" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.029357   0.005769   5.089 3.62e-07 ***</span></span>
+<span id="cb20-290"><a href="#cb20-290" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.004420   0.014610  -0.303  0.76224    </span></span>
+<span id="cb20-291"><a href="#cb20-291" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.004759   0.015303  -0.311  0.75580    </span></span>
+<span id="cb20-292"><a href="#cb20-292" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.020623   0.006878  -2.998  0.00272 ** </span></span>
+<span id="cb20-293"><a href="#cb20-293" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
+<span id="cb20-294"><a href="#cb20-294" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb20-295"><a href="#cb20-295" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-296"><a href="#cb20-296" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-297"><a href="#cb20-297" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 19:</span></span>
+<span id="cb20-298"><a href="#cb20-298" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-299"><a href="#cb20-299" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
+<span id="cb20-300"><a href="#cb20-300" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                          Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb20-301"><a href="#cb20-301" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.0135406  0.0025968   5.214 1.86e-07 ***</span></span>
+<span id="cb20-302"><a href="#cb20-302" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.0273582  0.0029884   9.155  &lt; 2e-16 ***</span></span>
+<span id="cb20-303"><a href="#cb20-303" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.0006041  0.0099405   0.061   0.9515    </span></span>
+<span id="cb20-304"><a href="#cb20-304" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.0064479  0.0105255  -0.613   0.5401    </span></span>
+<span id="cb20-305"><a href="#cb20-305" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.0030469  0.0043987  -0.693   0.4885    </span></span>
+<span id="cb20-306"><a href="#cb20-306" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.0032199  0.0121279  -0.265   0.7906    </span></span>
+<span id="cb20-307"><a href="#cb20-307" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.0283683  0.0130767   2.169   0.0301 *  </span></span>
+<span id="cb20-308"><a href="#cb20-308" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.0026697  0.0057458   0.465   0.6422    </span></span>
+<span id="cb20-309"><a href="#cb20-309" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
+<span id="cb20-310"><a href="#cb20-310" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb20-311"><a href="#cb20-311" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-312"><a href="#cb20-312" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-313"><a href="#cb20-313" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 20:</span></span>
+<span id="cb20-314"><a href="#cb20-314" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
+<span id="cb20-315"><a href="#cb20-315" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
+<span id="cb20-316"><a href="#cb20-316" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                          Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb20-317"><a href="#cb20-317" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.0067332  0.0019291   3.490 0.000483 ***</span></span>
+<span id="cb20-318"><a href="#cb20-318" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.0314273  0.0022053  14.251  &lt; 2e-16 ***</span></span>
+<span id="cb20-319"><a href="#cb20-319" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.0013507  0.0077072  -0.175 0.860882    </span></span>
+<span id="cb20-320"><a href="#cb20-320" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.0002222  0.0082503  -0.027 0.978509    </span></span>
+<span id="cb20-321"><a href="#cb20-321" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.0004619  0.0034393   0.134 0.893163    </span></span>
+<span id="cb20-322"><a href="#cb20-322" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.0085733  0.0096594   0.888 0.374784    </span></span>
+<span id="cb20-323"><a href="#cb20-323" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.0130118  0.0107693   1.208 0.226970    </span></span>
+<span id="cb20-324"><a href="#cb20-324" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.0213573  0.0046259   4.617 3.91e-06 ***</span></span>
+<span id="cb20-325"><a href="#cb20-325" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
+<span id="cb20-326"><a href="#cb20-326" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code></pre></div>
 <p>The following sections illustrate the exploration of covariate
 effects with several examples.</p>
 <div class="section level4">
@@ -1039,9 +1038,10 @@ effects object and create customized charts.</p>
 <em>medRxiv</em>) as a covariate. We hypothesized that the prevalence of
 certain topics will be influenced by this covariate, i.e. that we are
 more likely to see certain topics on either <em>bioRxiv</em> and
-<em>medRxiv</em>. STM interprets this as a <em>treatment</em> (see <span class="citation">(<a href="#ref-RobertsStewart_et_2014_AJPS_58" role="doc-biblioref">Roberts et al. 2014</a>)</span> for background and
-examples) and we can extract the effect of this treatment from the
-regression object returned by <code><a href="https://rdrr.io/pkg/stm/man/estimateEffect.html" class="external-link">estimateEffect()</a></code>.</p>
+<em>medRxiv</em>. STM interprets this as a <em>treatment</em> (see <span class="citation">(<a href="#ref-RobertsStewart_et_2014_AJPS_58">Roberts
+et al. 2014</a>)</span> for background and examples) and we can extract
+the effect of this treatment from the regression object returned by
+<code><a href="https://rdrr.io/pkg/stm/man/estimateEffect.html" class="external-link">estimateEffect()</a></code>.</p>
 <p>The <code>stm::plot()</code> offers different methods to explore
 those effects. The figure below lists the effect of <em>‘treatment
 medrxiv’</em> for all topics in the model. The treatment can have a
@@ -1116,8 +1116,8 @@ covariate effect.</p>
 <div class="section level4">
 <h4 id="topic-correlations">Topic correlations<a class="anchor" aria-label="anchor" href="#topic-correlations"></a>
 </h4>
-<p>Finally, considering that STM is extending <span class="citation">(<a href="#ref-RobertsStewart_et_2019_JSTATS_91" role="doc-biblioref">Roberts, Stewart, and Tingley 2019</a>)</span> a
-correlated topic model <span class="citation">(<a href="#ref-BleiLafferty2007_AAS_1" role="doc-biblioref">Blei and
+<p>Finally, considering that STM is extending <span class="citation">(<a href="#ref-RobertsStewart_et_2019_JSTATS_91">Roberts, Stewart, and
+Tingley 2019</a>)</span> a correlated topic model <span class="citation">(<a href="#ref-BleiLafferty2007_AAS_1">Blei and
 Lafferty 2007</a>)</span> we may also explore if topics are frequently
 cooccuring. A a topic correlation matrix is retrieved with
 <code><a href="https://rdrr.io/pkg/stm/man/topicCorr.html" class="external-link">stm::topicCorr()</a></code> which can then be plotted. The resulting
@@ -2347,7 +2347,7 @@ return function(){for(var n=0,e=0;e<t;++e)n+=Math.random();return n}},um=functio
 <div class="section level2">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-BenoitWatanabe_et_2018_JOSS_3" class="csl-entry">
 Benoit, Kenneth, Kohei Watanabe, Haiyan Wang, Paul Nulty, Adam Obeng,
 Stefan Müller, and Akitaka Matsuo. 2018. <span>“Quanteda: <span>An
