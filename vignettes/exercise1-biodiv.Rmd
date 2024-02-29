@@ -1,0 +1,614 @@
+---
+title: "Exercise 1: Topic modeling biodiversity preprints"
+output: rmarkdown::html_vignette
+bibliography: srcquantcourse.bib
+link-citations: yes
+vignette: >
+  %\VignetteIndexEntry{Exercise 1: Topic modeling biodiversity preprints}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  collapse = TRUE,
+  cache = FALSE,
+  comment = ">#"
+)
+```
+
+```{r setup}
+library(srcquantcourse)
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(quanteda)
+library(quanteda.textstats)
+library(stm)
+library(stminsights)
+library(ggplot2)
+```
+
+
+This exercise follows the structure of the `vignette("covid-preprint-topics")` and adapts it to create a topic model for preprints referencing the term *'biodiversity'* in either the preprint title or abstract. Refer back to the `vignette("covid-preprint-topics")` for more information about the individual steps.
+
+Either try the steps yourself with the help of the example in the `vignette("covid-preprint-topics")` or jump ahead to the **[Solution](#solution)** section.
+
+
+# Exercise tasks
+
+## Getting the document data 
+
+We assume that you have created a local copy of the preprint data to run this analysis (see information and code samples for *"Getting the document data"* in  `vignette("covid-preprint-topics")`).
+
+```{r eval=FALSE, echo=TRUE}
+load(url("PREPRINT_RDATA_LOCATION_HERE"))
+```
+
+
+## Cleaning, filtering and annotating the data
+
+For this example we are planning to explore whether the publication status influences the topic prevalence. We therefore adapt the time range and consider preprints added from 2017 to 2021. We then reduce this to a subset of preprints that reference the term *'biodiversity'* in either the preprint title or abstract. 
+
+```{r eval=FALSE, echo=TRUE}
+# adapt based on the covid preprints example
+
+```
+
+
+## Preparing and preprocessing the documents for text analysis
+
+### Create a corpus
+
+Create a **corpus** and explore its properties.
+
+```{r eval=FALSE, echo=TRUE}
+# quanteda is used for corpus creation
+
+```
+
+
+### Tokenize and preprocess
+
+Tokenize by applying the same steps as in the Covid preprint example.
+
+```{r eval=FALSE, echo=TRUE}
+# quanteda is used for tokenization
+
+```
+
+
+### Create a Document-feature matrix
+
+```{r eval=FALSE, echo=TRUE}
+# quanteda is used for creation of a DFM 
+
+```
+
+
+### Filter terms and documents
+
+Remove stopwords from the document-feature-matrix. Explore its properties.
+
+```{r eval=FALSE, echo=TRUE}
+# quanteda is used for stopword removal 
+
+```
+
+Filter tokens and documents by applying the same approach as in the Covid preprint example.
+
+```{r eval=FALSE, echo=TRUE}
+# quanteda is used for filtering
+
+```
+
+## Topic modeling
+
+### Fitting the STM topic model
+
+Fit an `stm` topic model with 10 topics to the prepared data. The model should consider an interacting effect between the covariates `is_published` and publication `year` on topical prevalence. Apply a `seed` argument with the value *9868467*. 
+ 
+```{r eval=FALSE, echo=TRUE}
+# convert the DFM into stm format and run the stm() function
+
+```
+
+
+### Estimating the effect of document covariates
+
+Evaluate the effect of the previously chosen topic prevalence covariates on all topics.
+
+```{r eval=FALSE, echo=TRUE}
+# estimateEffect() on the topic model
+
+```
+
+This concludes fitting the model. The following sections step through a sample exploration of this topic model.
+
+
+## Analysing and interpreting the topic model
+
+### Basic topic model information
+
+Plot a model summary with the 7 most frequent words per topic.
+
+```{r echo=TRUE, dpi = 200, fig.height=7, fig.width=10}
+# stm plot() teh topic model provides a summary of topic proportions
+
+```
+
+Print a `summary()` of the topic model and explore the sets of words that characterize the 10 topics. 
+
+```{r echo=TRUE}
+# print a summary() of the topic model
+
+```
+
+
+## Understanding and labeling topics
+
+Create word clouds for all 10 topics using the 30 words with the highest probability per topic. Remove the term "biodiversity" from this display.
+
+```{r echo=TRUE, warning=FALSE, fig.width=8, fig.height=4, fig.cap="**Word clouds showing the 30 most probable terms per topic.**"}
+# word clouds are a useful first step to arrive at summary labels for topics
+
+```
+
+
+
+
+
+## Covariate effects
+
+Print the regression tables for all or selected topics. 
+
+```{r echo=TRUE}
+# print a summary() of effects
+
+```
+
+
+
+### Publication year
+
+Use the `stm` plot method to create a plot that shows the effect of publication `year` on topical prevalence for Topic 4 and Topic 8. Annotate with the most probable terms.  
+
+```{r echo=TRUE, fig.height=7, fig.width=10}
+# stm plot offers various different plot options for covariate effects
+
+```
+
+Alternatively, the `stminsights` package could be used to extract the same regression information from the `stm` effects object and create customized charts.
+
+```{r echo=TRUE, warning=FALSE, fig.width=8, fig.height=4}
+# stminsights allows to get effects in a format suitable for ggplot2
+
+```
+
+
+
+### Publication status effect 
+
+We also incoporated the publication status into the model (covariate `is_published`). Using the `stm` plot method explore the effect of the treatment "published" on topical prevalence. 
+
+
+```{r echo=TRUE, fig.dpi=150, fig.height=14, fig.width=16}
+# stm plot offers various different plotoptions for covariate effects
+
+```
+
+Compare the topical prevalence effect of covariate `is_published` for Topic 4. 
+
+```{r echo=TRUE}
+# stm plot offers various different plotoptions for covariate effects
+
+```
+
+
+### Combination of publication status and publication year
+
+Finally, we can also explore the combined effect of covariates; we assumed an interacting effect of the two covariates `is_published` and `year`. Using the `stm` plot function explore the combined interacting covariate effect for Topic 4. 
+
+```{r echo=FALSE, fig.width=10, fig.height=7, dpi=150}
+# stm plot offers various different plotoptions for covariate effects
+
+```
+
+Again, `stminsights` can be used to retrieve this information and create customized visualizations for the combined covariate effect.
+
+```{r echo=TRUE, warning=FALSE, fig.width=8, fig.height=4}
+# stminsights allows to get effects in a format suitable for ggplot2
+
+```
+
+
+
+
+
+## Exploring the topic structure
+
+### Topic correlations
+
+Finally, retrieve the topic correlations matrix and plot a cooccurrence network.  
+
+```{r echo=TRUE}
+# topic correlations retrieved with stm
+
+```
+
+
+
+
+
+# Solution 
+
+## Getting the document data 
+
+We assume that you have created a local copy of the preprint data to run this analysis (see information and code samples for *"Getting the document data"* in  `vignette("covid-preprint-topics")`).
+
+```{r eval=FALSE, echo=TRUE}
+load(url("PREPRINT_RDATA_LOCATION_HERE"))
+```
+
+
+## Cleaning, filtering and annotating the data
+
+For this example we are planning to explore whether the publication status influences the topic prevalence. We therefore adapt the time range and consider preprints added from 2017 to 2021. We then reduce this to a subset of preprints that reference the term *'biodiversity'* in either the preprint title or abstract. 
+
+```{r eval=FALSE, echo=TRUE}
+library(dplyr)
+library(stringr)
+
+preprints_cleaned <- preprints_raw %>%
+  group_by(doi) %>%
+  filter(version == max(version)) %>%
+  ungroup() %>%
+  distinct(doi, .keep_all = TRUE)
+
+preprints <- preprints_cleaned %>%
+  mutate(published = stringr::str_trim(published)) %>%
+  mutate(published = na_if(published, "NA")) %>%
+  mutate(is_published = as.numeric(!is.na(published))) %>%
+  mutate(is_published = case_when(is_published == 1 ~ "published",
+                                  is_published == 0 ~ "not published",
+                                  TRUE ~ "undefined")) %>%
+  mutate(year = lubridate::year(date)) %>%
+  filter(year >= 2017 & year <= 2021) %>% 
+  select(doi, server, title, abstract, date, year, version, is_published)
+
+keywords <- c("biodiversity")
+
+search_pattern <- stringr::regex(paste(keywords, collapse = "|"), 
+                                 ignore_case = TRUE)
+
+biodiv_preprints <- preprints %>%
+  filter(stringr::str_detect(title, pattern = search_pattern) |
+           stringr::str_detect(abstract, pattern = search_pattern))
+```
+
+
+## Preparing and preprocessing the documents for text analysis
+
+### Create a corpus
+
+Create a **corpus** and explore its properties.
+
+```{r eval=FALSE, echo=TRUE}
+library(quanteda)
+
+pubs_corpus <- biodiv_preprints %>%
+  quanteda::corpus(docid_field = "doi", text_field = "abstract")
+
+# pubs_corpus
+# Corpus consisting of 29,692 documents and 6 docvars.
+```
+
+
+### Tokenize and preprocess
+
+Tokenize by applying the same steps as in the Covid preprint example.
+
+```{r eval=FALSE, echo=TRUE}
+pubs_tokens <- pubs_corpus %>%
+  quanteda::tokens(remove_punct = TRUE,
+                   remove_symbols = TRUE,
+                   remove_numbers = TRUE,
+                   remove_url = TRUE,
+                   remove_separators = TRUE,
+                   split_hyphens = TRUE) 
+
+```
+
+
+### Create a Document-feature matrix
+
+```{r eval=FALSE, echo=TRUE}
+pubs_dfm <- pubs_tokens %>%
+  quanteda::dfm()
+```
+
+
+### Filter terms and documents
+
+Remove stopwords from the document-feature-matrix. Explore its properties.
+
+```{r eval=FALSE, echo=TRUE}
+pubs_dfm <- pubs_dfm %>%
+  quanteda::dfm_remove(pattern = quanteda::stopwords("english")) #%>%
+  #quanteda::dfm_wordstem()
+```
+
+Filter tokens and documents by applying the same approach as in the Covid preprint example.
+
+```{r eval=FALSE, echo=TRUE}
+pubs_dfm <- pubs_dfm %>%
+  quanteda::dfm_remove(min_nchar = 2) %>%
+  quanteda::dfm_trim(min_docfreq = 2, docfreq_type = "count") %>%
+  quanteda::dfm_subset(quanteda::ntoken(.) > 4)
+```
+
+## Topic modeling
+
+### Fitting the STM topic model
+
+Fit an `stm` topic model with 10 topics to the prepared data. The model should consider an interacting effect between the covariates `is_published` and publication `year` on topical prevalence. Apply a `seed` argument with the value *9868467*. 
+ 
+```{r eval=FALSE, echo=TRUE}
+library(stm)
+
+biodiv_stm_docs <- quanteda::convert(pubs_dfm, to = "stm")
+
+biodiv_model_K10 <- stm(documents = biodiv_stm_docs$documents,
+                    vocab = biodiv_stm_docs$vocab,
+                    data = biodiv_stm_docs$meta,
+                    prevalence = ~ is_published * year,
+                    K = 10,
+                    verbose = TRUE,
+                    seed = seed_stm)
+```
+
+
+### Estimating the effect of document covariates
+
+Evaluate the effect of the previously chosen topic prevalence covariates on all topics.
+
+```{r eval=FALSE, echo=TRUE}
+biodiv_effect_K10 <- estimateEffect(1:10 ~ is_published * year,
+                                   stmobj = biodiv_model_K10,
+                                   metadata = biodiv_stm_docs$meta)
+```
+
+This concludes fitting the model. The following sections step through a sample exploration of this topic model.
+
+
+## Analysing and interpreting the topic model
+
+### Basic topic model information
+
+Plot a model summary with the 7 most frequent words per topic.
+
+```{r echo=TRUE, dpi = 200, fig.height=7, fig.width=10}
+
+plot(biodiv_model_K10, n = 7)
+
+```
+
+Print a `summary()` of the topic model and explore the sets of words that characterize the 10 topics. 
+
+```{r echo=TRUE}
+
+summary(biodiv_model_K10)
+
+```
+
+
+## Understanding and labeling topics
+
+Create word clouds for all 10 topics using the 30 words with the highest probability per topic. Remove the term "biodiversity" from this display.
+
+```{r echo=TRUE, warning=FALSE, fig.width=8, fig.height=4, fig.cap="**Word clouds showing the 30 most probable terms per topic.**"}
+library(tidyr)
+library(tibble)
+
+# get the top FREX words
+frex_top20 <- as.data.frame(labelTopics(biodiv_model_K10, n = 25)$frex) %>%
+  rownames_to_column(var = "topic") %>%
+  pivot_longer(starts_with("V"), values_to = "term") %>%
+  mutate(is_frex = 1) %>%
+  select(-name)
+
+topic_words <- tidytext::tidy(biodiv_model_K10, matrix = "beta") %>%
+  #filter(!(term %in% c("sars", "cov", "covid"))) %>% 
+  mutate(topic = as.character(topic)) %>%
+  group_by(topic) %>%
+  arrange(-beta) %>%
+  slice_head(n = 30) %>%
+  mutate(beta_norm = (beta - min(beta)) / (max(beta) - min(beta))) %>%
+  ungroup() %>%
+  left_join(frex_top20, by = c("topic", "term")) %>%
+  mutate(is_frex = ifelse(is.na(is_frex), "0", "1")) %>%
+  filter(!(term %in% c("biodiversity"))) %>%
+  mutate(topic = paste("Topic", topic))
+
+ggplot(topic_words, aes(label = term, size = beta_norm, color = is_frex)) +
+  ggwordcloud::geom_text_wordcloud_area(shape = "square",
+                                        family = "Arial",
+                                        rm_outside = TRUE) +
+  scale_radius(range = c(4, 15)) +
+  scale_color_manual(values = c("0" = "black", "1" = "#D55E00")) + 
+  facet_wrap(~topic, ncol = 5)
+```
+
+
+
+
+
+## Covariate effects
+
+Print the regression tables for all or selected topics. 
+
+```{r echo=TRUE}
+
+summary(biodiv_effect_K10)
+
+```
+
+
+
+### Publication year
+
+Use the `stm` plot method to create a plot that shows the effect of publication `year` on topical prevalence for Topic 4 and Topic 8. Annotate with the most probable terms.  
+
+```{r echo=TRUE, fig.height=7, fig.width=10}
+plot(biodiv_effect_K10,
+     covariate = "year",
+     method = "continuous",
+     model = biodiv_model_K10,
+     topics = c(4, 8),
+     xaxt = "n",
+     main = 'Effect of publication year on prevalence of Topic 4 ("???") and Topic 8 ("???")',
+     labeltype = "prob",
+     xlab = "Publication year")
+axis(1, at = c("2017","2018","2019","2020", "2021"), labels = c(2017, 2018, 2019, 2020, 2021))
+```
+
+Alternatively, the `stminsights` package could be used to extract the same regression information from the `stm` effects object and create customized charts.
+
+```{r echo=TRUE, warning=FALSE, fig.width=8, fig.height=4}
+library(stminsights)
+
+year_effect <- get_effects(estimates = biodiv_effect_K10, 
+                           variable = "year",
+                           type = "continuous")
+
+year_effect %>%
+  mutate(topic = as.character(topic)) %>%
+  mutate(topic = paste("Topic", topic)) %>%
+    ggplot(aes(x = value, y = proportion)) +
+      geom_line() +
+      geom_ribbon(aes(ymin = lower, ymax = upper), 
+                  alpha = 0.2, linetype = 0)  +
+      xlab("Publication year") +
+      ylab("Topic prevalence") +
+      facet_wrap(~topic, ncol = 5) +
+      theme_minimal()
+```
+
+
+
+### Publication status effect 
+
+We also incoporated the publication status into the model (covariate `is_published`). Using the `stm` plot method explore the effect of the treatment "published" on topical prevalence. 
+
+
+```{r echo=TRUE, fig.dpi=150, fig.height=14, fig.width=16}
+plot(biodiv_effect_K10, 
+     covariate = "is_published",
+     #topics = c(9, 10, 16, 1),
+     model = biodiv_model_K10, 
+     method = "difference",
+     cov.value1 = "published", cov.value2 = "not published",
+     xlab = "higher prevalence in unpublished ... higher prevalence in published",
+     #xlim = c(-0.19, 0.1),
+     #labeltype = "prob",
+     main = "Effect of preprint server (treatment 'published')")
+```
+
+Compare the topical prevalence effect of covariate `is_published` for Topic 4. 
+
+```{r echo=TRUE}
+plot(biodiv_effect_K10, 
+     covariate = "is_published",
+     topics = c(4),
+     model = biodiv_model_K10, 
+      method = "pointestimate",
+     xlab = "Topical prevalence",
+     #xlim = c(-0.04, 0.2),
+     #labeltype = "prob",
+     main = "Effect of preprint 'is_published' covariate for Topic 4")
+
+```
+
+
+### Combination of publication status and publication year
+
+Finally, we can also explore the combined effect of covariates; we assumed an interacting effect of the two covariates `is_published` and `year`. Using the `stm` plot function explore the combined interacting covariate effect for Topic 4. 
+
+```{r echo=FALSE, fig.width=10, fig.height=7, dpi=150}
+plot(biodiv_effect_K10,
+     topics = c(4),
+     covariate = "year",
+     model = biodiv_model_K10,
+     ci.level = 0.95,
+     method = "continuous",
+     moderator = "is_published",
+     moderator.value = "published",
+     linecol = "#619CFF", lwd = 4,
+     xlab = "Publication year",
+     ylim = c(0, .2),
+     main = 'Effect of preprint server on Topic 4 ("???")',
+     xaxt = "n",
+     printlegend = F)
+plot(biodiv_effect_K10,
+     topics = c(4),
+     covariate = "year",
+     model = biodiv_model_K10,
+     method = "continuous",
+     moderator = "is_published",
+     moderator.value = "not published",
+     linecol = "#F8766D", lwd = 2,
+     add = T,
+     printlegend = F)
+legend(2017, .2, c("published", "not published"), lwd = 2, col = c("#619CFF", "#F8766D"))
+axis(1, at = c("2017","2018","2019","2020", "2021"), labels = c(2017, 2018, 2019, 2020, 2021))
+```
+
+Again, `stminsights` can be used to retrieve this information and create customized visualizations for the combined covariate effect.
+
+
+```{r echo=TRUE, warning=FALSE, fig.width=8, fig.height=4}
+published_effect <- get_effects(biodiv_effect_K10, 
+                                variable = "year", type = "continuous", 
+                                moderator = "is_published", modval = "published")
+
+unpublished_effect <- get_effects(biodiv_effect_K10,
+                                  variable = "year", type = "continuous", 
+                                  moderator = "is_published", modval = "not published")
+
+is_published_effects <- bind_rows(published_effect, unpublished_effect)
+
+is_published_effects %>%
+  mutate(topic = as.character(topic)) %>%
+  mutate(topic = paste("Topic", topic)) %>%
+    ggplot(aes(x = value, y = proportion, color = moderator,
+               group = moderator, fill = moderator)) +
+      geom_line() +
+      geom_ribbon(aes(ymin = lower, ymax = upper, 
+                      fill = moderator), alpha = 0.2, linetype = 0) +
+      xlab("Publication year") +
+      ylab("Topic prevalence") +
+      facet_wrap(~topic, ncol = 5) +
+      theme_minimal() +
+      theme(legend.position = "bottom") 
+```
+
+
+
+
+
+## Exploring the topic structure
+
+### Topic correlations
+
+Finally, retrieve the topic correlations matrix and plot a cooccurrence network.  
+
+```{r echo=TRUE}
+covid_topic_correlations <- topicCorr(biodiv_model_K10, cutoff = 0.001)
+
+plot(covid_topic_correlations)
+```
+
+

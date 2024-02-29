@@ -12,9 +12,8 @@ Quantitative Methods PhD course.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/sdaume/srcquantcourse}
   \item \url{https://sdaume.github.io/srcquantcourse}
-  \item \url{https://sdaume.github.io/srcquantcourse/}
+  \item \url{https://github.com/sdaume/srcquantcourse}
   \item Report bugs at \url{https://github.com/sdaume/srcquantcourse/issues}
 }
 

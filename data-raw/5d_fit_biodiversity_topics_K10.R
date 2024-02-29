@@ -1,6 +1,6 @@
 # Project: SRC Quantitative Methods PhD Course
 #
-# Script purpose: Fit a K=20 topic model for Covid preprints
+# Script purpose: Fit a K=10 topic model for biodiversity preprints
 #
 # Stefan Daume
 
@@ -28,20 +28,10 @@ seed_stm <- 9868467
 
 load("./data-raw/preprints_raw.Rdata")
 
-ppt_raw <- url("https://su.drive.sunet.se/index.php/s/gwnFSWHMCawkfwc/download/preprints_raw.Rdata")
-
-con1 <- url("https://su.drive.sunet.se/index.php/s/T9oiagaRDPmzNdn/download/ses_preprints.Rdata")
-
-con2 <- url("https://su.drive.sunet.se/index.php/s/T9oiagaRDPmzNdn")
-
-load(con1)
-
 
 ###############################################################################################
 # FILTER AND PREPROCESS THE DOCUMENT SET
 ###############################################################################################
-
-print(paste(Sys.time(), "Preparing DFM ..."))
 
 preprints <- preprints_raw %>%
   group_by(doi) %>%
@@ -55,27 +45,26 @@ preprints <- preprints_raw %>%
                                   is_published == 0 ~ "not published",
                                   TRUE ~ "undefined")) %>%
   mutate(year = lubridate::year(date)) %>%
-  filter(year >= 2020 & year <= 2023) %>%
+  #filter(server == "biorxiv") %>%
+  filter(year >= 2017 & year <= 2021) %>%
   select(doi, server, title, abstract, date, year, version, is_published)
 
 # create a subset filtered by keywords in titles and abstracts
-keywords <- c("sars-cov", "covid")
+keywords <- c("biodiversity")
 
 search_pattern <- stringr::regex(paste(keywords, collapse = "|"), ignore_case = TRUE)
 
-covid_preprints <- preprints %>%
+preprints <- preprints %>%
   filter(stringr::str_detect(title, pattern = search_pattern) |
            stringr::str_detect(abstract, pattern = search_pattern))
 
-preprint_stats <- covid_preprints %>%
-  group_by(server, year) %>%
+preprint_stats <- preprints %>%
+  group_by(year, is_published) %>%
   summarise(n_pubs = n()) %>%
   ungroup()
 
-summary(pubs_dfm)
-
 # Tokenize and create a document-feature-matrix as input to stm
-pubs_dfm <- covid_preprints %>%
+pubs_dfm <- preprints %>%
   quanteda::corpus(docid_field = "doi", text_field = "abstract") %>%
   quanteda::tokens(remove_punct = TRUE,
                    remove_symbols = TRUE,
@@ -85,7 +74,7 @@ pubs_dfm <- covid_preprints %>%
                    split_hyphens = TRUE) %>% #!!!!
   quanteda::dfm() %>%
   quanteda::dfm_remove(pattern = quanteda::stopwords("english")) #%>%
-  #quanteda::dfm_wordstem() #!!!!
+  #quanteda::dfm_wordstem()
 
 dfm_stats <- textstat_frequency(pubs_dfm)
 
@@ -123,33 +112,36 @@ print(paste(Sys.time(), "Preparing topic modelling ..."))
 # quanteda::convert() internally when a DFM is passed, but in order to ensure
 # that misalignments of docs and metadata are avoided when reproducing any parts
 # of the analysis we explicitly work with the native format
-covid_stm_docs <- quanteda::convert(pubs_dfm, to = "stm")
+biodiv_stm_docs <- quanteda::convert(pubs_dfm, to = "stm")
 
-save(covid_stm_docs,
+save(biodiv_stm_docs,
      file = paste(results_dir,
                   #base_result_label,
-                  "covid_stm_docs",
+                  "biodiv_stm_docs",
                   #K,
                   ".Rdata", sep = ""))
 
 # fit the STM models with different Ks
-covid_model_K20 <- stm(documents = covid_stm_docs$documents,
-                    vocab = covid_stm_docs$vocab,
-                    data = covid_stm_docs$meta,
-                    prevalence = ~ server * s(year),
-                    K = 20,
+biodiv_model_K10 <- stm(documents = biodiv_stm_docs$documents,
+                    vocab = biodiv_stm_docs$vocab,
+                    data = biodiv_stm_docs$meta,
+                    prevalence = ~ is_published * year,
+                    K = 10,
                     #emtol = 1e-06,
                     #control = list("allow.neg.change" = FALSE),
                     verbose = TRUE,
                     seed = seed_stm)
 
-summary(covid_model_K20)
+
+summary(biodiv_model_K10)
+
+plot(biodiv_model_K10)
 
 # save the models
-save(covid_model_K20,
+save(biodiv_model_K10,
      file = paste(results_dir,
                   #base_result_label,
-                  "covid_model_K20",
+                  "biodiv_model_K10",
                   #min_K, "_", max_K,
                   ".Rdata", sep = ""))
 
@@ -162,19 +154,19 @@ print(paste(Sys.time(), "Finished fitting topic model ..."))
 
 print(paste(Sys.time(), "Evaluating effect of covariates ..."))
 
-covid_effect_K20 <- estimateEffect(1:20 ~ server * s(year),
-                                   stmobj = covid_model_K20,
-                                   metadata = covid_stm_docs$meta)
+biodiv_effect_K10 <- estimateEffect(1:10 ~ is_published * year,
+                                   stmobj = biodiv_model_K10,
+                                   metadata = biodiv_stm_docs$meta)
 
-summary(covid_effect_K20)
-
+summary(biodiv_effect_K10)
 # save to explore metrics
-save(covid_effect_K20,
+save(biodiv_effect_K10,
      file = paste(results_dir,
                   #base_result_label,
-                  "covid_effect_K20",
+                  "biodiv_effect_K10",
                   #K,
                   ".Rdata", sep = ""))
 
 
 print(paste(Sys.time(), "DONE!"))
+
