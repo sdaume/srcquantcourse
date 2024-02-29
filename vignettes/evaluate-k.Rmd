@@ -1,0 +1,112 @@
+---
+title: "Choosing the number of topics (K)"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Choosing the number of topics (K)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  collapse = TRUE,
+  cache = FALSE,
+  comment = ">#"
+)
+```
+
+
+```{r setup}
+library(srcquantcourse)
+library(ggplot2)
+library(tidyr)
+```
+
+**This is a draft!**
+
+# Covid preprints
+
+```{r, fig.height=7, fig.width=10, dpi=300}
+topicmodel_evaluations %>%
+  filter(subset_label %in% c("Covid preprints")) %>%
+  filter(!(model_metric %in% c("Converged", "Iterations"))) %>%
+  #filter(K <= 70) %>%
+  ggplot(aes(K, value, color = model_metric, group = subset_label)) +
+  scale_x_continuous(breaks = seq.int(0, 100, 10), limits = c(0, NA)) +
+  #geom_smooth(colour = "black") +
+  geom_line(show.legend = TRUE, aes(colour = subset_label)) +
+  geom_point(show.legend = TRUE, aes(colour = subset_label)) +
+  facet_wrap(~model_metric, scales = "free_y", ncol = 2) +
+  labs(x = "Number of topics (K)", y = NULL) +
+  theme_minimal() +
+  theme(panel.grid.major.x = ggplot2::element_line(colour = "#969696"),
+        panel.grid.major.y = ggplot2::element_blank(),
+        legend.position = "bottom")
+```
+
+
+# All preprints
+
+```{r, fig.height=7, fig.width=10, dpi=300}
+topicmodel_evaluations %>%
+  filter(subset_label %in% c("All preprints")) %>%
+  filter(!(model_metric %in% c("Converged", "Iterations"))) %>%
+  #filter(K <= 70) %>%
+  ggplot(aes(K, value, color = model_metric, group = subset_label)) +
+  scale_x_continuous(breaks = seq.int(0, 100, 10), limits = c(0, NA)) +
+  #geom_smooth(colour = "black") +
+  geom_line(show.legend = TRUE, aes(colour = subset_label)) +
+  geom_point(show.legend = TRUE, aes(colour = subset_label)) +
+  facet_wrap(~model_metric, scales = "free_y", ncol = 2) +
+  labs(x = "Number of topics (K)", y = NULL) +
+  theme_minimal() +
+  theme(panel.grid.major.x = ggplot2::element_line(colour = "#969696"),
+        panel.grid.major.y = ggplot2::element_blank(),
+        legend.position = "bottom")
+```
+
+# ML/AI subset
+
+```{r, fig.height=7, fig.width=10, dpi=300}
+topicmodel_evaluations %>%
+  filter(subset_label %in% c("ML/AI preprints")) %>%
+  filter(!(model_metric %in% c("Converged", "Iterations"))) %>%
+  #filter(K <= 70) %>%
+  ggplot(aes(K, value, color = model_metric, group = subset_label)) +
+  scale_x_continuous(breaks = seq.int(0, 100, 10), limits = c(0, NA)) +
+  #geom_smooth(colour = "black") +
+  geom_line(show.legend = TRUE, aes(colour = subset_label)) +
+  geom_point(show.legend = TRUE, aes(colour = subset_label)) +
+  facet_wrap(~model_metric, scales = "free_y", ncol = 2) +
+  labs(x = "Number of topics (K)", y = NULL) +
+  theme_minimal() +
+  theme(panel.grid.major.x = ggplot2::element_line(colour = "#969696"),
+        panel.grid.major.y = ggplot2::element_blank(),
+        legend.position = "bottom")
+```
+
+
+# Miscellaneous subsets
+
+```{r, fig.height=7, fig.width=10, dpi=300}
+topicmodel_evaluations %>%
+  filter(subset_label %in% c("SES preprints", 
+                             #"ML/AI preprints",
+                             "Biodiversity preprints")) %>%
+  filter(!(model_metric %in% c("Converged", "Iterations"))) %>%
+  #filter(K <= 70) %>%
+  ggplot(aes(K, value, color = model_metric, group = subset_label)) +
+  scale_x_continuous(breaks = seq.int(0, 100, 10), limits = c(0, NA)) +
+  #geom_smooth(colour = "black") +
+  geom_line(show.legend = TRUE, aes(colour = subset_label)) +
+  geom_point(show.legend = TRUE, aes(colour = subset_label)) +
+  facet_wrap(~model_metric, scales = "free_y", ncol = 2) +
+  labs(x = "Number of topics (K)", y = NULL) +
+  theme_minimal() +
+  theme(panel.grid.major.x = ggplot2::element_line(colour = "#969696"),
+        panel.grid.major.y = ggplot2::element_blank(),
+        legend.position = "bottom")
+```
