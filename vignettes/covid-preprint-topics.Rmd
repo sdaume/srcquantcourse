@@ -38,7 +38,7 @@ library(ggplot2)
 This is an example topic modelling analysis using the *Structural Topic Model (STM)* [@RobertsStewart_et_2019_JSTATS_91] to explore a subset of [bioRxiv](https://www.biorxiv.org/) and [medRxiv](https://www.medrxiv.org/) preprints covering research related to *Covid-19*. 
 The medRxiv website actually provides access to a dedicated collection of preprints on both medRxix and bioRxiv covering [COVID-19 SARS-CoV-2]((https://connect.medrxiv.org/relate/content/181)). Here we will however work with the whole preprint collection and create a subset using keyword matching. 
 
-Note that this analysis is intended to illustrate the method of *topic modeling*. A complete analysis of the sample preprints would be more detailed and would like feature a larger number of topics.
+Note that this analysis is intended to illustrate the method of *topic modeling*. A complete analysis of the sample preprints would be more detailed and would likely feature a larger number of topics.
 
 This document assumes some familiarity with *Structural Topic Modeling (STM)*. Please consult the `stm` package vignette [@RobertsStewart_et_2019_JSTATS_91] for background. 
 
