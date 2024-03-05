@@ -62,11 +62,11 @@ Since this approach is not deterministic, different executions with this setting
 
 ## Comparing topic models with different *K*s
 
-The `stm` package provides the `searchK()`function, which allows to run multiple model fits with different `K`s and then returns the different measures for model fit. Here we use instead an alternative approach employing the `future` and `furrr` packages^[See also this [blog post](https://juliasilge.com/blog/evaluating-stm/) for a great overview.].
+A more detailed (and resource-intensive approach) is to fit models with multiple options of *K*, and evaluate the best or most suitable choice based on different measures for goodness of fit. In the following, we will use four metrics --- *held-out likelihood* [@WallachMurray_et_2009_ICML_Conf], *residual dispersion* [@Taddy_2012_AIS_Conf], *semantic coherence* [@MimnoWallach_et_2011_EMNLP_Conf] and *exclusivity* [@RobertsStewart_et_2019_JSTATS_91] --- to assess the quality of topic models with different *K*s. 
 
-A more detailed (and resource-intensive approach) is to fit models with multiple options of *K*, and evaluate the best or most suitable choice based on different measures for goodness of fit. In the following, we will use four metrics --- *held-out likelihood* [@WallachMurray_et_2009_ICML_Conf], *residual dispersion* [@Taddy_2012_AIS_Conf], *semantic coherence* [@MimnoWallach_et_2011_EMNLP_Conf] and *exclusivity* [@RobertsStewart_et_2019_JSTATS_91] --- to assess the quality of topic models with different *K*s^[See also [this blog by Julia Silge](https://juliasilge.com/blog/evaluating-stm/) for a good overview of evaluating topic models with `stm`.]. 
+The `stm` package provides the `searchK()`function, which allows to run multiple model fits with different `K`s and then returns the different measures for model fit. Here we use instead an alternative approach employing the `future` and `furrr` packages^[See also [this blog by Julia Silge](https://juliasilge.com/blog/evaluating-stm/) for a good overview of evaluating topic models with `stm`.].
 
-One of those, *held-out likelihood*, requires an evaluation of a topic model against an unseen data set. We follow the default approach suggested by  [@RobertsStewart_et_2019_JSTATS_91] and use `stm`'s `make.heldout` method to split the  document corpus (transformed in a document-feature matrix) in a training and a testing set --- models are fit for the training set and held-out likelihood is then evaluated against the testing set.
+*Held-out likelihood*, requires an evaluation of a topic model against an unseen data set. We follow the default approach suggested by  [@RobertsStewart_et_2019_JSTATS_91] and use `stm`'s `make.heldout` method to split the  document corpus (transformed in a document-feature matrix) in a training and a testing set --- models are fit for the training set and held-out likelihood is then evaluated against the testing set.
 
 ```{r, eval=FALSE, echo=TRUE}
 library(stm)
@@ -226,7 +226,7 @@ metrics_K5_100 %>%
     facet_wrap(~K, ncol = 3) 
 ```
 
-```{r echo=FALSE}
+```{r echo=FALSE, out.width="100%"}
 knitr::include_graphics("per_topic_metrics.png")
 ```
 
