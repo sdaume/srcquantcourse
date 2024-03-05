@@ -93,7 +93,7 @@ SARS-CoV-2</a>. Here we will however work with the whole preprint
 collection and create a subset using keyword matching.</p>
 <p>Note that this analysis is intended to illustrate the method of
 <em>topic modeling</em>. A complete analysis of the sample preprints
-would be more detailed and would like feature a larger number of
+would be more detailed and would likely feature a larger number of
 topics.</p>
 <p>This document assumes some familiarity with <em>Structural Topic
 Modeling (STM)</em>. Please consult the <code>stm</code> package
@@ -663,14 +663,14 @@ selected topics.</p>
 <span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
 <span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
 <span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                          Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.0234719  0.0037166   6.315 2.73e-10 ***</span></span>
-<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.1239381  0.0043477  28.507  &lt; 2e-16 ***</span></span>
-<span id="cb20-15"><a href="#cb20-15" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.0022752  0.0147584  -0.154    0.877    </span></span>
-<span id="cb20-16"><a href="#cb20-16" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.0003647  0.0154166  -0.024    0.981    </span></span>
-<span id="cb20-17"><a href="#cb20-17" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.0082955  0.0067326   1.232    0.218    </span></span>
-<span id="cb20-18"><a href="#cb20-18" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.0691671  0.0173325  -3.991 6.61e-05 ***</span></span>
-<span id="cb20-19"><a href="#cb20-19" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.0968968  0.0191428  -5.062 4.18e-07 ***</span></span>
-<span id="cb20-20"><a href="#cb20-20" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.0705290  0.0084830  -8.314  &lt; 2e-16 ***</span></span>
+<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.0234422  0.0037119   6.315 2.73e-10 ***</span></span>
+<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.1240098  0.0043722  28.363  &lt; 2e-16 ***</span></span>
+<span id="cb20-15"><a href="#cb20-15" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.0018965  0.0145932  -0.130    0.897    </span></span>
+<span id="cb20-16"><a href="#cb20-16" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.0006633  0.0154418  -0.043    0.966    </span></span>
+<span id="cb20-17"><a href="#cb20-17" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.0084478  0.0067452   1.252    0.210    </span></span>
+<span id="cb20-18"><a href="#cb20-18" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.0698026  0.0172523  -4.046 5.22e-05 ***</span></span>
+<span id="cb20-19"><a href="#cb20-19" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.0965327  0.0190507  -5.067 4.06e-07 ***</span></span>
+<span id="cb20-20"><a href="#cb20-20" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.0706334  0.0085722  -8.240  &lt; 2e-16 ***</span></span>
 <span id="cb20-21"><a href="#cb20-21" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
 <span id="cb20-22"><a href="#cb20-22" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb20-23"><a href="#cb20-23" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
@@ -679,14 +679,14 @@ selected topics.</p>
 <span id="cb20-26"><a href="#cb20-26" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
 <span id="cb20-27"><a href="#cb20-27" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
 <span id="cb20-28"><a href="#cb20-28" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-29"><a href="#cb20-29" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.098658   0.002891  34.128  &lt; 2e-16 ***</span></span>
-<span id="cb20-30"><a href="#cb20-30" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.085945   0.003160 -27.196  &lt; 2e-16 ***</span></span>
-<span id="cb20-31"><a href="#cb20-31" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.019987   0.011326  -1.765   0.0776 .  </span></span>
-<span id="cb20-32"><a href="#cb20-32" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.011235   0.013453  -0.835   0.4036    </span></span>
-<span id="cb20-33"><a href="#cb20-33" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.028620   0.004595  -6.228 4.77e-10 ***</span></span>
-<span id="cb20-34"><a href="#cb20-34" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.021613   0.012586   1.717   0.0860 .  </span></span>
-<span id="cb20-35"><a href="#cb20-35" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.008234   0.014412   0.571   0.5678    </span></span>
-<span id="cb20-36"><a href="#cb20-36" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.030409   0.005326   5.710 1.14e-08 ***</span></span>
+<span id="cb20-29"><a href="#cb20-29" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.098621   0.002880  34.248  &lt; 2e-16 ***</span></span>
+<span id="cb20-30"><a href="#cb20-30" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.085905   0.003162 -27.172  &lt; 2e-16 ***</span></span>
+<span id="cb20-31"><a href="#cb20-31" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.019811   0.011234  -1.764   0.0778 .  </span></span>
+<span id="cb20-32"><a href="#cb20-32" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.011334   0.013412  -0.845   0.3981    </span></span>
+<span id="cb20-33"><a href="#cb20-33" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.028582   0.004534  -6.304 2.93e-10 ***</span></span>
+<span id="cb20-34"><a href="#cb20-34" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.021456   0.012585   1.705   0.0882 .  </span></span>
+<span id="cb20-35"><a href="#cb20-35" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.008355   0.014405   0.580   0.5619    </span></span>
+<span id="cb20-36"><a href="#cb20-36" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.030360   0.005282   5.748 9.13e-09 ***</span></span>
 <span id="cb20-37"><a href="#cb20-37" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
 <span id="cb20-38"><a href="#cb20-38" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb20-39"><a href="#cb20-39" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
@@ -695,14 +695,14 @@ selected topics.</p>
 <span id="cb20-42"><a href="#cb20-42" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
 <span id="cb20-43"><a href="#cb20-43" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
 <span id="cb20-44"><a href="#cb20-44" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-45"><a href="#cb20-45" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.011093   0.002806   3.953 7.74e-05 ***</span></span>
-<span id="cb20-46"><a href="#cb20-46" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.053926   0.003296  16.362  &lt; 2e-16 ***</span></span>
-<span id="cb20-47"><a href="#cb20-47" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.002506   0.011290  -0.222    0.824    </span></span>
-<span id="cb20-48"><a href="#cb20-48" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.002072   0.011794  -0.176    0.861    </span></span>
-<span id="cb20-49"><a href="#cb20-49" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.001220   0.004882   0.250    0.803    </span></span>
-<span id="cb20-50"><a href="#cb20-50" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.014935   0.013706   1.090    0.276    </span></span>
-<span id="cb20-51"><a href="#cb20-51" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.014325   0.014927   0.960    0.337    </span></span>
-<span id="cb20-52"><a href="#cb20-52" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.029830   0.006526   4.571 4.88e-06 ***</span></span>
+<span id="cb20-45"><a href="#cb20-45" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.011057   0.002818   3.924 8.71e-05 ***</span></span>
+<span id="cb20-46"><a href="#cb20-46" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.053945   0.003318  16.257  &lt; 2e-16 ***</span></span>
+<span id="cb20-47"><a href="#cb20-47" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.002421   0.011264  -0.215    0.830    </span></span>
+<span id="cb20-48"><a href="#cb20-48" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.002147   0.011826  -0.182    0.856    </span></span>
+<span id="cb20-49"><a href="#cb20-49" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.001219   0.004870   0.250    0.802    </span></span>
+<span id="cb20-50"><a href="#cb20-50" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.014874   0.013813   1.077    0.282    </span></span>
+<span id="cb20-51"><a href="#cb20-51" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.014352   0.015013   0.956    0.339    </span></span>
+<span id="cb20-52"><a href="#cb20-52" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.029854   0.006547   4.560 5.14e-06 ***</span></span>
 <span id="cb20-53"><a href="#cb20-53" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
 <span id="cb20-54"><a href="#cb20-54" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb20-55"><a href="#cb20-55" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
@@ -711,14 +711,14 @@ selected topics.</p>
 <span id="cb20-58"><a href="#cb20-58" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
 <span id="cb20-59"><a href="#cb20-59" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
 <span id="cb20-60"><a href="#cb20-60" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-61"><a href="#cb20-61" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.008914   0.003293   2.707  0.00679 ** </span></span>
-<span id="cb20-62"><a href="#cb20-62" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.057676   0.003871  14.899  &lt; 2e-16 ***</span></span>
-<span id="cb20-63"><a href="#cb20-63" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.004607   0.013407   0.344  0.73113    </span></span>
-<span id="cb20-64"><a href="#cb20-64" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.005204   0.013796  -0.377  0.70600    </span></span>
-<span id="cb20-65"><a href="#cb20-65" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.004447   0.005871   0.758  0.44873    </span></span>
-<span id="cb20-66"><a href="#cb20-66" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.020370   0.016462   1.237  0.21595    </span></span>
-<span id="cb20-67"><a href="#cb20-67" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.003930   0.017894  -0.220  0.82617    </span></span>
-<span id="cb20-68"><a href="#cb20-68" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.020345   0.007764   2.620  0.00879 ** </span></span>
+<span id="cb20-61"><a href="#cb20-61" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.008855   0.003255   2.720  0.00653 ** </span></span>
+<span id="cb20-62"><a href="#cb20-62" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.057713   0.003856  14.967  &lt; 2e-16 ***</span></span>
+<span id="cb20-63"><a href="#cb20-63" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.004747   0.013379   0.355  0.72272    </span></span>
+<span id="cb20-64"><a href="#cb20-64" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.005224   0.014012  -0.373  0.70929    </span></span>
+<span id="cb20-65"><a href="#cb20-65" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.004535   0.005764   0.787  0.43147    </span></span>
+<span id="cb20-66"><a href="#cb20-66" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.020439   0.016403   1.246  0.21276    </span></span>
+<span id="cb20-67"><a href="#cb20-67" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.004076   0.017949  -0.227  0.82037    </span></span>
+<span id="cb20-68"><a href="#cb20-68" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.020302   0.007718   2.630  0.00853 ** </span></span>
 <span id="cb20-69"><a href="#cb20-69" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
 <span id="cb20-70"><a href="#cb20-70" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb20-71"><a href="#cb20-71" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
@@ -727,14 +727,14 @@ selected topics.</p>
 <span id="cb20-74"><a href="#cb20-74" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
 <span id="cb20-75"><a href="#cb20-75" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
 <span id="cb20-76"><a href="#cb20-76" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                          Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-77"><a href="#cb20-77" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             4.960e-03  2.361e-03   2.101   0.0356 *  </span></span>
-<span id="cb20-78"><a href="#cb20-78" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           5.425e-02  2.801e-03  19.366   &lt;2e-16 ***</span></span>
-<span id="cb20-79"><a href="#cb20-79" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -8.239e-04  9.458e-03  -0.087   0.9306    </span></span>
-<span id="cb20-80"><a href="#cb20-80" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2                7.381e-05  9.913e-03   0.007   0.9941    </span></span>
-<span id="cb20-81"><a href="#cb20-81" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                1.060e-03  4.166e-03   0.254   0.7992    </span></span>
-<span id="cb20-82"><a href="#cb20-82" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  2.613e-02  1.158e-02   2.256   0.0241 *  </span></span>
-<span id="cb20-83"><a href="#cb20-83" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -1.667e-03  1.216e-02  -0.137   0.8910    </span></span>
-<span id="cb20-84"><a href="#cb20-84" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -8.480e-03  5.381e-03  -1.576   0.1150    </span></span>
+<span id="cb20-77"><a href="#cb20-77" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.0049431  0.0023141   2.136   0.0327 *  </span></span>
+<span id="cb20-78"><a href="#cb20-78" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.0542647  0.0027800  19.519   &lt;2e-16 ***</span></span>
+<span id="cb20-79"><a href="#cb20-79" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.0008035  0.0093291  -0.086   0.9314    </span></span>
+<span id="cb20-80"><a href="#cb20-80" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2                0.0001360  0.0098696   0.014   0.9890    </span></span>
+<span id="cb20-81"><a href="#cb20-81" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.0010645  0.0041225   0.258   0.7962    </span></span>
+<span id="cb20-82"><a href="#cb20-82" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.0260905  0.0114787   2.273   0.0230 *  </span></span>
+<span id="cb20-83"><a href="#cb20-83" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.0018036  0.0121198  -0.149   0.8817    </span></span>
+<span id="cb20-84"><a href="#cb20-84" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.0084554  0.0053608  -1.577   0.1147    </span></span>
 <span id="cb20-85"><a href="#cb20-85" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
 <span id="cb20-86"><a href="#cb20-86" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb20-87"><a href="#cb20-87" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
@@ -743,14 +743,14 @@ selected topics.</p>
 <span id="cb20-90"><a href="#cb20-90" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
 <span id="cb20-91"><a href="#cb20-91" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
 <span id="cb20-92"><a href="#cb20-92" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-93"><a href="#cb20-93" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.148609   0.003827  38.830  &lt; 2e-16 ***</span></span>
-<span id="cb20-94"><a href="#cb20-94" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.115780   0.004182 -27.683  &lt; 2e-16 ***</span></span>
-<span id="cb20-95"><a href="#cb20-95" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.021079   0.013439  -1.569   0.1168    </span></span>
-<span id="cb20-96"><a href="#cb20-96" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.049226   0.012082  -4.074 4.63e-05 ***</span></span>
-<span id="cb20-97"><a href="#cb20-97" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.043796   0.006027  -7.266 3.78e-13 ***</span></span>
-<span id="cb20-98"><a href="#cb20-98" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.005797   0.014923   0.388   0.6977    </span></span>
-<span id="cb20-99"><a href="#cb20-99" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.035470   0.013870   2.557   0.0106 *  </span></span>
-<span id="cb20-100"><a href="#cb20-100" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.031055   0.006928   4.482 7.41e-06 ***</span></span>
+<span id="cb20-93"><a href="#cb20-93" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.148611   0.003832  38.781  &lt; 2e-16 ***</span></span>
+<span id="cb20-94"><a href="#cb20-94" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.115788   0.004216 -27.463  &lt; 2e-16 ***</span></span>
+<span id="cb20-95"><a href="#cb20-95" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.020966   0.013447  -1.559  0.11896    </span></span>
+<span id="cb20-96"><a href="#cb20-96" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.049344   0.012049  -4.095 4.23e-05 ***</span></span>
+<span id="cb20-97"><a href="#cb20-97" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.043734   0.006033  -7.250 4.28e-13 ***</span></span>
+<span id="cb20-98"><a href="#cb20-98" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.005796   0.015050   0.385  0.70016    </span></span>
+<span id="cb20-99"><a href="#cb20-99" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.035558   0.013754   2.585  0.00973 ** </span></span>
+<span id="cb20-100"><a href="#cb20-100" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.031001   0.006958   4.456 8.39e-06 ***</span></span>
 <span id="cb20-101"><a href="#cb20-101" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
 <span id="cb20-102"><a href="#cb20-102" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb20-103"><a href="#cb20-103" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
@@ -759,14 +759,14 @@ selected topics.</p>
 <span id="cb20-106"><a href="#cb20-106" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
 <span id="cb20-107"><a href="#cb20-107" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
 <span id="cb20-108"><a href="#cb20-108" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-109"><a href="#cb20-109" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.010638   0.002948   3.608 0.000309 ***</span></span>
-<span id="cb20-110"><a href="#cb20-110" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.086116   0.003501  24.595  &lt; 2e-16 ***</span></span>
-<span id="cb20-111"><a href="#cb20-111" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.004010   0.011740  -0.342 0.732686    </span></span>
-<span id="cb20-112"><a href="#cb20-112" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.007740   0.012402  -0.624 0.532569    </span></span>
-<span id="cb20-113"><a href="#cb20-113" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.003281   0.005155  -0.636 0.524541    </span></span>
-<span id="cb20-114"><a href="#cb20-114" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.049330   0.014762  -3.342 0.000834 ***</span></span>
-<span id="cb20-115"><a href="#cb20-115" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.019767   0.015955  -1.239 0.215378    </span></span>
-<span id="cb20-116"><a href="#cb20-116" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.038540   0.006526  -5.906 3.55e-09 ***</span></span>
+<span id="cb20-109"><a href="#cb20-109" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.010731   0.002909   3.689 0.000226 ***</span></span>
+<span id="cb20-110"><a href="#cb20-110" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.086029   0.003486  24.682  &lt; 2e-16 ***</span></span>
+<span id="cb20-111"><a href="#cb20-111" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.004067   0.011729  -0.347 0.728821    </span></span>
+<span id="cb20-112"><a href="#cb20-112" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.007804   0.012242  -0.637 0.523823    </span></span>
+<span id="cb20-113"><a href="#cb20-113" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.003467   0.005173  -0.670 0.502721    </span></span>
+<span id="cb20-114"><a href="#cb20-114" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.049350   0.014597  -3.381 0.000724 ***</span></span>
+<span id="cb20-115"><a href="#cb20-115" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.019646   0.015738  -1.248 0.211948    </span></span>
+<span id="cb20-116"><a href="#cb20-116" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.038419   0.006563  -5.854 4.84e-09 ***</span></span>
 <span id="cb20-117"><a href="#cb20-117" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
 <span id="cb20-118"><a href="#cb20-118" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb20-119"><a href="#cb20-119" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
@@ -775,14 +775,14 @@ selected topics.</p>
 <span id="cb20-122"><a href="#cb20-122" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
 <span id="cb20-123"><a href="#cb20-123" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
 <span id="cb20-124"><a href="#cb20-124" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-125"><a href="#cb20-125" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.027287   0.003034   8.994  &lt; 2e-16 ***</span></span>
-<span id="cb20-126"><a href="#cb20-126" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.108650   0.003572  30.415  &lt; 2e-16 ***</span></span>
-<span id="cb20-127"><a href="#cb20-127" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.012962   0.012383  -1.047  0.29522    </span></span>
-<span id="cb20-128"><a href="#cb20-128" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.018376   0.012456  -1.475  0.14015    </span></span>
-<span id="cb20-129"><a href="#cb20-129" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.017099   0.005203  -3.287  0.00102 ** </span></span>
-<span id="cb20-130"><a href="#cb20-130" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.088312   0.014795  -5.969 2.41e-09 ***</span></span>
-<span id="cb20-131"><a href="#cb20-131" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.046526   0.015270  -3.047  0.00231 ** </span></span>
-<span id="cb20-132"><a href="#cb20-132" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.060195   0.006494  -9.270  &lt; 2e-16 ***</span></span>
+<span id="cb20-125"><a href="#cb20-125" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.027223   0.003041   8.953  &lt; 2e-16 ***</span></span>
+<span id="cb20-126"><a href="#cb20-126" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.108750   0.003573  30.433  &lt; 2e-16 ***</span></span>
+<span id="cb20-127"><a href="#cb20-127" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.012839   0.012300  -1.044  0.29656    </span></span>
+<span id="cb20-128"><a href="#cb20-128" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.018390   0.012507  -1.470  0.14146    </span></span>
+<span id="cb20-129"><a href="#cb20-129" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.017006   0.005233  -3.250  0.00116 ** </span></span>
+<span id="cb20-130"><a href="#cb20-130" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.088589   0.014831  -5.973 2.35e-09 ***</span></span>
+<span id="cb20-131"><a href="#cb20-131" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.046504   0.015517  -2.997  0.00273 ** </span></span>
+<span id="cb20-132"><a href="#cb20-132" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.060293   0.006524  -9.242  &lt; 2e-16 ***</span></span>
 <span id="cb20-133"><a href="#cb20-133" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
 <span id="cb20-134"><a href="#cb20-134" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb20-135"><a href="#cb20-135" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
@@ -791,14 +791,14 @@ selected topics.</p>
 <span id="cb20-138"><a href="#cb20-138" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
 <span id="cb20-139"><a href="#cb20-139" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
 <span id="cb20-140"><a href="#cb20-140" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-141"><a href="#cb20-141" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.170514   0.004557  37.418  &lt; 2e-16 ***</span></span>
-<span id="cb20-142"><a href="#cb20-142" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.163993   0.004776 -34.340  &lt; 2e-16 ***</span></span>
-<span id="cb20-143"><a href="#cb20-143" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.017997   0.019100   0.942   0.3461    </span></span>
-<span id="cb20-144"><a href="#cb20-144" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.034745   0.020130  -1.726   0.0844 .  </span></span>
-<span id="cb20-145"><a href="#cb20-145" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.027992   0.006508  -4.301 1.70e-05 ***</span></span>
-<span id="cb20-146"><a href="#cb20-146" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.010881   0.020203  -0.539   0.5902    </span></span>
-<span id="cb20-147"><a href="#cb20-147" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.033180   0.021912   1.514   0.1300    </span></span>
-<span id="cb20-148"><a href="#cb20-148" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.027906   0.007096   3.932 8.43e-05 ***</span></span>
+<span id="cb20-141"><a href="#cb20-141" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.170476   0.004600  37.062  &lt; 2e-16 ***</span></span>
+<span id="cb20-142"><a href="#cb20-142" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.163921   0.004808 -34.095  &lt; 2e-16 ***</span></span>
+<span id="cb20-143"><a href="#cb20-143" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.018157   0.018930   0.959 0.337487    </span></span>
+<span id="cb20-144"><a href="#cb20-144" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.034836   0.020116  -1.732 0.083329 .  </span></span>
+<span id="cb20-145"><a href="#cb20-145" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.027901   0.006609  -4.222 2.43e-05 ***</span></span>
+<span id="cb20-146"><a href="#cb20-146" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.010967   0.020030  -0.548 0.584000    </span></span>
+<span id="cb20-147"><a href="#cb20-147" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.033085   0.021894   1.511 0.130763    </span></span>
+<span id="cb20-148"><a href="#cb20-148" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.027844   0.007205   3.865 0.000111 ***</span></span>
 <span id="cb20-149"><a href="#cb20-149" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
 <span id="cb20-150"><a href="#cb20-150" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb20-151"><a href="#cb20-151" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
@@ -807,14 +807,14 @@ selected topics.</p>
 <span id="cb20-154"><a href="#cb20-154" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
 <span id="cb20-155"><a href="#cb20-155" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
 <span id="cb20-156"><a href="#cb20-156" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                          Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-157"><a href="#cb20-157" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.0447093  0.0033275  13.437  &lt; 2e-16 ***</span></span>
-<span id="cb20-158"><a href="#cb20-158" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.0117892  0.0036085   3.267  0.00109 ** </span></span>
-<span id="cb20-159"><a href="#cb20-159" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.0042065  0.0145117   0.290  0.77192    </span></span>
-<span id="cb20-160"><a href="#cb20-160" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2                0.0002803  0.0130954   0.021  0.98292    </span></span>
-<span id="cb20-161"><a href="#cb20-161" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.0261672  0.0058179   4.498 6.89e-06 ***</span></span>
-<span id="cb20-162"><a href="#cb20-162" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.0177231  0.0161711  -1.096  0.27310    </span></span>
-<span id="cb20-163"><a href="#cb20-163" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.0305140  0.0151908  -2.009  0.04458 *  </span></span>
-<span id="cb20-164"><a href="#cb20-164" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.0409332  0.0069885  -5.857 4.76e-09 ***</span></span>
+<span id="cb20-157"><a href="#cb20-157" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.0447400  0.0033716  13.269  &lt; 2e-16 ***</span></span>
+<span id="cb20-158"><a href="#cb20-158" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.0117470  0.0036653   3.205  0.00135 ** </span></span>
+<span id="cb20-159"><a href="#cb20-159" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.0042057  0.0147040   0.286  0.77486    </span></span>
+<span id="cb20-160"><a href="#cb20-160" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2                0.0002279  0.0132522   0.017  0.98628    </span></span>
+<span id="cb20-161"><a href="#cb20-161" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.0261771  0.0058303   4.490 7.16e-06 ***</span></span>
+<span id="cb20-162"><a href="#cb20-162" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.0177331  0.0162815  -1.089  0.27609    </span></span>
+<span id="cb20-163"><a href="#cb20-163" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.0303798  0.0155210  -1.957  0.05032 .  </span></span>
+<span id="cb20-164"><a href="#cb20-164" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.0408580  0.0069894  -5.846 5.10e-09 ***</span></span>
 <span id="cb20-165"><a href="#cb20-165" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
 <span id="cb20-166"><a href="#cb20-166" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb20-167"><a href="#cb20-167" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
@@ -823,14 +823,14 @@ selected topics.</p>
 <span id="cb20-170"><a href="#cb20-170" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
 <span id="cb20-171"><a href="#cb20-171" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
 <span id="cb20-172"><a href="#cb20-172" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                        Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-173"><a href="#cb20-173" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)            0.005076   0.002329   2.180  0.02928 *  </span></span>
-<span id="cb20-174"><a href="#cb20-174" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          0.008193   0.002685   3.051  0.00228 ** </span></span>
-<span id="cb20-175"><a href="#cb20-175" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               0.009869   0.009926   0.994  0.32007    </span></span>
-<span id="cb20-176"><a href="#cb20-176" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               0.010167   0.010189   0.998  0.31836    </span></span>
-<span id="cb20-177"><a href="#cb20-177" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               0.006416   0.004248   1.511  0.13091    </span></span>
-<span id="cb20-178"><a href="#cb20-178" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 0.057244   0.011704   4.891 1.01e-06 ***</span></span>
-<span id="cb20-179"><a href="#cb20-179" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 0.073526   0.012475   5.894 3.81e-09 ***</span></span>
-<span id="cb20-180"><a href="#cb20-180" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 0.047038   0.005914   7.954 1.87e-15 ***</span></span>
+<span id="cb20-173"><a href="#cb20-173" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)            0.005059   0.002345   2.157  0.03103 *  </span></span>
+<span id="cb20-174"><a href="#cb20-174" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          0.008221   0.002690   3.056  0.00225 ** </span></span>
+<span id="cb20-175"><a href="#cb20-175" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               0.009920   0.009803   1.012  0.31158    </span></span>
+<span id="cb20-176"><a href="#cb20-176" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               0.010185   0.010147   1.004  0.31552    </span></span>
+<span id="cb20-177"><a href="#cb20-177" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               0.006402   0.004269   1.500  0.13373    </span></span>
+<span id="cb20-178"><a href="#cb20-178" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 0.057139   0.011532   4.955 7.28e-07 ***</span></span>
+<span id="cb20-179"><a href="#cb20-179" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 0.073585   0.012431   5.919 3.27e-09 ***</span></span>
+<span id="cb20-180"><a href="#cb20-180" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 0.047008   0.005897   7.972 1.62e-15 ***</span></span>
 <span id="cb20-181"><a href="#cb20-181" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
 <span id="cb20-182"><a href="#cb20-182" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb20-183"><a href="#cb20-183" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
@@ -839,14 +839,14 @@ selected topics.</p>
 <span id="cb20-186"><a href="#cb20-186" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
 <span id="cb20-187"><a href="#cb20-187" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
 <span id="cb20-188"><a href="#cb20-188" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-189"><a href="#cb20-189" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.022005   0.002842   7.742 1.01e-14 ***</span></span>
-<span id="cb20-190"><a href="#cb20-190" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.041928   0.003402  12.325  &lt; 2e-16 ***</span></span>
-<span id="cb20-191"><a href="#cb20-191" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.008509   0.011263  -0.756    0.450    </span></span>
-<span id="cb20-192"><a href="#cb20-192" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.005858   0.012243  -0.479    0.632    </span></span>
-<span id="cb20-193"><a href="#cb20-193" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.002646   0.004882  -0.542    0.588    </span></span>
-<span id="cb20-194"><a href="#cb20-194" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.006689   0.013816  -0.484    0.628    </span></span>
-<span id="cb20-195"><a href="#cb20-195" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.009547   0.015679   0.609    0.543    </span></span>
-<span id="cb20-196"><a href="#cb20-196" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.034847   0.006434   5.416 6.15e-08 ***</span></span>
+<span id="cb20-189"><a href="#cb20-189" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.021999   0.002835   7.760 8.79e-15 ***</span></span>
+<span id="cb20-190"><a href="#cb20-190" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.041942   0.003399  12.338  &lt; 2e-16 ***</span></span>
+<span id="cb20-191"><a href="#cb20-191" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.008371   0.011200  -0.747    0.455    </span></span>
+<span id="cb20-192"><a href="#cb20-192" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.006053   0.012208  -0.496    0.620    </span></span>
+<span id="cb20-193"><a href="#cb20-193" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.002534   0.004891  -0.518    0.604    </span></span>
+<span id="cb20-194"><a href="#cb20-194" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.006894   0.013834  -0.498    0.618    </span></span>
+<span id="cb20-195"><a href="#cb20-195" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.009740   0.015810   0.616    0.538    </span></span>
+<span id="cb20-196"><a href="#cb20-196" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.034780   0.006473   5.373 7.78e-08 ***</span></span>
 <span id="cb20-197"><a href="#cb20-197" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
 <span id="cb20-198"><a href="#cb20-198" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb20-199"><a href="#cb20-199" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
@@ -855,14 +855,14 @@ selected topics.</p>
 <span id="cb20-202"><a href="#cb20-202" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
 <span id="cb20-203"><a href="#cb20-203" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
 <span id="cb20-204"><a href="#cb20-204" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-205"><a href="#cb20-205" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.104392   0.003136  33.291  &lt; 2e-16 ***</span></span>
-<span id="cb20-206"><a href="#cb20-206" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.086376   0.003435 -25.144  &lt; 2e-16 ***</span></span>
-<span id="cb20-207"><a href="#cb20-207" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.031695   0.015408  -2.057   0.0397 *  </span></span>
-<span id="cb20-208"><a href="#cb20-208" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.027882   0.015087  -1.848   0.0646 .  </span></span>
-<span id="cb20-209"><a href="#cb20-209" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.023379   0.005609  -4.168 3.08e-05 ***</span></span>
-<span id="cb20-210"><a href="#cb20-210" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.078014   0.017859   4.368 1.26e-05 ***</span></span>
-<span id="cb20-211"><a href="#cb20-211" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.028083   0.016916   1.660   0.0969 .  </span></span>
-<span id="cb20-212"><a href="#cb20-212" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.041212   0.006676   6.173 6.79e-10 ***</span></span>
+<span id="cb20-205"><a href="#cb20-205" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.104366   0.003161  33.015  &lt; 2e-16 ***</span></span>
+<span id="cb20-206"><a href="#cb20-206" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.086341   0.003438 -25.114  &lt; 2e-16 ***</span></span>
+<span id="cb20-207"><a href="#cb20-207" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.031675   0.015431  -2.053   0.0401 *  </span></span>
+<span id="cb20-208"><a href="#cb20-208" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.027877   0.015102  -1.846   0.0649 .  </span></span>
+<span id="cb20-209"><a href="#cb20-209" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.023329   0.005664  -4.119 3.82e-05 ***</span></span>
+<span id="cb20-210"><a href="#cb20-210" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.077868   0.017827   4.368 1.26e-05 ***</span></span>
+<span id="cb20-211"><a href="#cb20-211" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.028212   0.016849   1.674   0.0941 .  </span></span>
+<span id="cb20-212"><a href="#cb20-212" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.041081   0.006614   6.211 5.34e-10 ***</span></span>
 <span id="cb20-213"><a href="#cb20-213" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
 <span id="cb20-214"><a href="#cb20-214" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb20-215"><a href="#cb20-215" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
@@ -871,14 +871,14 @@ selected topics.</p>
 <span id="cb20-218"><a href="#cb20-218" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
 <span id="cb20-219"><a href="#cb20-219" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
 <span id="cb20-220"><a href="#cb20-220" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-221"><a href="#cb20-221" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.124587   0.003420  36.433   &lt;2e-16 ***</span></span>
-<span id="cb20-222"><a href="#cb20-222" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.112707   0.003638 -30.979   &lt;2e-16 ***</span></span>
-<span id="cb20-223"><a href="#cb20-223" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.004331   0.015037   0.288    0.773    </span></span>
-<span id="cb20-224"><a href="#cb20-224" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.007535   0.015734  -0.479    0.632    </span></span>
-<span id="cb20-225"><a href="#cb20-225" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.007555   0.006294   1.200    0.230    </span></span>
-<span id="cb20-226"><a href="#cb20-226" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.003295   0.015962  -0.206    0.836    </span></span>
-<span id="cb20-227"><a href="#cb20-227" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.005338   0.016746   0.319    0.750    </span></span>
-<span id="cb20-228"><a href="#cb20-228" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.005154   0.007122  -0.724    0.469    </span></span>
+<span id="cb20-221"><a href="#cb20-221" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.124566   0.003392  36.722   &lt;2e-16 ***</span></span>
+<span id="cb20-222"><a href="#cb20-222" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.112684   0.003605 -31.259   &lt;2e-16 ***</span></span>
+<span id="cb20-223"><a href="#cb20-223" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.004293   0.015015   0.286    0.775    </span></span>
+<span id="cb20-224"><a href="#cb20-224" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.007425   0.015757  -0.471    0.638    </span></span>
+<span id="cb20-225"><a href="#cb20-225" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.007594   0.006293   1.207    0.228    </span></span>
+<span id="cb20-226"><a href="#cb20-226" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.003295   0.016021  -0.206    0.837    </span></span>
+<span id="cb20-227"><a href="#cb20-227" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.005263   0.016881   0.312    0.755    </span></span>
+<span id="cb20-228"><a href="#cb20-228" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.005157   0.007077  -0.729    0.466    </span></span>
 <span id="cb20-229"><a href="#cb20-229" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
 <span id="cb20-230"><a href="#cb20-230" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb20-231"><a href="#cb20-231" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
@@ -887,14 +887,14 @@ selected topics.</p>
 <span id="cb20-234"><a href="#cb20-234" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
 <span id="cb20-235"><a href="#cb20-235" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
 <span id="cb20-236"><a href="#cb20-236" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-237"><a href="#cb20-237" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.053504   0.003540  15.116  &lt; 2e-16 ***</span></span>
-<span id="cb20-238"><a href="#cb20-238" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.027440   0.003984  -6.887 5.81e-12 ***</span></span>
-<span id="cb20-239"><a href="#cb20-239" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.044569   0.014918   2.988  0.00281 ** </span></span>
-<span id="cb20-240"><a href="#cb20-240" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2                0.024810   0.015585   1.592  0.11140    </span></span>
-<span id="cb20-241"><a href="#cb20-241" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.017771   0.006496   2.736  0.00622 ** </span></span>
-<span id="cb20-242"><a href="#cb20-242" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.003799   0.017396   0.218  0.82715    </span></span>
-<span id="cb20-243"><a href="#cb20-243" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.033589   0.017700   1.898  0.05775 .  </span></span>
-<span id="cb20-244"><a href="#cb20-244" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.003423   0.007622  -0.449  0.65339    </span></span>
+<span id="cb20-237"><a href="#cb20-237" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.053502   0.003524  15.183  &lt; 2e-16 ***</span></span>
+<span id="cb20-238"><a href="#cb20-238" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.027406   0.003994  -6.861 6.97e-12 ***</span></span>
+<span id="cb20-239"><a href="#cb20-239" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.044537   0.014934   2.982  0.00286 ** </span></span>
+<span id="cb20-240"><a href="#cb20-240" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2                0.024862   0.015491   1.605  0.10851    </span></span>
+<span id="cb20-241"><a href="#cb20-241" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.017659   0.006395   2.761  0.00576 ** </span></span>
+<span id="cb20-242"><a href="#cb20-242" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.003727   0.017517   0.213  0.83152    </span></span>
+<span id="cb20-243"><a href="#cb20-243" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.033548   0.017701   1.895  0.05807 .  </span></span>
+<span id="cb20-244"><a href="#cb20-244" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.003361   0.007545  -0.445  0.65600    </span></span>
 <span id="cb20-245"><a href="#cb20-245" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
 <span id="cb20-246"><a href="#cb20-246" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb20-247"><a href="#cb20-247" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
@@ -903,14 +903,14 @@ selected topics.</p>
 <span id="cb20-250"><a href="#cb20-250" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
 <span id="cb20-251"><a href="#cb20-251" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
 <span id="cb20-252"><a href="#cb20-252" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                          Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-253"><a href="#cb20-253" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.0531715  0.0034654  15.344  &lt; 2e-16 ***</span></span>
-<span id="cb20-254"><a href="#cb20-254" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.0176033  0.0040362   4.361 1.30e-05 ***</span></span>
-<span id="cb20-255"><a href="#cb20-255" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.0495250  0.0128687  -3.848 0.000119 ***</span></span>
-<span id="cb20-256"><a href="#cb20-256" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.0294419  0.0131198  -2.244 0.024834 *  </span></span>
-<span id="cb20-257"><a href="#cb20-257" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.0279160  0.0057295  -4.872 1.11e-06 ***</span></span>
-<span id="cb20-258"><a href="#cb20-258" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.0609005  0.0149578   4.071 4.68e-05 ***</span></span>
-<span id="cb20-259"><a href="#cb20-259" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.0012147  0.0160254   0.076 0.939581    </span></span>
-<span id="cb20-260"><a href="#cb20-260" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.0007564  0.0072205  -0.105 0.916574    </span></span>
+<span id="cb20-253"><a href="#cb20-253" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.0532027  0.0034798  15.289  &lt; 2e-16 ***</span></span>
+<span id="cb20-254"><a href="#cb20-254" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.0175917  0.0040744   4.318 1.58e-05 ***</span></span>
+<span id="cb20-255"><a href="#cb20-255" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.0494295  0.0130467  -3.789 0.000152 ***</span></span>
+<span id="cb20-256"><a href="#cb20-256" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.0295761  0.0131021  -2.257 0.023993 *  </span></span>
+<span id="cb20-257"><a href="#cb20-257" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.0279010  0.0057337  -4.866 1.14e-06 ***</span></span>
+<span id="cb20-258"><a href="#cb20-258" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.0607722  0.0151389   4.014 5.98e-05 ***</span></span>
+<span id="cb20-259"><a href="#cb20-259" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.0013638  0.0158219   0.086 0.931312    </span></span>
+<span id="cb20-260"><a href="#cb20-260" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.0007048  0.0072631  -0.097 0.922693    </span></span>
 <span id="cb20-261"><a href="#cb20-261" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
 <span id="cb20-262"><a href="#cb20-262" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb20-263"><a href="#cb20-263" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
@@ -919,14 +919,14 @@ selected topics.</p>
 <span id="cb20-266"><a href="#cb20-266" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
 <span id="cb20-267"><a href="#cb20-267" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
 <span id="cb20-268"><a href="#cb20-268" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-269"><a href="#cb20-269" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.012496   0.002366   5.282 1.29e-07 ***</span></span>
-<span id="cb20-270"><a href="#cb20-270" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.010830   0.002659  -4.073 4.65e-05 ***</span></span>
-<span id="cb20-271"><a href="#cb20-271" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.062486   0.011957   5.226 1.74e-07 ***</span></span>
-<span id="cb20-272"><a href="#cb20-272" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2                0.167257   0.016095  10.392  &lt; 2e-16 ***</span></span>
-<span id="cb20-273"><a href="#cb20-273" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.074795   0.005273  14.184  &lt; 2e-16 ***</span></span>
-<span id="cb20-274"><a href="#cb20-274" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.043754   0.013177  -3.320    9e-04 ***</span></span>
-<span id="cb20-275"><a href="#cb20-275" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.079944   0.017963  -4.450 8.60e-06 ***</span></span>
-<span id="cb20-276"><a href="#cb20-276" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.037963   0.006066  -6.258 3.96e-10 ***</span></span>
+<span id="cb20-269"><a href="#cb20-269" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.012531   0.002385   5.253 1.51e-07 ***</span></span>
+<span id="cb20-270"><a href="#cb20-270" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.010852   0.002671  -4.063 4.87e-05 ***</span></span>
+<span id="cb20-271"><a href="#cb20-271" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.062487   0.012061   5.181 2.22e-07 ***</span></span>
+<span id="cb20-272"><a href="#cb20-272" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2                0.167255   0.016093  10.393  &lt; 2e-16 ***</span></span>
+<span id="cb20-273"><a href="#cb20-273" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.074734   0.005352  13.965  &lt; 2e-16 ***</span></span>
+<span id="cb20-274"><a href="#cb20-274" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.043632   0.013575  -3.214  0.00131 ** </span></span>
+<span id="cb20-275"><a href="#cb20-275" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.080194   0.018069  -4.438 9.10e-06 ***</span></span>
+<span id="cb20-276"><a href="#cb20-276" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.037884   0.006146  -6.163 7.21e-10 ***</span></span>
 <span id="cb20-277"><a href="#cb20-277" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
 <span id="cb20-278"><a href="#cb20-278" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb20-279"><a href="#cb20-279" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
@@ -935,14 +935,14 @@ selected topics.</p>
 <span id="cb20-282"><a href="#cb20-282" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
 <span id="cb20-283"><a href="#cb20-283" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
 <span id="cb20-284"><a href="#cb20-284" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-285"><a href="#cb20-285" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.055611   0.003061  18.168  &lt; 2e-16 ***</span></span>
-<span id="cb20-286"><a href="#cb20-286" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.019843   0.003478  -5.706 1.17e-08 ***</span></span>
-<span id="cb20-287"><a href="#cb20-287" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.005720   0.012139   0.471  0.63752    </span></span>
-<span id="cb20-288"><a href="#cb20-288" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2                0.004216   0.012671   0.333  0.73936    </span></span>
-<span id="cb20-289"><a href="#cb20-289" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.029496   0.005780   5.103 3.37e-07 ***</span></span>
-<span id="cb20-290"><a href="#cb20-290" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.004567   0.014656  -0.312  0.75536    </span></span>
-<span id="cb20-291"><a href="#cb20-291" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.004789   0.015299  -0.313  0.75429    </span></span>
-<span id="cb20-292"><a href="#cb20-292" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.020749   0.006881  -3.016  0.00257 ** </span></span>
+<span id="cb20-285"><a href="#cb20-285" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.055670   0.003078  18.085  &lt; 2e-16 ***</span></span>
+<span id="cb20-286"><a href="#cb20-286" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv          -0.019879   0.003489  -5.697 1.23e-08 ***</span></span>
+<span id="cb20-287"><a href="#cb20-287" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.005581   0.012035   0.464  0.64285    </span></span>
+<span id="cb20-288"><a href="#cb20-288" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2                0.004247   0.012797   0.332  0.73999    </span></span>
+<span id="cb20-289"><a href="#cb20-289" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.029377   0.005765   5.096 3.49e-07 ***</span></span>
+<span id="cb20-290"><a href="#cb20-290" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.004536   0.014651  -0.310  0.75684    </span></span>
+<span id="cb20-291"><a href="#cb20-291" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2 -0.004733   0.015474  -0.306  0.75971    </span></span>
+<span id="cb20-292"><a href="#cb20-292" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3 -0.020665   0.006882  -3.003  0.00268 ** </span></span>
 <span id="cb20-293"><a href="#cb20-293" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
 <span id="cb20-294"><a href="#cb20-294" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb20-295"><a href="#cb20-295" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
@@ -950,15 +950,15 @@ selected topics.</p>
 <span id="cb20-297"><a href="#cb20-297" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Topic 19:</span></span>
 <span id="cb20-298"><a href="#cb20-298" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
 <span id="cb20-299"><a href="#cb20-299" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
-<span id="cb20-300"><a href="#cb20-300" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                         Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-301"><a href="#cb20-301" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.013572   0.002578   5.264 1.42e-07 ***</span></span>
-<span id="cb20-302"><a href="#cb20-302" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.027342   0.003001   9.111  &lt; 2e-16 ***</span></span>
-<span id="cb20-303"><a href="#cb20-303" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.000346   0.009880   0.035   0.9721    </span></span>
-<span id="cb20-304"><a href="#cb20-304" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.006231   0.010499  -0.593   0.5529    </span></span>
-<span id="cb20-305"><a href="#cb20-305" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.003132   0.004406  -0.711   0.4771    </span></span>
-<span id="cb20-306"><a href="#cb20-306" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.002951   0.012138  -0.243   0.8079    </span></span>
-<span id="cb20-307"><a href="#cb20-307" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.028101   0.013185   2.131   0.0331 *  </span></span>
-<span id="cb20-308"><a href="#cb20-308" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.002783   0.005749   0.484   0.6283    </span></span>
+<span id="cb20-300"><a href="#cb20-300" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                          Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb20-301"><a href="#cb20-301" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.0135216  0.0025954   5.210  1.9e-07 ***</span></span>
+<span id="cb20-302"><a href="#cb20-302" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.0273710  0.0030250   9.048  &lt; 2e-16 ***</span></span>
+<span id="cb20-303"><a href="#cb20-303" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1                0.0005277  0.0099684   0.053   0.9578    </span></span>
+<span id="cb20-304"><a href="#cb20-304" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.0062477  0.0105106  -0.594   0.5522    </span></span>
+<span id="cb20-305"><a href="#cb20-305" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3               -0.0030357  0.0044293  -0.685   0.4931    </span></span>
+<span id="cb20-306"><a href="#cb20-306" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1 -0.0031713  0.0122028  -0.260   0.7950    </span></span>
+<span id="cb20-307"><a href="#cb20-307" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.0281920  0.0131978   2.136   0.0327 *  </span></span>
+<span id="cb20-308"><a href="#cb20-308" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.0027011  0.0057234   0.472   0.6370    </span></span>
 <span id="cb20-309"><a href="#cb20-309" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
 <span id="cb20-310"><a href="#cb20-310" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb20-311"><a href="#cb20-311" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
@@ -967,14 +967,14 @@ selected topics.</p>
 <span id="cb20-314"><a href="#cb20-314" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># </span></span>
 <span id="cb20-315"><a href="#cb20-315" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Coefficients:</span></span>
 <span id="cb20-316"><a href="#cb20-316" tabindex="-1"></a><span class="er">&gt;</span><span class="co">#                          Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-317"><a href="#cb20-317" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             6.721e-03  1.932e-03   3.478 0.000506 ***</span></span>
-<span id="cb20-318"><a href="#cb20-318" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           3.143e-02  2.206e-03  14.251  &lt; 2e-16 ***</span></span>
-<span id="cb20-319"><a href="#cb20-319" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -1.592e-03  7.672e-03  -0.208 0.835604    </span></span>
-<span id="cb20-320"><a href="#cb20-320" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2                3.583e-05  8.156e-03   0.004 0.996495    </span></span>
-<span id="cb20-321"><a href="#cb20-321" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                5.082e-04  3.341e-03   0.152 0.879090    </span></span>
-<span id="cb20-322"><a href="#cb20-322" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  8.835e-03  9.661e-03   0.914 0.360490    </span></span>
-<span id="cb20-323"><a href="#cb20-323" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  1.277e-02  1.069e-02   1.194 0.232447    </span></span>
-<span id="cb20-324"><a href="#cb20-324" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  2.132e-02  4.567e-03   4.669 3.05e-06 ***</span></span>
+<span id="cb20-317"><a href="#cb20-317" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># (Intercept)             0.0067403  0.0019495   3.457 0.000546 ***</span></span>
+<span id="cb20-318"><a href="#cb20-318" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv           0.0314197  0.0022172  14.171  &lt; 2e-16 ***</span></span>
+<span id="cb20-319"><a href="#cb20-319" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)1               -0.0015017  0.0076660  -0.196 0.844695    </span></span>
+<span id="cb20-320"><a href="#cb20-320" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)2               -0.0001298  0.0081639  -0.016 0.987316    </span></span>
+<span id="cb20-321"><a href="#cb20-321" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># s(year)3                0.0004885  0.0034267   0.143 0.886642    </span></span>
+<span id="cb20-322"><a href="#cb20-322" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)1  0.0086720  0.0095654   0.907 0.364624    </span></span>
+<span id="cb20-323"><a href="#cb20-323" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)2  0.0129677  0.0105867   1.225 0.220620    </span></span>
+<span id="cb20-324"><a href="#cb20-324" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># servermedrxiv:s(year)3  0.0213203  0.0046180   4.617 3.91e-06 ***</span></span>
 <span id="cb20-325"><a href="#cb20-325" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># ---</span></span>
 <span id="cb20-326"><a href="#cb20-326" tabindex="-1"></a><span class="er">&gt;</span><span class="co"># Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code></pre></div>
 <p>The following sections illustrate the exploration of covariate
