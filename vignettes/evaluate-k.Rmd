@@ -209,7 +209,8 @@ Large *Ks* lead to a higher mean exclusivity of topics, but in our example the g
 
 The combined assessment of all four metrics does not suggest a clear winner. For the *SES preprints* subset we could make a case for topic numbers in the range of 20 to 50 topics. A common approach to arrive at a suitable choice for *K* is to evaluate topic numbers iteratively, i.e. in the example above it would be potentially helpful to next evaluate all *Ks* in the range 20 to 50.   
 
-It can therefore be helpful to look at the values for exclusivity and semantic coherence for **individual topics** in a set of models, an approach also suggested by [@RobertsStewart_et_2019_JSTATS_91]. 
+It can therefore be helpful to look at the values for exclusivity and semantic coherence for **individual topics** in a set of models, an approach also suggested by [@RobertsStewart_et_2019_JSTATS_91]. The figure below summarizes this approach for the *SES preprints* subset, showing the combination of *exclusivity* and *semantic coherence* for each topic in topic models with *Ks* ranging from 15 to 55.  
+
 
 ```{r, eval=FALSE, fig.height=8, fig.width=8, dpi=150}
 library(ggplot2)
@@ -227,11 +228,13 @@ metrics_K5_100 %>%
 ```
 
 ```{r echo=FALSE, out.width="100%"}
-knitr::include_graphics("per_topic_metrics.png")
+knitr::include_graphics("ses_per_topic_metrics.png")
 ```
 
 
-This more detailed look illustrates again that exclusivity improves "at the expense of" semantic coherence. Again, we cannot identify a "clear winner", but Ks in the range 30 to 45 might be a reasonable choices for a sample analysis --- there are no large gains in topic exclusivity beyond 30 topics, but more topics show distinctly lower semantic coherence beyond 45 topics. Ultimately, this approach can help to identify a suitable range of *Ks*, but the choice should also be informed by the explored research questions, practical considerations and ideally domain knowledge about the anaylsed documents.  
+This exploration at the level of individual topics illustrates again that exclusivity improves at the expense of semantic coherence. Again, we cannot identify a 'clear winner', but *Ks* in the range 30 to 45 might be a reasonable choices for a sample analysis --- there are no large gains in topic exclusivity beyond 30 topics, but more topics show distinctly lower semantic coherence beyond 45 topics. 
+Ultimately, this approach can help to identify a suitable range of *Ks*, but the choice should also be informed by the explored research questions, practical considerations and ideally domain knowledge about the analysed documents.  
+
 
 # References
 
