@@ -80,27 +80,295 @@
 
     
     
-<p><strong>This is a draft!</strong></p>
 <div class="section level2">
-<h2 id="covid-preprints">Covid preprints<a class="anchor" aria-label="anchor" href="#covid-preprints"></a>
+<h2 id="k-the-number-of-topics">‘K’ — the number of topics<a class="anchor" aria-label="anchor" href="#k-the-number-of-topics"></a>
 </h2>
-<p><img src="evaluate-k_files/figure-html/unnamed-chunk-2-1.png" width="3000"></p>
+<p>Topic modeling algorithms like <code><a href="https://rdrr.io/pkg/stm/man/stm.html" class="external-link">stm()</a></code> are unsupervised
+classification methods, but they require one input parameter,
+<em>K</em>, which is the number of topics that should be fit to a given
+document collection. Choosing a suitable number of topics is one of the
+key challenges when fitting a topic model.</p>
+<p>There is in fact no correct or best number of topics for a given
+document corpus. Ultimately, the chosen number of topics defines the
+level of granularity at which we can explore the topical structure of a
+document collection. One factor in the choice of <em>K</em> will thus be
+practical considerations and the questions a topic model should help to
+answer.</p>
+<p>There exist however a number of metrics to assess how well a given
+number of topics can explain a document collection <span class="citation">(<a href="#ref-RobertsStewart_et_2019_JSTATS_91">Roberts, Stewart, and
+Tingley 2019</a>; <a href="#ref-WallachMurray_et_2009_ICML_Conf">Wallach
+et al. 2009</a>)</span>. The <code><a href="https://rdrr.io/pkg/stm/man/stm.html" class="external-link">stm()</a></code> package supports several
+of these approaches. For the sample analysis included in the
+<code><a href="../articles/covid-preprint-topics.html">vignette("covid-preprint-topics")</a></code> we considered these
+measures to determine a suitable <em>K</em>, one that is ideally
+producing both a good model fit and deliver a navigable number of topics
+for an exploratory analysis.</p>
+<p>The <code>stm</code> package offers two approaches to determine a
+suitable <em>K</em>, either by letting <code>stm</code> decide the
+number of topics or by fitting multiple models with different topic
+numbers in parallel and comparing the various measures for goodness of
+model fit. Both approaches are discussed below.</p>
+<p>Note that the pre-processing options available when preparing the
+document corpus for topic modeling will impact the runtime duration of
+the algorithm and may also impact the model fit (see
+<code><a href="../articles/covid-preprint-topics.html">vignette("covid-preprint-topics")</a></code> for an explanation of
+different steps).</p>
 </div>
 <div class="section level2">
-<h2 id="all-preprints">All preprints<a class="anchor" aria-label="anchor" href="#all-preprints"></a>
+<h2 id="finding-the-best-k">Finding the best <em>‘K’</em><a class="anchor" aria-label="anchor" href="#finding-the-best-k"></a>
 </h2>
-<p><img src="evaluate-k_files/figure-html/unnamed-chunk-3-1.png" width="3000"></p>
+<div class="section level3">
+<h3 id="let-stm-determine-a-suitable-topic-number">Let <code>stm</code> determine a suitable topic number<a class="anchor" aria-label="anchor" href="#let-stm-determine-a-suitable-topic-number"></a>
+</h3>
+<p>The main <code>stm</code> function offers an option to set <em>K</em>
+to <code>0</code> which triggers a processing workflow that determines a
+suitable number of topics. This option uses an approach described by
+<span class="citation">(<a href="#ref-MimnoLee_2014_EMNLP_Conf">Mimno
+and Lee 2014</a>)</span> (it is however not deterministic).</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">model_K0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stm/man/stm.html" class="external-link">stm</a></span><span class="op">(</span><span class="va">mydocs_dfm</span>, K <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
+<p>Since this approach is not deterministic, different executions with
+this setting may result in different topic numbers and different word to
+topic assignments.</p>
+</div>
+<div class="section level3">
+<h3 id="comparing-topic-models-with-different-ks">Comparing topic models with different <em>K</em>s<a class="anchor" aria-label="anchor" href="#comparing-topic-models-with-different-ks"></a>
+</h3>
+<p>The <code>stm</code> package provides the
+<code><a href="https://rdrr.io/pkg/stm/man/searchK.html" class="external-link">searchK()</a></code>function, which allows to run multiple model fits
+with different <code>K</code>s and then returns the different measures
+for model fit. Here we use instead an alternative approach employing the
+<code>future</code> and <code>furrr</code> packages<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;See also this &lt;a href="https://juliasilge.com/blog/evaluating-stm/" class="external-link"&gt;blog post&lt;/a&gt; for a
+great overview.&lt;/p&gt;'><sup>1</sup></a>.</p>
+<p>A more detailed (and resource-intensive approach) is to fit models
+with multiple options of <em>K</em>, and evaluate the best or most
+suitable choice based on different measures for goodness of fit. In the
+following, we will use four metrics — <em>held-out likelihood</em> <span class="citation">(<a href="#ref-WallachMurray_et_2009_ICML_Conf">Wallach
+et al. 2009</a>)</span>, <em>residual dispersion</em> <span class="citation">(<a href="#ref-Taddy_2012_AIS_Conf">Taddy
+2012</a>)</span>, <em>semantic coherence</em> <span class="citation">(<a href="#ref-MimnoWallach_et_2011_EMNLP_Conf">Mimno et al.
+2011</a>)</span> and <em>exclusivity</em> <span class="citation">(<a href="#ref-RobertsStewart_et_2019_JSTATS_91">Roberts, Stewart, and
+Tingley 2019</a>)</span> — to assess the quality of topic models with
+different <em>K</em>s<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;See also &lt;a href="https://juliasilge.com/blog/evaluating-stm/" class="external-link"&gt;this blog by Julia
+Silge&lt;/a&gt; for a good overview of evaluating topic models with
+&lt;code&gt;stm&lt;/code&gt;.&lt;/p&gt;'><sup>2</sup></a>.</p>
+<p>One of those, <em>held-out likelihood</em>, requires an evaluation of
+a topic model against an unseen data set. We follow the default approach
+suggested by <span class="citation">(<a href="#ref-RobertsStewart_et_2019_JSTATS_91">Roberts, Stewart, and
+Tingley 2019</a>)</span> and use <code>stm</code>’s
+<code>make.heldout</code> method to split the document corpus
+(transformed in a document-feature matrix) in a training and a testing
+set — models are fit for the training set and held-out likelihood is
+then evaluated against the testing set.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.structuraltopicmodel.com/" class="external-link">stm</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># a seed is needed for replicability </span></span>
+<span><span class="va">heldout_corpus</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stm/man/make.heldout.html" class="external-link">make.heldout</a></span><span class="op">(</span><span class="va">mydocs_dfm</span>, seed <span class="op">=</span> <span class="fl">6406852</span><span class="op">)</span></span></code></pre></div>
+<p>In preparation of evaluating the models we use <code>stm</code>’s
+<code>make.heldout</code> function, which splits a given document corpus
+into two parts, a core document set for fitting the model(s) and a
+“missing” set that can be used to measure — with the function
+<code>eval.heldout</code> — how well the model performs on an unseen
+document set.</p>
+<p>Fo illustration two subsets of <a href="https://www.biorxiv.org/" class="external-link">bioRxiv</a> and <a href="https://www.medrxiv.org/" class="external-link">medRxiv</a> preprints potentially
+covering the topic <em>“biodiversity”</em> and
+<em>“sustainability/social-ecological systems”</em> respectively were
+created. For both subsets, the results of fitting models with
+<em>K</em>’s ranging from 5 to 100 (in intervals of 5) were evaluated.
+Depending on the system configuration, fitting those models can take
+several hours.</p>
+<p>For the code section below we assume that we have previously created
+a document-feature matrix (<code>pubs_dfm</code>) from a document
+set.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://quanteda.io" class="external-link">quanteda</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.structuraltopicmodel.com/" class="external-link">stm</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/DavisVaughan/furrr" class="external-link">furrr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># create a set of Ks to evaluate</span></span>
+<span><span class="va">K_values</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>K <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq.int</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">5</span>, to <span class="op">=</span> <span class="fl">100</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># create a heldout corpus for evaluation of model fit</span></span>
+<span><span class="co"># (a seed can be provided for replicability)</span></span>
+<span><span class="va">pubs_dfm_heldout</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stm/man/make.heldout.html" class="external-link">make.heldout</a></span><span class="op">(</span><span class="va">pubs_dfm</span>, seed <span class="op">=</span> <span class="fl">1234567</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># create document format required by stm</span></span>
+<span><span class="va">stm_docs</span> <span class="op">&lt;-</span> <span class="fu">quanteda</span><span class="fu">::</span><span class="fu"><a href="https://quanteda.io/reference/convert.html" class="external-link">convert</a></span><span class="op">(</span><span class="va">pubs_dfm_heldout</span>, to <span class="op">=</span> <span class="st">"stm"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># consult the futures package for details on parallelization options</span></span>
+<span><span class="fu">plan</span><span class="op">(</span><span class="st">"multisession"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># fit the STM models with different Ks</span></span>
+<span><span class="co"># supplying a seed allows replication, but can also be retrieved from the model</span></span>
+<span><span class="va">models_K5_100</span> <span class="op">&lt;-</span> <span class="va">K_values</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>topic_model <span class="op">=</span> <span class="fu">future_map</span><span class="op">(</span><span class="va">K</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/pkg/stm/man/stm.html" class="external-link">stm</a></span><span class="op">(</span>documents <span class="op">=</span> <span class="va">stm_docs</span><span class="op">$</span><span class="va">documents</span>,</span>
+<span>                                          vocab <span class="op">=</span> <span class="va">stm_docs</span><span class="op">$</span><span class="va">vocab</span>,</span>
+<span>                                          data <span class="op">=</span> <span class="va">stm_docs</span><span class="op">$</span><span class="va">meta</span>,</span>
+<span>                                          prevalence <span class="op">=</span> <span class="op">~</span> <span class="va">server</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/pkg/stm/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span>,</span>
+<span>                                          K <span class="op">=</span> <span class="va">.</span>,</span>
+<span>                                          verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                                          seed <span class="op">=</span> <span class="fl">8912388</span><span class="op">)</span>,</span>
+<span>                                  .options <span class="op">=</span> <span class="fu">furrr_options</span><span class="op">(</span>seed <span class="op">=</span> <span class="fl">8912388</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># extract model fit metrics</span></span>
+<span><span class="va">metrics_K5_100</span> <span class="op">&lt;-</span> <span class="va">models_K5_100</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>exclusivity <span class="op">=</span> <span class="fu">future_map</span><span class="op">(</span><span class="va">topic_model</span>, <span class="va">exclusivity</span><span class="op">)</span>,</span>
+<span>         semantic_coherence <span class="op">=</span> <span class="fu">future_map</span><span class="op">(</span><span class="va">topic_model</span>, <span class="va">semanticCoherence</span>,</span>
+<span>                                         <span class="va">pubs_dfm_heldout</span><span class="op">$</span><span class="va">documents</span><span class="op">)</span>,</span>
+<span>         eval_heldout <span class="op">=</span> <span class="fu">future_map</span><span class="op">(</span><span class="va">topic_model</span>, <span class="va">eval.heldout</span>,</span>
+<span>                                   <span class="va">pubs_dfm_heldout</span><span class="op">$</span><span class="va">missing</span><span class="op">)</span>,</span>
+<span>         residual <span class="op">=</span> <span class="fu">future_map</span><span class="op">(</span><span class="va">topic_model</span>, <span class="va">checkResiduals</span>,</span>
+<span>                               <span class="va">pubs_dfm_heldout</span><span class="op">$</span><span class="va">documents</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">plan</span><span class="op">(</span><span class="st">"sequential"</span><span class="op">)</span></span></code></pre></div>
+<p>Now we can explore the results for the four metrics mentioned
+earlier.</p>
+<p><img src="evaluate-k_files/figure-html/unnamed-chunk-6-1.png" width="10500"></p>
+<p>The <strong>document completion held-out likelihood</strong> <span class="citation">(<a href="#ref-WallachMurray_et_2009_ICML_Conf">Wallach
+et al. 2009</a>)</span> and <strong>residual dispersion</strong> <span class="citation">(<a href="#ref-Taddy_2012_AIS_Conf">Taddy
+2012</a>)</span> help us to assess how well a topic model explains a
+given document corpus. <strong>Exclusivity</strong> <span class="citation">(<a href="#ref-RobertsStewart_et_2019_JSTATS_91">Roberts, Stewart, and
+Tingley 2019</a>)</span>and <strong>semantic coherence</strong> <span class="citation">(<a href="#ref-MimnoWallach_et_2011_EMNLP_Conf">Mimno
+et al. 2011</a>)</span> can help to assess the quality of the topic
+assignments and their interpretability.</p>
+<p>In order to compute <strong>held-out likelihood</strong> we created a
+held-out dataset. The held-out likelihood measures how well a topic
+model performs on previously unseen documents. There is no specific
+number that identifies the best <em>K</em> and thus the best topic
+model, but held-out likelihood allows comparisons between different
+models, with smaller numbers indicating a better fit. For the evaluated
+<em>biodiversity preprints</em> subset held-out likelihood peaks at 15
+topics and declines quickly for higher <em>Ks</em>, for the <em>SES
+preprints</em> it peaks at 40 topics but does not show the same large
+differences for the evaluated <em>Ks</em>.</p>
+<p>The <strong>residual dispersion</strong> can be used as a measure for
+the unexplained variance in a topic model <span class="citation">(<a href="#ref-Taddy_2012_AIS_Conf">Taddy 2012</a>)</span>. This measure can
+again be used to compare different model options. Our evaluation
+indicates that larger <em>K</em>’s seem to reduce residual
+overdispersion, but the improvements level off from around 30 topics for
+both evaluated subsets and increases again for higher <em>Ks</em>.</p>
+<p><strong>Semantic coherence</strong> measures how frequently the most
+probable words in a topic co-occur in the modeled documents. The
+coherence metric appears to align well with expert evaluations of topic
+quality <span class="citation">(<a href="#ref-MimnoWallach_et_2011_EMNLP_Conf">Mimno et al.
+2011</a>)</span>. <span class="citation">(<a href="#ref-RobertsStewart_et_2019_JSTATS_91">Roberts, Stewart, and
+Tingley 2019</a>)</span> suggest however that semantic coherence can be
+easily achieved by having a small number of topics dominated by common
+words. This is in line with the evaluations for both document subsets
+showing that the average semantic coherence of topics decreases with
+larger <em>Ks</em>, slower however from around 65 topics, with an
+intermediate peak at 40 topics.</p>
+<p><span class="citation">(<a href="#ref-RobertsStewart_et_2019_JSTATS_91">Roberts, Stewart, and
+Tingley 2019</a>)</span> suggest an additional measure:
+<strong>exclusivity</strong>. A topic’s exclusivity score considers both
+the exclusivity and frequency of words in a topic <span class="citation">(<a href="#ref-RobertsStewart_et_2019_JSTATS_91">Roberts, Stewart, and
+Tingley 2019</a>; <a href="#ref-BischofAiroldi_2012_ICML_Conf">Bischof
+and Airoldi 2012</a>)</span>. Simply put, topic models with higher
+exclusivity scores indicate a better delineation of topics. Large
+<em>Ks</em> lead to a higher mean exclusivity of topics, but in our
+example the gains appear to be smaller from around 20 topic. Deciding on
+a number of topics based on these latter metrics is thus a trade-off
+between maximizing semantic coherence or exclusivity.</p>
+<p>The combined assessment of all four metrics does not suggest a clear
+winner. For the <em>SES preprints</em> subset we could make a case for
+topic numbers in the range of 20 to 50 topics. A common approach to
+arrive at a suitable choice for <em>K</em> is to evaluate topic numbers
+iteratively, i.e. in the example above it would be potentially helpful
+to next evaluate all <em>Ks</em> in the range 20 to 50.</p>
+<p>It can therefore be helpful to look at the values for exclusivity and
+semantic coherence for <strong>individual topics</strong> in a set of
+models, an approach also suggested by <span class="citation">(<a href="#ref-RobertsStewart_et_2019_JSTATS_91">Roberts, Stewart, and
+Tingley 2019</a>)</span>.</p>
+<p><img src="per_topic_metrics.png" width="384"></p>
+<p>This more detailed look illustrates again that exclusivity improves
+“at the expense of” semantic coherence. Again, we cannot identify a
+“clear winner”, but Ks in the range 30 to 45 might be a reasonable
+choices for a sample analysis — there are no large gains in topic
+exclusivity beyond 30 topics, but more topics show distinctly lower
+semantic coherence beyond 45 topics. Ultimately, this approach can help
+to identify a suitable range of <em>Ks</em>, but the choice should also
+be informed by the explored research questions, practical considerations
+and ideally domain knowledge about the anaylsed documents.</p>
+</div>
 </div>
 <div class="section level2">
-<h2 id="mlai-subset">ML/AI subset<a class="anchor" aria-label="anchor" href="#mlai-subset"></a>
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<p><img src="evaluate-k_files/figure-html/unnamed-chunk-4-1.png" width="3000"></p>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-BischofAiroldi_2012_ICML_Conf" class="csl-entry">
+Bischof, Jonathan M., and Edoardo M. Airoldi. 2012. <span>“Summarizing
+Topical Content with Word Frequency and Exclusivity.”</span> In
+<em>Proceedings of the 29th <span>International Coference</span> on
+<span>International Conference</span> on <span>Machine
+Learning</span></em>, 9–16. <span>ICML</span>’12. Madison, WI, USA:
+Omnipress.
+</div>
+<div id="ref-MimnoLee_2014_EMNLP_Conf" class="csl-entry">
+Mimno, David, and Moontae Lee. 2014. <span>“Low-Dimensional
+<span>Embeddings</span> for <span class="nocase">Interpretable
+Anchor-based Topic Inference</span>.”</span> In <em>Proceedings of the
+2014 <span>Conference</span> on <span>Empirical Methods</span> in
+<span>Natural Language Processing</span> (<span>EMNLP</span>)</em>,
+edited by Alessandro Moschitti, Bo Pang, and Walter Daelemans, 1319–28.
+Doha, Qatar: Association for Computational Linguistics. <a href="https://doi.org/10.3115/v1/D14-1138" class="external-link">https://doi.org/10.3115/v1/D14-1138</a>.
+</div>
+<div id="ref-MimnoWallach_et_2011_EMNLP_Conf" class="csl-entry">
+Mimno, David, Hanna M. Wallach, Edmund Talley, Miriam Leenders, and
+Andrew McCallum. 2011. <span>“Optimizing Semantic Coherence in Topic
+Models.”</span> In <em>Proceedings of the <span>Conference</span> on
+<span>Empirical Methods</span> in <span>Natural Language
+Processing</span></em>, 262–72. <span>EMNLP</span> ’11. USA: Association
+for Computational Linguistics.
+</div>
+<div id="ref-RobertsStewart_et_2019_JSTATS_91" class="csl-entry">
+Roberts, Margaret E., Brandon M. Stewart, and Dustin Tingley. 2019.
+<span>“Stm: <span>An R</span> Package for Structural Topic
+Models.”</span> <em>Journal of Statistical Software</em> 91 (1): 1–40.
+<a href="https://doi.org/10.18637/jss.v091.i02" class="external-link">https://doi.org/10.18637/jss.v091.i02</a>.
+</div>
+<div id="ref-Taddy_2012_AIS_Conf" class="csl-entry">
+Taddy, Matt. 2012. <span>“On <span>Estimation</span> and
+<span>Selection</span> for <span>Topic Models</span>.”</span> In
+<em>Proceedings of the <span>Fifteenth International Conference</span>
+on <span>Artificial Intelligence</span> and
+<span>Statistics</span></em>, 1184–93. PMLR.
+</div>
+<div id="ref-WallachMurray_et_2009_ICML_Conf" class="csl-entry">
+Wallach, Hanna M., Iain Murray, Ruslan Salakhutdinov, and David Mimno.
+2009. <span>“Evaluation Methods for Topic Models.”</span> In
+<em>Proceedings of the 26th <span>Annual International Conference</span>
+on <span>Machine Learning</span> - <span>ICML</span> ’09</em>, 1–8. New
+York, New York, USA: ACM Press. <a href="https://doi.org/10.1145/1553374.1553515" class="external-link">https://doi.org/10.1145/1553374.1553515</a>.
+</div>
+</div>
 </div>
 <div class="section level2">
-<h2 id="miscellaneous-subsets">Miscellaneous subsets<a class="anchor" aria-label="anchor" href="#miscellaneous-subsets"></a>
+<h2 class="unnumbered" id="appendix">Appendix<a class="anchor" aria-label="anchor" href="#appendix"></a>
 </h2>
-<p><img src="evaluate-k_files/figure-html/unnamed-chunk-5-1.png" width="3000"></p>
+<p>The following sections show additional evaluations for (subsets of)
+the <em>bioRxiv/medRxiv</em> preprints.</p>
+<div class="section level3">
+<h3 id="additional-sample-evaluations">Additional sample evaluations<a class="anchor" aria-label="anchor" href="#additional-sample-evaluations"></a>
+</h3>
+<div class="section level4">
+<h4 id="all-preprints">All preprints<a class="anchor" aria-label="anchor" href="#all-preprints"></a>
+</h4>
+<p><img src="evaluate-k_files/figure-html/unnamed-chunk-9-1.png" width="1500"></p>
 </div>
+<div class="section level4">
+<h4 id="covid-preprints">Covid preprints<a class="anchor" aria-label="anchor" href="#covid-preprints"></a>
+</h4>
+<p><img src="evaluate-k_files/figure-html/unnamed-chunk-10-1.png" width="1500"></p>
+</div>
+<div class="section level4">
+<h4 id="preprints-referencing-ai-and-machine-learning">Preprints referencing AI and machine learning<a class="anchor" aria-label="anchor" href="#preprints-referencing-ai-and-machine-learning"></a>
+</h4>
+<p><img src="evaluate-k_files/figure-html/unnamed-chunk-11-1.png" width="1500"></p>
+</div>
+</div>
+</div>
+
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
 </div>
